@@ -1,0 +1,57 @@
+<svg width="1200" height="360" viewBox="0 0 1200 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">okmrtis profile header</title>
+  <desc id="desc">A soft white and gray neumorphic GitHub profile header with cyan accent details.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FAFA"/>
+      <stop offset="1" stop-color="#EEF2F4"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="240" y1="94" x2="980" y2="252" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#19C4E1"/>
+      <stop offset="1" stop-color="#8EE7F2"/>
+    </linearGradient>
+    <filter id="outerShadow" x="77" y="37" width="1046" height="286" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="20" dy="24" stdDeviation="28" flood-color="#C7CED3" flood-opacity="0.72"/>
+      <feDropShadow dx="-18" dy="-18" stdDeviation="26" flood-color="#FFFFFF" flood-opacity="0.95"/>
+    </filter>
+    <filter id="softInset" x="120" y="86" width="960" height="188" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="9" dy="10" stdDeviation="12" flood-color="#C9D0D5" flood-opacity="0.36"/>
+      <feDropShadow dx="-9" dy="-9" stdDeviation="12" flood-color="#FFFFFF" flood-opacity="0.90"/>
+    </filter>
+    <filter id="pillShadow" x="0" y="0" width="360" height="92" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="8" dy="9" stdDeviation="10" flood-color="#C6CDD2" flood-opacity="0.52"/>
+      <feDropShadow dx="-8" dy="-8" stdDeviation="10" flood-color="#FFFFFF" flood-opacity="0.95"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="360" rx="36" fill="url(#bg)"/>
+
+  <g filter="url(#outerShadow)">
+    <rect x="116" y="76" width="968" height="208" rx="38" fill="#F5F7F8"/>
+    <rect x="117.5" y="77.5" width="965" height="205" rx="36.5" stroke="#FFFFFF" stroke-width="3"/>
+  </g>
+
+  <g filter="url(#softInset)">
+    <path d="M422 188C492 158 542 97 633 108C714 118 759 175 828 190C889 203 946 194 1025 174" stroke="url(#accent)" stroke-width="10" stroke-linecap="round" opacity="0.95"/>
+    <path d="M190 238C280 193 354 194 431 229C506 263 565 258 631 220C720 168 794 174 871 225C924 260 971 264 1020 242" stroke="#D8E0E4" stroke-width="8" stroke-linecap="round" opacity="0.82"/>
+  </g>
+
+  <circle cx="214" cy="125" r="13" fill="#19C4E1"/>
+  <circle cx="248" cy="125" r="13" fill="#E7ECEF"/>
+  <circle cx="282" cy="125" r="13" fill="#D9E0E4"/>
+
+  <text x="174" y="180" fill="#2F3A40" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="58" font-weight="700" letter-spacing="0">okmrtis</text>
+  <text x="176" y="224" fill="#65727A" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="24" font-weight="500" letter-spacing="0">practical automation / durable docs / quiet tools</text>
+
+  <g transform="translate(708 112)" filter="url(#pillShadow)">
+    <rect width="316" height="58" rx="29" fill="#F5F7F8"/>
+    <text x="158" y="37" text-anchor="middle" fill="#415057" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="18" font-weight="650" letter-spacing="0">local-first workflows</text>
+  </g>
+  <g transform="translate(762 188)" filter="url(#pillShadow)">
+    <rect width="262" height="58" rx="29" fill="#F5F7F8"/>
+    <text x="131" y="37" text-anchor="middle" fill="#415057" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="18" font-weight="650" letter-spacing="0">GitHub systems</text>
+  </g>
+
+  <rect x="1016" y="104" width="8" height="132" rx="4" fill="#19C4E1"/>
+  <rect x="996" y="124" width="8" height="92" rx="4" fill="#CFEFF5"/>
+</svg>
