@@ -1,57 +1,67 @@
-<svg width="1200" height="360" viewBox="0 0 1200 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<svg width="1200" height="420" viewBox="0 0 1200 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">okmrtis profile header</title>
-  <desc id="desc">A soft white and gray neumorphic GitHub profile header with cyan accent details.</desc>
+  <desc id="desc">A white and gray neumorphic GitHub profile header for consulting workflow automation, AI agent collaboration, and externalized thinking with GitHub.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="360" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F8FAFA"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FAFBFB"/>
       <stop offset="1" stop-color="#EEF2F4"/>
     </linearGradient>
-    <linearGradient id="accent" x1="240" y1="94" x2="980" y2="252" gradientUnits="userSpaceOnUse">
+    <linearGradient id="accent" x1="192" y1="264" x2="1017" y2="132" gradientUnits="userSpaceOnUse">
       <stop stop-color="#19C4E1"/>
       <stop offset="1" stop-color="#8EE7F2"/>
     </linearGradient>
-    <filter id="outerShadow" x="77" y="37" width="1046" height="286" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="20" dy="24" stdDeviation="28" flood-color="#C7CED3" flood-opacity="0.72"/>
-      <feDropShadow dx="-18" dy="-18" stdDeviation="26" flood-color="#FFFFFF" flood-opacity="0.95"/>
+    <filter id="shellShadow" x="66" y="38" width="1068" height="342" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="22" dy="26" stdDeviation="30" flood-color="#C6CDD2" flood-opacity="0.72"/>
+      <feDropShadow dx="-20" dy="-20" stdDeviation="28" flood-color="#FFFFFF" flood-opacity="0.96"/>
     </filter>
-    <filter id="softInset" x="120" y="86" width="960" height="188" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="9" dy="10" stdDeviation="12" flood-color="#C9D0D5" flood-opacity="0.36"/>
-      <feDropShadow dx="-9" dy="-9" stdDeviation="12" flood-color="#FFFFFF" flood-opacity="0.90"/>
+    <filter id="cardShadow" x="-36" y="-32" width="430" height="152" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="10" dy="11" stdDeviation="12" flood-color="#C5CDD2" flood-opacity="0.48"/>
+      <feDropShadow dx="-9" dy="-9" stdDeviation="12" flood-color="#FFFFFF" flood-opacity="0.95"/>
     </filter>
-    <filter id="pillShadow" x="0" y="0" width="360" height="92" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="8" dy="9" stdDeviation="10" flood-color="#C6CDD2" flood-opacity="0.52"/>
-      <feDropShadow dx="-8" dy="-8" stdDeviation="10" flood-color="#FFFFFF" flood-opacity="0.95"/>
+    <filter id="lineSoftness" x="148" y="117" width="908" height="190" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="8" dy="9" stdDeviation="12" flood-color="#C8D0D5" flood-opacity="0.34"/>
+      <feDropShadow dx="-8" dy="-8" stdDeviation="12" flood-color="#FFFFFF" flood-opacity="0.90"/>
     </filter>
   </defs>
 
-  <rect width="1200" height="360" rx="36" fill="url(#bg)"/>
+  <rect width="1200" height="420" rx="38" fill="url(#bg)"/>
 
-  <g filter="url(#outerShadow)">
-    <rect x="116" y="76" width="968" height="208" rx="38" fill="#F5F7F8"/>
-    <rect x="117.5" y="77.5" width="965" height="205" rx="36.5" stroke="#FFFFFF" stroke-width="3"/>
+  <g filter="url(#shellShadow)">
+    <rect x="112" y="72" width="976" height="276" rx="42" fill="#F6F8F8"/>
+    <rect x="113.5" y="73.5" width="973" height="273" rx="40.5" stroke="#FFFFFF" stroke-width="3"/>
   </g>
 
-  <g filter="url(#softInset)">
-    <path d="M422 188C492 158 542 97 633 108C714 118 759 175 828 190C889 203 946 194 1025 174" stroke="url(#accent)" stroke-width="10" stroke-linecap="round" opacity="0.95"/>
-    <path d="M190 238C280 193 354 194 431 229C506 263 565 258 631 220C720 168 794 174 871 225C924 260 971 264 1020 242" stroke="#D8E0E4" stroke-width="8" stroke-linecap="round" opacity="0.82"/>
+  <g filter="url(#lineSoftness)">
+    <path d="M176 286C284 226 381 231 470 265C554 297 611 270 681 221C753 171 829 155 907 181C962 199 997 191 1030 159" stroke="#D8E0E4" stroke-width="8" stroke-linecap="round" opacity="0.78"/>
+    <path d="M552 176C613 139 657 118 723 131C783 143 809 185 864 199C923 214 967 192 1029 144" stroke="url(#accent)" stroke-width="10" stroke-linecap="round" opacity="0.96"/>
   </g>
 
-  <circle cx="214" cy="125" r="13" fill="#19C4E1"/>
-  <circle cx="248" cy="125" r="13" fill="#E7ECEF"/>
-  <circle cx="282" cy="125" r="13" fill="#D9E0E4"/>
+  <circle cx="204" cy="126" r="13" fill="#19C4E1"/>
+  <circle cx="238" cy="126" r="13" fill="#E7ECEF"/>
+  <circle cx="272" cy="126" r="13" fill="#D9E0E4"/>
 
-  <text x="174" y="180" fill="#2F3A40" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="58" font-weight="700" letter-spacing="0">okmrtis</text>
-  <text x="176" y="224" fill="#65727A" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="24" font-weight="500" letter-spacing="0">practical automation / durable docs / quiet tools</text>
+  <text x="168" y="181" fill="#2F3A40" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="58" font-weight="750" letter-spacing="0">okmrtis</text>
+  <text x="170" y="222" fill="#5F6C74" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="24" font-weight="560" letter-spacing="0">automation / agents / extended thinking</text>
+  <text x="171" y="258" fill="#7C8A91" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="17" font-weight="520" letter-spacing="0">calm systems for repeatable, reviewable work</text>
 
-  <g transform="translate(708 112)" filter="url(#pillShadow)">
-    <rect width="316" height="58" rx="29" fill="#F5F7F8"/>
-    <text x="158" y="37" text-anchor="middle" fill="#415057" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="18" font-weight="650" letter-spacing="0">local-first workflows</text>
-  </g>
-  <g transform="translate(762 188)" filter="url(#pillShadow)">
-    <rect width="262" height="58" rx="29" fill="#F5F7F8"/>
-    <text x="131" y="37" text-anchor="middle" fill="#415057" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="18" font-weight="650" letter-spacing="0">GitHub systems</text>
+  <g transform="translate(733 108)" filter="url(#cardShadow)">
+    <rect width="288" height="64" rx="26" fill="#F7F9F9"/>
+    <rect x="24" y="21" width="8" height="22" rx="4" fill="#19C4E1"/>
+    <text x="149" y="39" text-anchor="middle" fill="#405057" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="0">consulting workflows</text>
   </g>
 
-  <rect x="1016" y="104" width="8" height="132" rx="4" fill="#19C4E1"/>
-  <rect x="996" y="124" width="8" height="92" rx="4" fill="#CFEFF5"/>
+  <g transform="translate(762 187)" filter="url(#cardShadow)">
+    <rect width="259" height="64" rx="26" fill="#F7F9F9"/>
+    <rect x="24" y="21" width="8" height="22" rx="4" fill="#BDEFF6"/>
+    <text x="142" y="39" text-anchor="middle" fill="#405057" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="0">agent collaboration</text>
+  </g>
+
+  <g transform="translate(703 266)" filter="url(#cardShadow)">
+    <rect width="318" height="64" rx="26" fill="#F7F9F9"/>
+    <rect x="24" y="21" width="8" height="22" rx="4" fill="#19C4E1"/>
+    <text x="168" y="39" text-anchor="middle" fill="#405057" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="0">GitHub thinking layer</text>
+  </g>
+
+  <rect x="1022" y="112" width="8" height="174" rx="4" fill="#19C4E1"/>
+  <rect x="1001" y="137" width="8" height="116" rx="4" fill="#CFEFF5"/>
 </svg>
