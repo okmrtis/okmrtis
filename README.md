@@ -4,18 +4,20 @@
 
 <br />
 
-<div align="center">
-  <a href="https://github.com/okmrtis?tab=repositories">
-    <img alt="Repositories" src="https://img.shields.io/badge/repositories-open-19C4E1?style=for-the-badge&labelColor=EEF2F4&color=19C4E1" />
-  </a>
-  <img alt="Consulting workflow automation" src="https://img.shields.io/badge/consulting-workflow_automation-19C4E1?style=for-the-badge&labelColor=EEF2F4&color=19C4E1" />
-  <img alt="AI agent collaboration" src="https://img.shields.io/badge/AI-agent_collaboration-19C4E1?style=for-the-badge&labelColor=EEF2F4&color=19C4E1" />
-  <img alt="GitHub thinking systems" src="https://img.shields.io/badge/GitHub-thinking_systems-19C4E1?style=for-the-badge&logo=github&logoColor=30363d&labelColor=EEF2F4&color=19C4E1" />
-</div>
+<p align="center">
+  <a href="#focus"><kbd>Focus</kbd></a>
+  <a href="#operating-style"><kbd>Operating style</kbd></a>
+  <a href="#current-direction"><kbd>Current direction</kbd></a>
+  <a href="https://github.com/okmrtis?tab=repositories"><kbd>Repositories</kbd></a>
+</p>
 
 ## Soft Systems Workbench
 
 I build calm, repeatable workflows for consulting work: small automations, clear documentation, and agent-ready repositories that make thinking easier to externalize, extend, and resume.
+
+<div align="center">
+  <img src="./assets/workbench-system.svg" alt="A soft workflow map connecting consulting work, AI agents, and GitHub-based externalized thinking" width="100%" />
+</div>
 
 ## Focus
 
