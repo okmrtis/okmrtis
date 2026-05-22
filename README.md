@@ -13,7 +13,7 @@
 
 ## Soft Systems Workbench
 
-I build calm, repeatable workflows for consulting work: small automations, clear documentation, and agent-ready repositories that make thinking easier to externalize, extend, and resume.
+I build quiet operating systems for consulting work: small automations, clear repositories, and AI-agent workflows that turn loose context into checkable, recoverable progress.
 
 <div align="center">
   <img src="./assets/workbench-system.svg" alt="A soft workflow map connecting consulting work, AI agents, and GitHub-based externalized thinking" width="100%" />
@@ -23,18 +23,19 @@ I build calm, repeatable workflows for consulting work: small automations, clear
 
 | Practice | What I am shaping |
 | --- | --- |
-| Consulting workflow automation | Turning recurring desk work into checkable, rerunnable flows |
-| AI agent collaboration | Designing prompts, handoffs, reviews, and recovery paths for human-agent work |
-| Externalized and extended thinking | Keeping decisions, tasks, notes, and runbooks inside versioned, reviewable repositories |
-| Verification | Making outputs easier to inspect, compare, and safely continue |
+| Consulting workflow automation | Translating recurring desk work into logged, rerunnable flows |
+| Human-agent collaboration | Designing prompts, handoffs, reviews, and recovery paths that keep humans in control |
+| Durable working memory | Moving decisions, tasks, notes, and runbooks into versioned, reviewable repositories |
+| Verification and continuity | Making outputs easy to reopen, compare, trace, and safely continue |
 
 ## Operating Style
 
-- Confidentiality-aware by default: public examples stay generalized and appropriate for open repositories.
-- Local-first when it matters: work should remain understandable, recoverable, and easy to rerun.
-- Repo-centered: decisions and procedures belong somewhere durable, not only in chat.
-- Agent-aware: tasks are written so a human and an AI agent can both pick up the thread.
+- Evidence before confidence: useful work should leave something inspectable behind.
+- Local-first when it matters: workflows should stay understandable on the machine where real work happens.
+- Repo-centered by default: decisions and procedures belong somewhere durable, not only in chat.
+- Boundary-aware: public examples stay generalized, private context stays private, and automation scopes stay explicit.
+- Agent-aware: tasks are written so a human and an AI agent can both pick up the thread without guessing.
 
 ## Current Direction
 
-I am exploring how consultants can combine everyday automation, AI agents, and GitHub to externalize and extend their working context: a place where ideas, decisions, and next actions become searchable, reusable, and easier to improve over time.
+I am exploring how consultants can combine everyday automation, AI agents, and GitHub as practical cognitive infrastructure: a working surface where context, decisions, checks, and next actions become searchable, reusable, and easier to improve over time.
