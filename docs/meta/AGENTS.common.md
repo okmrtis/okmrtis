@@ -41,7 +41,10 @@ specific rule.
   create, inspect, run, or verify something, do the work directly when feasible.
 - When a task is large or difficult enough that tool calls risk timing out,
   divide it into smaller staged batches, verify each batch, and continue from
-  recorded intermediate state instead of attempting one broad run.
+  recorded intermediate state instead of attempting one broad run. Run batches
+  in parallel only when they are independent, do not touch the same files or
+  external state, and have a bounded concurrency limit; otherwise run them
+  sequentially.
 - If the practical effect is limited to the user's own local files, private
   workspace state, or other reversible personal scope, proceed through execution
   and verification after creating a suitable rollback path when risk warrants it.
