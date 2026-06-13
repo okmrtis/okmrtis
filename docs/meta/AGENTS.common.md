@@ -8,6 +8,11 @@ specific rule.
 
 - Durable work should end as committed and pushed repository state, not as
   chat-only guidance.
+- For any new non-test `okmrtis` project, GitHub/meta adoption is part of
+  project creation, not a later cleanup task. Do not start normal project work
+  until the project has a Git repository, root `AGENTS.md`,
+  `docs/meta/AGENTS.common.md`, `docs/meta/meta_source.json`, and the
+  meta-adoption check passes.
 - A project should be reproducible from Git plus documented authorized external
   inputs. If an input or generated output is not committed, record enough
   manifest information to obtain it, rerun the procedure, and verify the result.
@@ -25,10 +30,23 @@ specific rule.
 
 - Read this shared file, then the project-local `AGENTS.md`, README, and
   workflow docs before changing files.
+- If a project has README/workflow docs saying work is GitHub-managed but lacks
+  `AGENTS.md` or `docs/meta/AGENTS.common.md`, treat that as a setup defect:
+  pause normal work, adopt `okmrtis/meta`, run the adoption check, and only then
+  continue.
 - On this Windows Codex host, recheck current tooling before applying older
   workaround history. GitHub CLI, Python, npm/npx, Git LFS, PowerShell policy,
   and Git long-path behavior were refreshed on 2026-05-20; the current baseline
-  lives in `okmrtis/meta` at `knowledge/codex-windows-tooling.md`.
+  lives in `okmrtis/meta` as cards under topic `codex-windows-tooling` in
+  `knowledge/cards.jsonl`.
+- On Windows Codex hosts, before substantive work, ensure the Codex
+  goal/automation taskbar-badge auto-sync is bootstrapped. If
+  `%CODEX_HOME%\bin\codex-goal-badge-watch.py` or the user Startup shortcut
+  `CodexGoalBadgeMetaSync.lnk` is missing, locate or fetch a local
+  `okmrtis/meta` checkout, then run
+  `powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\codex_goal_badge_fix\bootstrap-codex-goal-badge-auto-sync.ps1`
+  from that checkout. This is user-local and reversible; proceed without asking
+  unless GitHub auth, clone access, or Windows execution policy blocks it.
 - Project-local rules win when they are more specific to that repository,
   especially around real data, workbook edits, deployment, or safety constraints.
 - If shared and local rules conflict, follow the stricter rule and update the
@@ -63,6 +81,43 @@ specific rule.
   present the exact proposed action, content, recipients, and likely impact for
   user approval first because the user holds real-world accountability.
 
+## Execution Reliability Protocol
+
+- Apply this protocol to every Codex task in adopted projects and on every
+  device where `okmrtis/meta` is available. Scale the depth to task risk, but
+  do not skip the protocol silently.
+- Before execution, report the request interpretation, concrete requirements,
+  material unknowns, working hypotheses, and the plan. Build the plan from an
+  appropriate frame for the task, such as decomposition, a structured checklist,
+  a logic tree, a decision matrix, a calculation, or a test matrix. For trivial
+  one-command requests, this can be a compact sentence; for ambiguous or
+  high-impact work, make the checklist explicit before editing or acting.
+- During execution, test hypotheses against current authoritative state. When
+  an interesting hypothesis, contradiction, or reusable lesson appears, inspect
+  evidence and revise the plan instead of continuing from stale assumptions.
+- After execution, verify against the original objective. Check for hallucinated
+  facts or unsupported claims, run relevant tests or validators, inspect saved
+  artifacts or runtime behavior, and confirm reproducibility from Git plus
+  documented external inputs.
+- Stabilize before declaring success: reduce avoidable flakiness, keep changes
+  bounded, refactor only where it improves correctness or maintainability, and
+  record residual risks or "not applicable" checks explicitly.
+- Use an external evaluator when proportionate: automated tests, linters,
+  schema validators, CI, browser screenshots, independent command output,
+  subagent review, or human review after approval. Do not notify or involve
+  other people without the user's approval.
+- Define task-relevant monitoring or regression signals when the work will run
+  again, such as pass/fail gates, runtime, coverage, candidate counts, error
+  rates, freshness, drift, or artifact hashes.
+- In user-facing updates and final responses, report the evidence produced by
+  this protocol: plan, checks run, results, stability/reproducibility status,
+  external-evaluation path, monitoring signals, objective alignment, and any
+  remaining uncertainty. Do not expose hidden chain-of-thought; summarize
+  verifiable reasoning outcomes and evidence.
+- Treat completion as unproven until requirement-by-requirement evidence shows
+  the requested end state is satisfied. If evidence is weak, indirect, missing,
+  or contradicted, continue working or state the remaining gap.
+
 ## Evidence And Verification
 
 - Do not trust script success alone when a task changes durable artifacts. Verify
@@ -70,8 +125,8 @@ specific rule.
 - For generated documents, spreadsheets, images, or uploads, keep enough compact
   evidence to explain what was checked without committing bulky scratch data.
 - Before changing Excel, Word, or PowerPoint artifacts, choose the tool path and
-  final verification gate from `okmrtis/meta` at
-  `knowledge/office-artifact-workflow.md`; do this before the first write.
+  final verification gate from `okmrtis/meta` topic `office-artifact-workflow`
+  in `knowledge/cards.jsonl`; do this before the first write.
 - Local Office automation must avoid interfering with the user's active work
   whenever possible. Do not open files in an existing visible Office session
   unless the target file is already open there and reuse is necessary; create a
@@ -93,6 +148,20 @@ specific rule.
 
 - Reusable lessons belong in `okmrtis/meta`; project-specific details belong in
   the project repository.
+- Keep reusable shared knowledge as structured JSONL cards in `okmrtis/meta` at
+  `knowledge/cards.jsonl`, with `knowledge/topics.json` as the topic map. Use
+  GitHub for synchronization and history, but do not maintain Markdown knowledge
+  files or generated JSON indexes as parallel sources of truth.
+- In `okmrtis/meta`, Markdown is reserved for Codex instruction files
+  (`AGENTS.md` and `shared/AGENTS.common.md`). Treat other shared knowledge as
+  JSON or JSONL.
+- When using live shared knowledge from `okmrtis/meta`, read
+  `knowledge/topics.json` for topic choice, then filter `knowledge/cards.jsonl`
+  by topic, section, summary, body, and signals. Apply only cards that fit the
+  current project.
+- When adding shared knowledge, make the scope, source date, and future action
+  explicit. Use GitHub Issues for open tasks and backlogs, not as the primary
+  store for stable lessons.
 - When changing common behavior, update `okmrtis/meta` first, then refresh each
   project's vendored `docs/meta/AGENTS.common.md` snapshot.
 - Do not store raw transcripts, secrets, customer data, or full local paths in
