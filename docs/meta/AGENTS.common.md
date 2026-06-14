@@ -8,9 +8,10 @@ specific rule.
 
 - Durable work should end as committed and pushed repository state, not as
   chat-only guidance.
-- For any new non-test `okmrtis` project, GitHub/meta adoption is part of
-  project creation, not a later cleanup task. Do not start normal project work
-  until the project has a Git repository, root `AGENTS.md`,
+- Every repository under `okmrtis` is in scope for GitHub/meta adoption,
+  including repositories created in the future. For any new `okmrtis` project,
+  adoption is part of project creation, not a later cleanup task. Do not start
+  normal project work until the project has a Git repository, root `AGENTS.md`,
   `docs/meta/AGENTS.common.md`, `docs/meta/meta_source.json`, and the
   meta-adoption check passes.
 - A project should be reproducible from Git plus documented authorized external
@@ -30,6 +31,13 @@ specific rule.
 
 - Read this shared file, then the project-local `AGENTS.md`, README, and
   workflow docs before changing files.
+- Treat `okmrtis/meta` as the normative source for Codex behavior in every
+  Codex chat that involves `okmrtis` work. On each shared device, a local
+  `okmrtis/meta` clone and workspace-level `AGENTS.md` entrypoint should be
+  bootstrapped with `scripts/bootstrap_codex_meta_environment.ps1` before
+  substantive work. If a chat starts outside a bootstrapped workspace or cannot
+  read meta, restore the bootstrap or move the work under a bootstrapped
+  workspace before relying on shared behavior.
 - If a project has README/workflow docs saying work is GitHub-managed but lacks
   `AGENTS.md` or `docs/meta/AGENTS.common.md`, treat that as a setup defect:
   pause normal work, adopt `okmrtis/meta`, run the adoption check, and only then
@@ -66,6 +74,12 @@ specific rule.
 - If the practical effect is limited to the user's own local files, private
   workspace state, or other reversible personal scope, proceed through execution
   and verification after creating a suitable rollback path when risk warrants it.
+- When the user explicitly delegates `okmrtis` repository maintenance authority,
+  such as applying meta rules to every current and future `okmrtis` repository,
+  treat that as approval to complete the necessary commits and pushes within
+  the authorized `okmrtis` scope after verifying the target list, keeping changes
+  reviewable, and reporting per-repository results. Do not stop merely because
+  multiple `okmrtis` repositories are affected.
 - For deletion, overwrite, settings, account, payment, or other sensitive
   changes, first make the operation reversible with a backup, branch, copy,
   export, snapshot, log, or staged change. If the reversible effect remains in
@@ -83,40 +97,73 @@ specific rule.
 
 ## Execution Reliability Protocol
 
-- Apply this protocol to every Codex task in adopted projects and on every
-  device where `okmrtis/meta` is available. Scale the depth to task risk, but
-  do not skip the protocol silently.
+- Apply this protocol to every user Codex chat execution where `okmrtis/meta`
+  is available, across projects, devices, current repositories, and future
+  repositories. Scale the depth to task risk, but do not skip the protocol
+  silently.
 - Before execution, report the request interpretation, concrete requirements,
   material unknowns, working hypotheses, and the plan. Build the plan from an
-  appropriate frame for the task, such as decomposition, a structured checklist,
-  a logic tree, a decision matrix, a calculation, or a test matrix. For trivial
-  one-command requests, this can be a compact sentence; for ambiguous or
-  high-impact work, make the checklist explicit before editing or acting.
+  appropriate task standard or frame. If the task has a recognized standard
+  planning or delivery method, follow it or explicitly adapt it before falling
+  back to generic structures, such as Agile or waterfall for application
+  development, WBS for task or project breakdown, decomposition, a structured
+  checklist, a logic tree, a decision matrix, a calculation, a test matrix, or
+  another explicit structure that fits the work. For trivial one-command
+  requests, this can be a compact sentence; for ambiguous or high-impact work,
+  make the checklist explicit before editing or acting. This is not a
+  pause-for-approval gate by default: after reporting the interpretation,
+  requirements, unknowns, hypotheses, and plan, choose the best supported
+  working hypothesis, state any material assumptions, and proceed to execution
+  unless a user-only decision, approval-required external impact, or unsafe
+  ambiguity remains.
 - During execution, test hypotheses against current authoritative state. When
   an interesting hypothesis, contradiction, or reusable lesson appears, inspect
   evidence and revise the plan instead of continuing from stale assumptions.
-- After execution, verify against the original objective. Check for hallucinated
-  facts or unsupported claims, run relevant tests or validators, inspect saved
-  artifacts or runtime behavior, and confirm reproducibility from Git plus
-  documented external inputs.
+- After execution, verify against the original objective. Check for
+  hallucinated facts or unsupported claims, run relevant tests or validators,
+  inspect saved artifacts or runtime behavior, and confirm reproducibility from
+  Git plus documented external inputs.
 - Stabilize before declaring success: reduce avoidable flakiness, keep changes
-  bounded, refactor only where it improves correctness or maintainability, and
+  bounded, refactor where it improves correctness or maintainability, and
   record residual risks or "not applicable" checks explicitly.
-- Use an external evaluator when proportionate: automated tests, linters,
-  schema validators, CI, browser screenshots, independent command output,
-  subagent review, or human review after approval. Do not notify or involve
-  other people without the user's approval.
+- Use external evaluators when proportionate: automated tests, linters, schema
+  validators, CI, browser screenshots, independent command output, subagent
+  review, or human review after approval. Do not notify or involve other people
+  without the user's approval.
 - Define task-relevant monitoring or regression signals when the work will run
   again, such as pass/fail gates, runtime, coverage, candidate counts, error
   rates, freshness, drift, or artifact hashes.
+- Perform layered meta-verification until confidence saturates for the task:
+  check whether the plan fits the requirements, whether the evidence actually
+  supports the conclusion, whether tests cover the risky paths, whether
+  remaining uncertainty is explicit, and whether another reasonable evaluator
+  would likely reach the same result. Extra time spent on this reliability loop
+  is acceptable when it materially increases confidence.
 - In user-facing updates and final responses, report the evidence produced by
-  this protocol: plan, checks run, results, stability/reproducibility status,
-  external-evaluation path, monitoring signals, objective alignment, and any
-  remaining uncertainty. Do not expose hidden chain-of-thought; summarize
-  verifiable reasoning outcomes and evidence.
+  this protocol: request interpretation, requirements, unknowns, hypotheses,
+  plan, checks run, results, stability/reproducibility status,
+  external-evaluation path, monitoring signals, objective alignment,
+  meta-verification confidence, and any remaining uncertainty. Do not expose
+  hidden chain-of-thought; summarize verifiable reasoning outcomes and evidence.
 - Treat completion as unproven until requirement-by-requirement evidence shows
   the requested end state is satisfied. If evidence is weak, indirect, missing,
   or contradicted, continue working or state the remaining gap.
+
+## User-Facing Output
+
+- For Japanese-speaking users, use Japanese by default in user-facing
+  responses, summaries, reports, and deliverable text unless the user asks for
+  another language, the artifact has a required language, or preserving source
+  wording is necessary.
+- Human-facing deliverables should present a readable review surface first. Do
+  not make raw CSV, JSON, logs, hashes, or full diffs the primary handoff when
+  Markdown, HTML, a formatted Excel workbook, or another readable artifact is
+  more appropriate; keep machine evidence as supporting material.
+- Keep submitted files few and purpose-specific. When the same content can be
+  delivered in one suitable format, produce one format instead of parallel
+  Markdown, HTML, Excel, CSV, or log copies. Create multiple formats only when
+  the user requests them or each format has a distinct review, execution, or
+  archival purpose.
 
 ## Evidence And Verification
 
@@ -137,12 +184,15 @@ specific rule.
 - When a task starts from a file in Downloads/downloads, copy or stage anything
   needed for the run into a stable work root before relying on it, and record
   the original location only as a temporary handoff source.
-- When a task reveals a missing local tool or runtime, finish the active task
-  first, then repair the host baseline if it is safe and local. Prefer
-  user-local, reversible installs and verify the command becomes available. If
-  the repair needs administrator rights, account consent, payment, or another
-  user-only step, record the exact install command and follow-up instead of
-  silently dropping the lesson.
+- When a task reveals a missing, stale, or weaker local tool/runtime, prefer a
+  beneficial environment update when it is user-local, reversible, and likely
+  to improve capability, reliability, verification quality, or future
+  reproducibility. Run or rerun the relevant environment checker after the
+  update. If the update is not needed for the active task, finish the task
+  first when that is safer; if the update materially improves the active task,
+  update before continuing. If the repair needs administrator rights, account
+  consent, payment, or another user-only step, record the exact install command
+  and follow-up instead of silently dropping the lesson.
 
 ## Cross-Repository Updates
 
@@ -162,7 +212,11 @@ specific rule.
 - When adding shared knowledge, make the scope, source date, and future action
   explicit. Use GitHub Issues for open tasks and backlogs, not as the primary
   store for stable lessons.
-- When changing common behavior, update `okmrtis/meta` first, then refresh each
-  project's vendored `docs/meta/AGENTS.common.md` snapshot.
+- When changing common behavior, update `okmrtis/meta` first, then refresh every
+  current `okmrtis` repository's vendored `docs/meta/AGENTS.common.md` snapshot.
+  Future repositories under `okmrtis` must receive the same snapshot during
+  creation. Use `scripts/sync_all_okmrtis_meta_adoption.ps1 -CheckOnly` to
+  audit current GitHub repositories, then rerun it with `-Apply`, `-Commit`, or
+  `-Push` when intentionally refreshing adopted repositories.
 - Do not store raw transcripts, secrets, customer data, or full local paths in
   `meta` unless they are deliberately sanitized examples.
