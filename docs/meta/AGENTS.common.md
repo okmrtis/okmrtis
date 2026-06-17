@@ -47,14 +47,18 @@ specific rule.
   and Git long-path behavior were refreshed on 2026-05-20; the current baseline
   lives in `okmrtis/meta` as cards under topic `codex-windows-tooling` in
   `knowledge/cards.jsonl`.
-- On Windows Codex hosts, before substantive work, ensure the Codex
-  goal/automation taskbar-badge auto-sync is bootstrapped. If
-  `%CODEX_HOME%\bin\codex-goal-badge-watch.py` or the user Startup shortcut
-  `CodexGoalBadgeMetaSync.lnk` is missing, locate or fetch a local
-  `okmrtis/meta` checkout, then run
-  `powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\codex_goal_badge_fix\bootstrap-codex-goal-badge-auto-sync.ps1`
-  from that checkout. This is user-local and reversible; proceed without asking
-  unless GitHub auth, clone access, or Windows execution policy blocks it.
+- On this Windows Codex host, the PC-freeze investigation currently overrides
+  the older Codex goal/automation taskbar-badge auto-sync bootstrap. Until the
+  user explicitly lifts that safety guard after fresh stability evidence, do
+  not recreate, bootstrap, reinstall, or start Codex background helpers
+  introduced around 2026-06-10 to 2026-06-11. This includes Codex Keep Awake,
+  goal-badge auto-sync/watch/scrub helpers, goal notification filters,
+  full-access/login-popup guards, Codex stumble knowledge watchers, and any
+  Codex-related Startup shortcut, Run/RunOnce registry value, scheduled task, or
+  hidden long-running monitor. Missing goal-badge watcher files and missing
+  Startup shortcuts are the desired safe state on this host. Environment repair
+  commands must pass guard flags such as `-NoBootstrapGoalBadge` and
+  `-NoEnsureWatcherShortcut` when available.
 - Project-local rules win when they are more specific to that repository,
   especially around real data, workbook edits, deployment, or safety constraints.
 - If shared and local rules conflict, follow the stricter rule and update the
