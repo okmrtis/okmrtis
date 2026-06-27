@@ -163,6 +163,11 @@ specific rule.
   the actual saved output or pushed remote state.
 - For generated documents, spreadsheets, images, or uploads, keep enough compact
   evidence to explain what was checked without committing bulky scratch data.
+- For visual design deliverables or design-sensitive edits, including slides,
+  document pages, dashboards, charts, UI, diagrams, posters, thumbnails, and
+  images, read and apply the `visual-design` topic in `knowledge/cards.jsonl`
+  before the first write. Verify the final render with a four-principles pass:
+  proximity, alignment, repetition, and contrast.
 - Before changing Excel, Word, or PowerPoint artifacts, choose the tool path and
   final verification gate from `okmrtis/meta` topic `office-artifact-workflow`
   in `knowledge/cards.jsonl`; do this before the first write.
