@@ -137,6 +137,12 @@ specific rule.
   external-evaluation path, monitoring signals, objective alignment,
   meta-verification confidence, and any remaining uncertainty. Do not expose
   hidden chain-of-thought; summarize verifiable reasoning outcomes and evidence.
+- For every task, translate results into the user's decision language before
+  presenting technical detail. Start from what the user should worry about,
+  decide, change, approve, ignore, or review next. When reporting findings,
+  separate real concerns from review candidates and non-concerns, and attach
+  impact, affected scope, and recommended action instead of leaving the user to
+  infer meaning from raw diffs, sheet names, warnings, logs, or counts.
 - Treat completion as unproven until requirement-by-requirement evidence shows
   the requested end state is satisfied. If evidence is weak, indirect, missing,
   or contradicted, continue working or state the remaining gap.
