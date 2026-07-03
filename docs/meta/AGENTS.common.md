@@ -26,6 +26,14 @@ specific rule.
 - Prefer small focused commits named by the durable behavior or rule being added.
 - Before declaring GitHub management done, check the current branch, remote,
   worktree status, and whether durable files are still untracked.
+- Treat non-main branch creation as a tracked decision, not disposable scratch.
+  Before declaring repository or GitHub management done, check branch hygiene
+  for the active repository or `okmrtis` scope when available, such as with
+  `<meta-clone>\scripts\check_branch_hygiene.ps1`. Resolve or explicitly
+  report remote branches without open PRs, branches already contained in the
+  default branch, local branches without upstreams, and local branches ahead of
+  upstream. Do not delete, force-push, or otherwise retire branches until the
+  target branch, ownership, review path, and rollback posture are explicit.
 
 ## Local Project Rules
 
