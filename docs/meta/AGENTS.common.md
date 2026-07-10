@@ -42,28 +42,44 @@ specific rule.
   default branch, local branches without upstreams, and local branches ahead of
   upstream. Do not delete, force-push, or otherwise retire branches until the
   target branch, ownership, review path, and rollback posture are explicit.
-- Use the installed `okmrtis` branch-integration controller as the cross-repo
-  safety net when it is available. It must identify repositories by GitHub
-  `owner/name`, not by whichever duplicate local clone happens to be found. The
-  controller may open a PR for an idle non-default branch, update it from the
-  default branch, merge it with an expected-head guard, and retire a ref only
-  after the configured cooldown and policy gates pass. It must fail closed for
-  conflicts, draft/hold branches, changed heads, failed or pending checks,
-  requested changes, sensitive or high-risk paths, oversized diffs, uncertain
-  API state, and untested code. Never force-update branch content. A contained
-  leftover ref may be deleted only with an expected-head lease and a recovery
-  SHA recorded first; the lease is a deletion guard, not permission to rewrite
-  history. A draft PR or a
-  `wip/`, `draft/`, release, archive, or pages branch remains an explicit hold.
-  A ready PR intentionally handed to the controller must include the exact body
-  marker `<!-- okmrtis-branch-integration:v1 -->`; absence of the marker is a
-  hold, not implied consent to merge a manually managed PR.
-- Branch automation complements task completion; it does not excuse leaving a
-  branch unexplained. At the end of branch-based work, push and open or update
-  the PR, merge verified work when authorized, or record the exact reason the
-  branch remains on hold. Keep `delete_branch_on_merge` enabled where GitHub
-  supports it, and retain the branch tip SHA in the controller recovery ledger
-  before deleting a contained leftover ref.
+- Use the installed `okmrtis` branch-integration controller as the deterministic
+  cross-repo safety layer when it is available. It must identify repositories by
+  GitHub `owner/name`, not by whichever duplicate local clone happens to be
+  found. It may open or update PRs, merge with expected-head guards, and retire
+  contained refs after cooldown. It must still fail closed for conflicts,
+  changed heads, failed or pending checks, requested changes, sensitive or
+  high-risk paths, oversized diffs, uncertain API state, and untested code.
+  Never force-update branch content. A contained ref may be deleted only with an
+  expected-head lease and a recovery SHA recorded first.
+- A deterministic `waiting`, `review_needed`, or `error` result is not a terminal
+  hold. The scheduled Codex semantic branch-convergence automation must consume
+  every such result and every local or remote non-default branch. It must use Git
+  commit, diff, reflog, worktree, PR, review, check, and timestamp evidence plus
+  all relevant Codex task history available through thread listing and reading.
+  Correlate task IDs, repositories, worktree paths, branch names, commit messages,
+  changed files, and timestamps before deciding ownership or intent. Store only
+  task IDs and privacy-safe summaries, never copied chat transcripts.
+- Semantic convergence must preserve the newest verified repository invariants
+  and integrate the unique intent of older work. Do not blindly merge an obsolete
+  implementation merely to remove a branch. Port still-useful behavior and tests
+  onto current `main`, resolve conflicts by the reconstructed intent and timeline,
+  add or repair tests, rerun risk-matched checks, and keep iterating until the
+  result is verified. A failing change is work to repair or safely supersede, not
+  permission to merge a regression and not a reason to abandon the branch.
+- An actively changing branch is owned work, not an abandoned hold. Continue or
+  message its owning Codex task with an explicit completion instruction; if the
+  task becomes idle or loses ownership, take over in an isolated worktree. The
+  only terminal outcomes are verified integration, verified supersession with
+  all unique intent represented on `main`, or verified empty/duplicate retirement.
+  Any unresolved external dependency remains an active retry item with a next
+  action and owning task, and must be revisited automatically rather than parked.
+- Branch automation complements task completion. At the end of branch-based work,
+  commit and push durable work, converge it into `main`, close or merge its PR,
+  and retire the ref after recording recovery evidence. Keep
+  `delete_branch_on_merge` enabled where GitHub supports it. A ready PR handed to
+  the deterministic controller may retain the exact body marker
+  `<!-- okmrtis-branch-integration:v1 -->`, but absence of that marker routes the
+  work to semantic convergence instead of becoming a permanent hold.
 
 ## Local Project Rules
 
@@ -226,6 +242,15 @@ specific rule.
 - Before changing Excel, Word, or PowerPoint artifacts, choose the tool path and
   final verification gate from `okmrtis/meta` topic `office-artifact-workflow`
   in `knowledge/cards.jsonl`; do this before the first write.
+- Before creating any customer-facing system implementation proposal, read and
+  apply all three canonical cards from `knowledge/cards.jsonl`:
+  `project-delivery-methods/customer-system-proposal-phase-gates`,
+  `project-delivery-methods/japanese-system-proposal-standard-structure`, and
+  `visual-design/imagegen-consulting-body-eight-pattern-contract`. Enforce the
+  six independent gates, canonical 25-module decision structure, exact
+  Title/Key Message/Body semantics, eight-form-only ImageGen body contract, and
+  full restart from Phase 1 after any rejection. Do not begin slide production
+  while an upstream gate is unpassed.
 - Local Office automation must avoid interfering with the user's active work
   whenever possible. Do not open files in an existing visible Office session
   unless the target file is already open there and reuse is necessary; create a
