@@ -35,6 +35,11 @@ specific rule.
 - Before declaring GitHub management done, check the current branch, remote,
   worktree status, and whether durable files are still untracked.
 - Treat non-main branch creation as a tracked decision, not disposable scratch.
+  Immediately after creating a branch and after material head changes, record
+  its repository, branch, full head/base object IDs, and current Codex task ID
+  in the local branch-integration provenance ledger with the installed
+  `record_branch_provenance.ps1`. Store pointers only: never copy raw chat text,
+  hidden reasoning, credentials, or private exports into the ledger or GitHub.
   Before declaring repository or GitHub management done, check branch hygiene
   for the active repository or `okmrtis` scope when available, such as with
   `<meta-clone>\scripts\check_branch_hygiene.ps1`. Resolve or explicitly
@@ -47,18 +52,31 @@ specific rule.
   GitHub `owner/name`, not by whichever duplicate local clone happens to be
   found. It may open or update PRs, merge with expected-head guards, and retire
   contained refs after cooldown. It must still fail closed for conflicts,
-  changed heads, failed or pending checks, requested changes, sensitive or
-  high-risk paths, oversized diffs, uncertain API state, and untested code.
-  Never force-update branch content. A contained ref may be deleted only with an
+  draft or do-not-merge signals, changed heads, failed or pending checks,
+  requested changes, sensitive or high-risk paths, oversized diffs, uncertain
+  API state, and untested code. A ready PR intentionally handed to that lane
+  must include `<!-- okmrtis-branch-integration:v1 -->`; absence routes it to
+  semantic convergence instead of implying deterministic merge consent. Never
+  force-update branch content. A contained ref may be deleted only with an
   expected-head lease and a recovery SHA recorded first.
 - A deterministic `waiting`, `review_needed`, or `error` result is not a terminal
   hold. The scheduled Codex semantic branch-convergence automation must consume
-  every such result and every local or remote non-default branch. It must use Git
-  commit, diff, reflog, worktree, PR, review, check, and timestamp evidence plus
-  all relevant Codex task history available through thread listing and reading.
-  Correlate task IDs, repositories, worktree paths, branch names, commit messages,
-  changed files, and timestamps before deciding ownership or intent. Store only
-  task IDs and privacy-safe summaries, never copied chat transcripts.
+  every such result and every local or remote non-default branch. Only an active
+  task, changed head, cooldown/post-mutation interval, or named external retry
+  may be monitored, and every monitoring item needs an exact recheck time.
+- Before deterministic create/update/merge/delete, run an audit and correlate the
+  exact head with its provenance and current Codex task. Grant a short-lived
+  exact-head `clear` preflight only when the owning task is inactive or complete
+  and no matching worktree contains uncommitted or unpushed intent. Record an
+  `active_task` lease otherwise. Missing, expired, active, or wrong-head
+  preflight must prevent mutation and produce bounded monitoring.
+- For semantic convergence, inspect evidence in this order: matching Codex task
+  history; GitHub Issue/PR timeline, reviews, and checks; commit, diff, reflog,
+  worktree, and timestamp chronology relative to current `main`; current rules
+  and regression tests; then prior integration/recovery records. Correlate at
+  least two independent identifiers before assigning task ownership. Store only
+  task IDs, hashes, and privacy-safe summaries, never raw chat transcripts,
+  hidden reasoning, credentials, or full machine paths.
 - Semantic convergence must preserve the newest verified repository invariants
   and integrate the unique intent of older work. Do not blindly merge an obsolete
   implementation merely to remove a branch. Port still-useful behavior and tests
@@ -69,8 +87,10 @@ specific rule.
 - An actively changing branch is owned work, not an abandoned hold. Continue or
   message its owning Codex task with an explicit completion instruction; if the
   task becomes idle or loses ownership, take over in an isolated worktree. The
-  only terminal outcomes are verified integration, verified supersession with
-  all unique intent represented on `main`, or verified empty/duplicate retirement.
+  only terminal outcomes are `merged_semantically`,
+  `semantic_noop_obsolete_retired`, or
+  `declared_long_lived_with_authoritative_evidence`. A long-lived declaration
+  must cite the current default-head authority and expire for revalidation.
   Any unresolved external dependency remains an active retry item with a next
   action and owning task, and must be revisited automatically rather than parked.
 - Branch automation complements task completion. At the end of branch-based work,
