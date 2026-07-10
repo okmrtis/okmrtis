@@ -8,6 +8,14 @@ specific rule.
 
 - Durable work should end as committed and pushed repository state, not as
   chat-only guidance.
+- For `okmrtis` repositories, a user request that creates or updates durable
+  repository state normally authorizes Codex to commit and push the verified
+  result to the repository's ordinary remote branch. Do not stop at a local
+  commit unless the user explicitly asks for local-only work, the push is
+  blocked by authentication or branch divergence, or the candidate push would
+  include secrets, unrelated user work, generated scratch, or another unsafe
+  change. If Codex leaves a durable commit unpushed, report that as a blocker
+  with the exact reason.
 - Every repository under `okmrtis` is in scope for GitHub/meta adoption,
   including repositories created in the future. For any new `okmrtis` project,
   adoption is part of project creation, not a later cleanup task. Do not start
@@ -34,6 +42,28 @@ specific rule.
   default branch, local branches without upstreams, and local branches ahead of
   upstream. Do not delete, force-push, or otherwise retire branches until the
   target branch, ownership, review path, and rollback posture are explicit.
+- Use the installed `okmrtis` branch-integration controller as the cross-repo
+  safety net when it is available. It must identify repositories by GitHub
+  `owner/name`, not by whichever duplicate local clone happens to be found. The
+  controller may open a PR for an idle non-default branch, update it from the
+  default branch, merge it with an expected-head guard, and retire a ref only
+  after the configured cooldown and policy gates pass. It must fail closed for
+  conflicts, draft/hold branches, changed heads, failed or pending checks,
+  requested changes, sensitive or high-risk paths, oversized diffs, uncertain
+  API state, and untested code. Never force-update branch content. A contained
+  leftover ref may be deleted only with an expected-head lease and a recovery
+  SHA recorded first; the lease is a deletion guard, not permission to rewrite
+  history. A draft PR or a
+  `wip/`, `draft/`, release, archive, or pages branch remains an explicit hold.
+  A ready PR intentionally handed to the controller must include the exact body
+  marker `<!-- okmrtis-branch-integration:v1 -->`; absence of the marker is a
+  hold, not implied consent to merge a manually managed PR.
+- Branch automation complements task completion; it does not excuse leaving a
+  branch unexplained. At the end of branch-based work, push and open or update
+  the PR, merge verified work when authorized, or record the exact reason the
+  branch remains on hold. Keep `delete_branch_on_merge` enabled where GitHub
+  supports it, and retain the branch tip SHA in the controller recovery ledger
+  before deleting a contained leftover ref.
 
 ## Local Project Rules
 
@@ -94,6 +124,11 @@ specific rule.
   otherwise affecting other people or shared environments. In those cases,
   present the exact proposed action, content, recipients, and likely impact for
   user approval first because the user holds real-world accountability.
+  Normal fast-forward `git push` of verified commits inside an authorized
+  `okmrtis` repository is governed by the Git and Reproducibility rules above,
+  not by this people-notification stop point. Force-pushes, deletions, public
+  releases, deployment promotions, or pushes containing unclear/unrelated
+  changes still require the relevant explicit approval or rollback path.
 
 ## Execution Reliability Protocol
 
