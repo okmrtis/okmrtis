@@ -132,54 +132,60 @@ specific rule.
 
 ## Execution Reliability Protocol
 
-- Apply this protocol to every user Codex chat execution where `okmrtis/meta`
+- Apply the following eight gates to every user Codex task where `okmrtis/meta`
   is available, across projects, devices, current repositories, and future
-  repositories. Scale the depth to task risk, but do not skip the protocol
-  silently.
-- Before execution, report the request interpretation, concrete requirements,
-  material unknowns, working hypotheses, and the plan. Build the plan from an
-  appropriate task standard or frame. If the task has a recognized standard
-  planning or delivery method, follow it or explicitly adapt it before falling
-  back to generic structures, such as Agile or waterfall for application
-  development, WBS for task or project breakdown, decomposition, a structured
-  checklist, a logic tree, a decision matrix, a calculation, a test matrix, or
-  another explicit structure that fits the work. For trivial one-command
-  requests, this can be a compact sentence; for ambiguous or high-impact work,
-  make the checklist explicit before editing or acting. This is not a
-  pause-for-approval gate by default: after reporting the interpretation,
-  requirements, unknowns, hypotheses, and plan, choose the best supported
-  working hypothesis, state any material assumptions, and proceed to execution
-  unless a user-only decision, approval-required external impact, or unsafe
-  ambiguity remains.
-- During execution, test hypotheses against current authoritative state. When
-  an interesting hypothesis, contradiction, or reusable lesson appears, inspect
-  evidence and revise the plan instead of continuing from stale assumptions.
-- After execution, verify against the original objective. Check for
-  hallucinated facts or unsupported claims, run relevant tests or validators,
-  inspect saved artifacts or runtime behavior, and confirm reproducibility from
-  Git plus documented external inputs.
-- Stabilize before declaring success: reduce avoidable flakiness, keep changes
-  bounded, refactor where it improves correctness or maintainability, and
-  record residual risks or "not applicable" checks explicitly.
-- Use external evaluators when proportionate: automated tests, linters, schema
-  validators, CI, browser screenshots, independent command output, subagent
-  review, or human review after approval. Do not notify or involve other people
-  without the user's approval.
-- Define task-relevant monitoring or regression signals when the work will run
-  again, such as pass/fail gates, runtime, coverage, candidate counts, error
-  rates, freshness, drift, or artifact hashes.
-- Perform layered meta-verification until confidence saturates for the task:
-  check whether the plan fits the requirements, whether the evidence actually
-  supports the conclusion, whether tests cover the risky paths, whether
-  remaining uncertainty is explicit, and whether another reasonable evaluator
-  would likely reach the same result. Extra time spent on this reliability loop
-  is acceptable when it materially increases confidence.
-- In user-facing updates and final responses, report the evidence produced by
-  this protocol: request interpretation, requirements, unknowns, hypotheses,
-  plan, checks run, results, stability/reproducibility status,
-  external-evaluation path, monitoring signals, objective alignment,
-  meta-verification confidence, and any remaining uncertainty. Do not expose
-  hidden chain-of-thought; summarize verifiable reasoning outcomes and evidence.
+  repositories. Scale depth to risk, but classify every gate as `complete`,
+  `not applicable` with a reason, or `blocked` with the missing evidence.
+- Gate 1, scope: before acting, report the request interpretation, concrete
+  requirements, material unknowns, constraints, and the objective-level done
+  criteria. Distinguish user facts, authoritative evidence, assumptions,
+  hypotheses, and unresolved claims.
+- Gate 2, plan: select and name an appropriate task standard or structure. Use
+  a recognized delivery method when one fits, such as Agile or waterfall for
+  application delivery, WBS for project decomposition, a logic tree, decision
+  matrix, calculation, test matrix, phase gates, or another explicit model.
+  State the working hypothesis and the evidence that would confirm or reject it.
+  This report is not an approval pause by default; proceed unless a user-only
+  decision, approval-required external impact, or unsafe ambiguity remains.
+- Gate 3, execution: work from authoritative current state, keep changes bounded,
+  and update the plan when a contradiction, interesting hypothesis, or reusable
+  lesson appears. Do not continue from an assumption after evidence invalidates
+  it.
+- Gate 4, truth and tests: check every material factual claim for source, test,
+  or direct observation; label inference and uncertainty. Run risk-matched tests,
+  validators, render checks, saved-artifact reads, runtime probes, and negative
+  cases. A successful command is evidence only for the behavior it actually
+  covers.
+- Gate 5, stability and reproducibility: reduce avoidable flakiness, refactor
+  where it improves correctness or maintainability, verify rerun behavior, and
+  record the exact Git state plus authorized external inputs needed to reproduce
+  the result.
+- Gate 6, independent evaluation: use at least one proportionate evaluator that
+  is independent of the implementation path, such as tests, linters, schema
+  validators, CI, browser screenshots, independent commands, subagent review,
+  or human review after approval. Do not involve other people without approval.
+- Gate 7, monitoring and alignment: define task-relevant regression signals for
+  recurring work, such as pass/fail gates, runtime, coverage, counts, error rate,
+  freshness, drift, hashes, or worker health. Recompare the result with the
+  original objective and identify work that is useful but out of scope.
+- Gate 8, meta-verification and reporting: audit the requirement-to-evidence
+  mapping, test coverage of risky paths, evaluator independence, remaining
+  uncertainty, and whether another reasonable evaluator would reach the same
+  conclusion. Confidence is saturated only when independent evidence agrees,
+  no material requirement or high-risk path lacks evidence, and another check
+  has low expected information gain. Report verifiable outcomes and evidence,
+  not hidden chain-of-thought.
+- User-facing updates and final responses must expose the protocol results:
+  interpretation, requirements, unknowns, hypotheses, plan, execution result,
+  factual checks, tests, stability and reproducibility, refactoring decision,
+  external evaluation, monitoring signals, objective alignment, confidence,
+  and residual uncertainty.
+- Keep the local automation that supports this protocol under the component
+  ownership defined in `scripts/codex_reliability/manifest.json`. Use
+  `scripts/codex_reliability/install-codex-reliability-control-plane.ps1` as the
+  unified install and health-check entrypoint. Do not add another Startup item
+  or scheduler for an existing component without first updating that manifest
+  and proving that the existing owner cannot carry the responsibility.
 - For every task, translate results into the user's decision language before
   presenting technical detail. Start from what the user should worry about,
   decide, change, approve, ignore, or review next. When reporting findings,
