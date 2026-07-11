@@ -362,6 +362,30 @@ specific rule.
   canonical paths, or URLs. Negative tests must cover missing evidence,
   same-size byte modification, candidate drift, path traversal, nonexistent
   meta commits, reverted rules, and a valid later meta descendant.
+- Treat an HTML citation locator as a structural identity, not as displayed
+  heading text. Record the exact decoded text together with the element tag,
+  ordered occurrence, raw line or byte range, and deterministic DOM path; the
+  frozen raw source must resolve that identity to exactly one element. Preserve
+  duplicate-text elements as an ordered collection and reject ambiguity. A
+  text-keyed map, silent overwrite, or last-write-wins parser cannot authorize
+  Gate 1. Negative tests must add a duplicate same-text heading while updating
+  dependent hashes and prove that the citation becomes ambiguous.
+- Bind every Gate 1 decision to an immutable, non-circular candidate receipt.
+  The receipt must name the frozen candidate path, exact candidate byte hash,
+  candidate Git commit, scoped artifact hashes, and applicable meta references;
+  the evaluated candidate must not try to contain its own hash. Validators and
+  dual-host wrappers must receive the candidate path and expected candidate
+  hash or receipt explicitly and must reject a mutable working-manifest
+  substitute, worktree drift, a wrong candidate, or a receipt mismatch. Include
+  positive coverage for an allowed descendant meta commit as well as negative
+  coverage for candidate/worktree drift.
+- Keep repeated proposal-gate runs lightweight and reproducible: cache frozen
+  raw source bytes by content hash, re-hash and re-read them in each restarted
+  run, execute focused mutation tests while iterating, and reserve one complete
+  normal validation pass for the frozen gate candidate. Bound concurrency and
+  avoid agent or browser fan-out when the host application is unstable. This
+  permits transport reuse only; conclusions, gate decisions, proposal text,
+  and slide bodies must still be regenerated or explicitly re-evaluated.
 - Prove meta lineage with a real or isolated clone of the recorded meta
   repository. Fail closed when it is unavailable. Confirm that the declared
   commit exists and descends from an evidence floor that already contains the
