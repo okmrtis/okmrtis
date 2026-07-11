@@ -267,9 +267,10 @@ specific rule.
   final verification gate from `okmrtis/meta` topic `office-artifact-workflow`
   in `knowledge/cards.jsonl`; do this before the first write.
 - Before creating any customer-facing system implementation proposal, read and
-  apply all three canonical cards from `knowledge/cards.jsonl`:
+  apply all four canonical cards from `knowledge/cards.jsonl`:
   `project-delivery-methods/customer-system-proposal-phase-gates`,
-  `project-delivery-methods/japanese-system-proposal-standard-structure`, and
+  `project-delivery-methods/japanese-system-proposal-standard-structure`,
+  `project-delivery-methods/pmo-management-system`, and
   `visual-design/imagegen-consulting-body-eight-pattern-contract`. Enforce the
   six independent gates, canonical 25-module decision structure, exact
   Title/Key Message/Body semantics, eight-form-only ImageGen body contract, and
@@ -286,6 +287,14 @@ specific rule.
   marked not applicable only with a written reason and an alternative control;
   never silently delete migration, testing/acceptance, training/adoption,
   go-live/rollback, operations/handover, data exit, or lifecycle cost.
+- Phase 1 sampling must include at least five publicly inspectable Japanese
+  customer-facing system implementation proposal artifacts, or clearly labeled
+  proposal templates that preserve the customer-facing page structure. Do not
+  count RFPs, procurement instructions, evaluation sheets, or generic how-to
+  articles as those five proposal artifacts; use them as separate requirement,
+  evaluation, or delivery-standard evidence. Record whether each artifact is an
+  actual submitted proposal, a disclosed exemplar, or a template, and state the
+  limitation before deriving the standard architecture.
 - Trace every canonical proposal module and every conditional overlay claim
   back to at least one source ID and an exact page or section; an uncited
   label or cover module is not an exception. Each citation must carry the
