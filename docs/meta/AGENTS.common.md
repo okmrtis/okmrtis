@@ -299,6 +299,18 @@ specific rule.
   upstream/downstream ID sets mechanically. Reusing an old identifier for a new
   meaning, silently losing a requirement, or changing its interpretation
   without a recorded version and impact analysis is a phase-gate rejection.
+- Phase 2 evidence controls must fail closed on meaning, not merely on IDs,
+  hashes, counts, or favorable substrings. Represent every mandatory customer
+  fact with canonical structured semantics and an exact source-ID set; reject
+  negation, reversed rights or payment direction, changed actors, and weakened
+  conditions. Re-extract live forms deterministically from their frozen raw
+  source and compare the entire extracted schema. For conditional fields,
+  verify the exact child, parent, triggering choice/key, required state, and
+  limit. Recompute draft-versus-live differences from the original workbook or
+  form instead of trusting a handwritten difference table. Negative tests must
+  mutate each critical fact direction, source attribution, branch connection,
+  attachment restriction, and raw-derived difference while updating dependent
+  hashes, so synchronized tampering is rejected as well as stale hashes.
 - Keep technical maturity and rights provenance as two separate axes in every
   proposal. Record maturity from unstarted/design/prototype/similar-project
   implementation/target-environment validation/operation, and record rights as
