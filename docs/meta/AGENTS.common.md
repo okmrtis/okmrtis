@@ -283,15 +283,29 @@ specific rule.
   never silently delete migration, testing/acceptance, training/adoption,
   go-live/rollback, operations/handover, data exit, or lifecycle cost.
 - Trace every canonical proposal module and every conditional overlay claim
-  back to source IDs and exact pages or sections. Unsupported claims about
+  back to at least one source ID and an exact page or section; an uncited
+  label or cover module is not an exception. Each citation must carry the
+  smallest supporting locator and a short exact evidence phrase that can be
+  re-extracted from that locator. A source-wide range copied across unrelated
+  claims is not claim-level evidence. Unsupported claims about
   agreements, reports, acceptance/payment, rights, publicity, continuation,
   ethics, or domain controls are a Gate 1 rejection even when the overall
   structure appears reasonable.
-- Preserve each source's exact visible formal title and exact heading; keep
-  contextual project names in a separate field. Declare one page convention,
+- Preserve each source's exact visible formal title and exact heading byte for
+  byte after ordinary HTML entity decoding, including full-width characters,
+  numbering, and punctuation; keep shortened aliases and contextual project
+  names in separate fields. Re-extract titles, headings, and cited evidence
+  phrases from the frozen raw source during validation rather than only
+  comparing two derived artifacts. Declare one page convention,
   normally one-based PDF file pages, and use it identically in the human
   ledger, manifest, module crosswalk, and overlay crosswalk. Reject or narrow a
   claim when the cited page does not contain it.
+- Proposal Gate 1 negative tests must cover a normalized-but-not-exact formal
+  title, a shortened or renamed heading, a zero-citation canonical module, a
+  broad locator reused across unrelated claims, and an evidence phrase absent
+  from the declared page or section while dependent hashes are updated. A
+  validator that accepts any of these semantic drifts fails closed only in
+  appearance and cannot authorize the next phase.
 - Freeze customer requirement identifiers and meanings when Phase 2 passes.
   Downstream phases and restarted runs must preserve those identifiers; split a
   requirement only with child identifiers such as `R06-1`, append newly found
