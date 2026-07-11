@@ -386,6 +386,43 @@ specific rule.
   avoid agent or browser fan-out when the host application is unstable. This
   permits transport reuse only; conclusions, gate decisions, proposal text,
   and slide bodies must still be regenerated or explicitly re-evaluated.
+- Make the five-sample entrance test machine-readable. Each counted artifact
+  must be classified as an actual submitted customer proposal, a disclosed
+  customer-facing exemplar, or a proposal template that preserves the page
+  structure delivered to a customer; attach the exact page or section proving
+  that classification and state its limitation. RFPs, proposal instructions,
+  evaluation sheets, procurement notices, and generic articles may support
+  separate requirement or practice claims but never satisfy the five counted
+  artifacts. Fewer than five eligible artifacts, including zero, is an
+  automatic Gate 1 rejection.
+- Decompose every canonical module and overlay claim into atomic claim elements
+  and validate element-level coverage. Every element must have at least one
+  direct raw-source citation or an explicitly identified normative meta
+  citation. A qualified-partial citation may supplement a claim but cannot be
+  the sole support for an uncovered element. Reject claims whose own
+  `support_boundary` admits that RACI, Go/No-Go, exceptions, adoption checks,
+  alternatives, owners/actions, data exit, or another stated element remains
+  unsupported. Add zero-direct, uncovered-element, and weakened-boundary
+  mutations.
+- A frozen proposal standard must be self-identical. Mechanically compare its
+  declared version, file name/self-reference, predecessor version/run, required
+  meta-card count and IDs, and all manifest/sidecar bindings. Do not create the
+  next standard by blind global string replacement; regenerate its front
+  matter and provenance contract from structured inputs. Any internal version,
+  predecessor, file-name, or card-count contradiction rejects Gate 1.
+- Separate immutable candidate evidence from post-candidate execution evidence
+  without pretending either can contain its own future hash. Commit the full
+  mutation suite and dual-host wrapper before the candidate commit and include
+  them in the candidate receipt scope. After executing them, commit the exact
+  commands, host/runtime identities, exit codes, normalized outputs, case list,
+  counts, control hashes, and final normal-pass result, then bind those results
+  with a second non-circular gate-evidence receipt and commit. The evaluator
+  must verify both receipts. The mutation matrix must cover missing evidence,
+  same-size byte drift, path traversal, nonexistent meta commit, rules/card
+  revert and decoy, exact title/heading drift, zero citation/direct support,
+  broad locator reuse, absent evidence phrase, duplicate same-text headings,
+  candidate path/SHA/worktree drift, wrapper wrong-candidate input, and a valid
+  descendant meta commit that retains all required contracts.
 - Prove meta lineage with a real or isolated clone of the recorded meta
   repository. Fail closed when it is unavailable. Confirm that the declared
   commit exists and descends from an evidence floor that already contains the
