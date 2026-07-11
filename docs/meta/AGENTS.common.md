@@ -296,6 +296,17 @@ specific rule.
   license, or future-IP candidate. Do not convert an OSS component's maturity
   into a claim that the proposal integration is mature, and do not call an
   unvalidated design proprietary proof.
+- For proposal Gate 1 reproducibility, separate the immutable meta evidence
+  floor from a vendored meta snapshot that may advance. Record both commits and
+  the required proposal-card IDs. Do not bind a validator permanently to exact
+  equality with a floating meta pointer; accept only the same commit or a
+  verified descendant that retains the required contracts, and evaluate the
+  candidate commit separately from later worktree drift. Run the validator
+  under both Windows PowerShell 5.1 and PowerShell 7 with equivalent counts,
+  hashes, ancestry result, and final outcome. Frozen downloaded source bytes
+  may be reused only after re-hashing and re-reading them as evidence; do not
+  reuse old conclusions, phase decisions, slide bodies, or proposal text
+  without regeneration or explicit re-evaluation in the new run.
 - Local Office automation must avoid interfering with the user's active work
   whenever possible. Do not open files in an existing visible Office session
   unless the target file is already open there and reuse is necessary; create a
