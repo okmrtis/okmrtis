@@ -40,6 +40,10 @@ specific rule.
   in the local branch-integration provenance ledger with the installed
   `record_branch_provenance.ps1`. Store pointers only: never copy raw chat text,
   hidden reasoning, credentials, or private exports into the ledger or GitHub.
+  A hexadecimal string is not provenance proof: the recorder must resolve the
+  supplied head and base as readable commit objects in the named worktree,
+  require the head to equal the current local branch ref, and append nothing
+  when object or ref validation fails.
   Before declaring repository or GitHub management done, check branch hygiene
   for the active repository or `okmrtis` scope when available, such as with
   `<meta-clone>\scripts\check_branch_hygiene.ps1`. Resolve or explicitly
