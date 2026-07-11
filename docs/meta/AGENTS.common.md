@@ -271,6 +271,31 @@ specific rule.
   Title/Key Message/Body semantics, eight-form-only ImageGen body contract, and
   full restart from Phase 1 after any rejection. Do not begin slide production
   while an upstream gate is unpassed.
+- At Phase 1, keep an evidence ledger for every sampled source with publisher,
+  formal title, URL, page or section, retrieval date, scope, and limitation; a
+  search-result snippet or an unreachable URL is not a usable sample. Organize
+  the resulting standard in three explicit layers: the system-delivery core
+  (purpose through handover and TCO), the public-PoC/procurement overlay
+  (scoring, agreement, reports, rights, payment, publicity, and non-guaranteed
+  continuation), and the domain overlay (law/standards, expert rubric,
+  inclusion/ethics, validity/KPI, and field constraints). A module may be
+  marked not applicable only with a written reason and an alternative control;
+  never silently delete migration, testing/acceptance, training/adoption,
+  go-live/rollback, operations/handover, data exit, or lifecycle cost.
+- Freeze customer requirement identifiers and meanings when Phase 2 passes.
+  Downstream phases and restarted runs must preserve those identifiers; split a
+  requirement only with child identifiers such as `R06-1`, append newly found
+  requirements at the end, and keep version/change history. Validate the
+  upstream/downstream ID sets mechanically. Reusing an old identifier for a new
+  meaning, silently losing a requirement, or changing its interpretation
+  without a recorded version and impact analysis is a phase-gate rejection.
+- Keep technical maturity and rights provenance as two separate axes in every
+  proposal. Record maturity from unstarted/design/prototype/similar-project
+  implementation/target-environment validation/operation, and record rights as
+  self-existing, self-current-development, joint result, OSS, third-party
+  license, or future-IP candidate. Do not convert an OSS component's maturity
+  into a claim that the proposal integration is mature, and do not call an
+  unvalidated design proprietary proof.
 - Local Office automation must avoid interfering with the user's active work
   whenever possible. Do not open files in an existing visible Office session
   unless the target file is already open there and reuse is necessary; create a
