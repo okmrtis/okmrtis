@@ -287,6 +287,11 @@ specific rule.
   agreements, reports, acceptance/payment, rights, publicity, continuation,
   ethics, or domain controls are a Gate 1 rejection even when the overall
   structure appears reasonable.
+- Preserve each source's exact visible formal title and exact heading; keep
+  contextual project names in a separate field. Declare one page convention,
+  normally one-based PDF file pages, and use it identically in the human
+  ledger, manifest, module crosswalk, and overlay crosswalk. Reject or narrow a
+  claim when the cited page does not contain it.
 - Freeze customer requirement identifiers and meanings when Phase 2 passes.
   Downstream phases and restarted runs must preserve those identifiers; split a
   requirement only with child identifiers such as `R06-1`, append newly found
@@ -325,6 +330,18 @@ specific rule.
   project's vendored blob; and inspect its canonical card bodies for required
   semantic fingerprints. A 40-character string or ancestry alone is not proof
   that the vendored rules came from that commit or retained their meaning.
+- Make the Gate 1 ledger and citation crosswalk machine-readable. Validate
+  exact expected ID sets, uniqueness, full source coverage, nonempty exact
+  locations, source-to-manifest membership, and correspondence between every
+  sidecar citation and its human-readable row. Row counts and whole-document
+  string searches are insufficient. Parse canonical meta cards by exact ID and
+  check each card's own body fingerprints so decoy cards cannot mask a revert.
+- Validate candidate and worktree `meta_source.source_repository` and
+  `common_rules_path` against the manifest and actual clone. Normalize
+  equivalent GitHub HTTPS/SSH identities, but require the declared meta commit
+  to be reachable from the authoritative remote ref. Cite explicit user/meta
+  normative controls separately from public source evidence rather than
+  overstating a public source.
 - Local Office automation must avoid interfering with the user's active work
   whenever possible. Do not open files in an existing visible Office session
   unless the target file is already open there and reuse is necessary; create a
