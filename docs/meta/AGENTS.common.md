@@ -282,6 +282,11 @@ specific rule.
   marked not applicable only with a written reason and an alternative control;
   never silently delete migration, testing/acceptance, training/adoption,
   go-live/rollback, operations/handover, data exit, or lifecycle cost.
+- Trace every canonical proposal module and every conditional overlay claim
+  back to source IDs and exact pages or sections. Unsupported claims about
+  agreements, reports, acceptance/payment, rights, publicity, continuation,
+  ethics, or domain controls are a Gate 1 rejection even when the overall
+  structure appears reasonable.
 - Freeze customer requirement identifiers and meanings when Phase 2 passes.
   Downstream phases and restarted runs must preserve those identifiers; split a
   requirement only with child identifiers such as `R06-1`, append newly found
@@ -307,6 +312,19 @@ specific rule.
   may be reused only after re-hashing and re-reading them as evidence; do not
   reuse old conclusions, phase decisions, slide bodies, or proposal text
   without regeneration or explicit re-evaluation in the new run.
+- Gate 1 validators must name the candidate Git commit and expected SHA-256
+  values, compare scoped worktree artifacts with that candidate separately,
+  enforce declared cache-root containment, and reject duplicate source IDs,
+  canonical paths, or URLs. Negative tests must cover missing evidence,
+  same-size byte modification, candidate drift, path traversal, nonexistent
+  meta commits, reverted rules, and a valid later meta descendant.
+- Prove meta lineage with a real or isolated clone of the recorded meta
+  repository. Fail closed when it is unavailable. Confirm that the declared
+  commit exists and descends from an evidence floor that already contains the
+  current reproducibility controls; compare its shared-rules Git blob with the
+  project's vendored blob; and inspect its canonical card bodies for required
+  semantic fingerprints. A 40-character string or ancestry alone is not proof
+  that the vendored rules came from that commit or retained their meaning.
 - Local Office automation must avoid interfering with the user's active work
   whenever possible. Do not open files in an existing visible Office session
   unless the target file is already open there and reuse is necessary; create a
