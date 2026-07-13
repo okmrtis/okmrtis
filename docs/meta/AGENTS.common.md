@@ -132,22 +132,33 @@ specific rule.
 
 ## Browser And Desktop Interaction
 
-- For browser work, unless the user explicitly requests another surface or the
-  task requires an existing external-browser profile, first discover and try
-  the Codex in-app browser (`iab`). Keep browser activity inside Codex and in
-  the background so it does not steal focus from the user's desktop work.
+- For browser work, unless the user explicitly requests another surface, first
+  discover and try the Codex in-app browser (`iab`). Keep browser activity
+  inside Codex and in the background so it does not steal focus from the user's
+  desktop work. Apparent capability gaps or a presumed need for an existing
+  external-browser profile are not reasons to skip this first attempt.
 - If the in-app browser disconnects or loses its tab, attempt a bounded recovery
   on the same `iab` backend, such as reconnecting and opening a new in-app tab,
   before changing tools. Do not treat one detached tab or timeout as proof that
   the in-app browser is unavailable.
+- If `iab` appears to lack a required capability or authenticated state, first
+  attempt bounded, user-local, reversible improvements on the in-app path. As
+  applicable, inspect its current tool documentation and available backends,
+  reconnect or recreate the in-app tab, complete supported authentication in
+  `iab`, and install, enable, update, or repair a relevant Codex browser plugin,
+  extension, or connector. Re-test the required workflow in `iab` after the
+  improvement. Do not use a capability gap or external-profile requirement as
+  an escalation reason until these applicable in-app improvements have been
+  attempted or a concrete blocker makes them unavailable.
 - Escalate to another authorized browser or desktop-control surface only when
   the in-app browser is undiscoverable, remains unavailable after bounded
-  recovery, lacks a required capability, or cannot use required authenticated
-  profile state. Record the concrete reason for escalation. Then choose the
-  least disruptive suitable option, such as a purpose-built connector or API,
-  a browser extension, or Computer Use. Launching, foregrounding, focusing, or
-  switching a normal Edge/Chrome window is a last resort because it interrupts
-  the user's work.
+  recovery and applicable improvement attempts, or those improvements require
+  a user-only approval, administrator privilege, unsupported authentication, or
+  another concrete blocker. Record the attempted in-app repairs and the exact
+  remaining reason for escalation. Then choose the least disruptive suitable
+  option, such as a purpose-built connector or API, a browser extension, or
+  Computer Use. Launching, foregrounding, focusing, or switching a normal
+  Edge/Chrome window is a last resort because it interrupts the user's work.
 
 ## Autonomy And Stop Points
 
