@@ -629,6 +629,18 @@ specific rule.
 - When adding shared knowledge, make the scope, source date, and future action
   explicit. Use GitHub Issues for open tasks and backlogs, not as the primary
   store for stable lessons.
+- Whenever Codex writes a new durable knowledge record or materially updates an
+  existing one in any `okmrtis` repository, add machine-readable environment
+  provenance in the record's native metadata. Record the writing environment
+  name, classify dependence as `dependent`, `partially-dependent`,
+  `independent`, or `unknown`, record confidence as `high`, `medium`, or `low`,
+  and add a short basis. Reassess these values on each material update; do not
+  silently carry forward legacy `unknown` metadata. For shared cards, use the
+  exact `environment` object required by `knowledge/schema.json`. For
+  project-local records, use an equivalent metadata object or front matter.
+  Never fabricate an original environment during backfill, and do not apply a
+  dependent or partially dependent lesson to another environment without a
+  current compatibility check.
 - When changing common behavior, update `okmrtis/meta` first, then refresh every
   current `okmrtis` repository's vendored `docs/meta/AGENTS.common.md` snapshot.
   Future repositories under `okmrtis` must receive the same snapshot during
