@@ -130,6 +130,25 @@ specific rule.
 - If shared and local rules conflict, follow the stricter rule and update the
   relevant documentation when the conflict reveals a reusable lesson.
 
+## Browser And Desktop Interaction
+
+- For browser work, unless the user explicitly requests another surface or the
+  task requires an existing external-browser profile, first discover and try
+  the Codex in-app browser (`iab`). Keep browser activity inside Codex and in
+  the background so it does not steal focus from the user's desktop work.
+- If the in-app browser disconnects or loses its tab, attempt a bounded recovery
+  on the same `iab` backend, such as reconnecting and opening a new in-app tab,
+  before changing tools. Do not treat one detached tab or timeout as proof that
+  the in-app browser is unavailable.
+- Escalate to another authorized browser or desktop-control surface only when
+  the in-app browser is undiscoverable, remains unavailable after bounded
+  recovery, lacks a required capability, or cannot use required authenticated
+  profile state. Record the concrete reason for escalation. Then choose the
+  least disruptive suitable option, such as a purpose-built connector or API,
+  a browser extension, or Computer Use. Launching, foregrounding, focusing, or
+  switching a normal Edge/Chrome window is a last resort because it interrupts
+  the user's work.
+
 ## Autonomy And Stop Points
 
 - Treat task requests as requests to complete the objective, not only to explain
