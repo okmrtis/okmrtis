@@ -1,7 +1,7 @@
 {
   "source_repository": "https://github.com/okmrtis/meta.git",
-  "source_commit": "09c2852594f74361d26e6d39cd923aa29e62efb4",
-  "imported_at": "2026-07-13T20:39:09+09:00",
+  "source_commit": "0d723c124d9a7dd7009d9b989a9945eb6ae63009",
+  "imported_at": "2026-07-13T21:13:12+09:00",
   "common_rules_path": "docs/meta/AGENTS.common.md",
   "refresh_command": "powershell -NoProfile -ExecutionPolicy Bypass -File <meta-clone>\\scripts\\sync_meta_rules.ps1 -TargetRepo <project-repo>"
 }
