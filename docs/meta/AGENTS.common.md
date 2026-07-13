@@ -276,6 +276,32 @@ specific rule.
   Title/Key Message/Body semantics, eight-form-only ImageGen body contract, and
   full restart from Phase 1 after any rejection. Do not begin slide production
   while an upstream gate is unpassed.
+- For the Phase 5 proposal BODY, use the committed asset with stable ID
+  `customer-system-proposal/body-structure-reference/v1` at
+  `assets/customer-system-proposal/body-structure-reference-v1.png` as the sole
+  body-structure reference. Its immutable identity is SHA-256
+  `1214c21578411dfb22885c3e9d1041640a0a78b54797b5761761273aef3122ca`,
+  MIME `image/png`, 4032 x 2283 pixels, 12,958,793 bytes, preserved byte for
+  byte from the user-supplied chat attachment. Additional or alternate
+  body-structure references are a Gate 1 rejection.
+- BODY production must use a Japanese BCG-like customer-proposal tone as a
+  non-proprietary benchmark: claim-led, analytical, flat and precise, minimally
+  ornamental, with rigorous alignment and evidence hierarchy. Do not copy
+  proprietary BCG or other consulting template assets. Use only the eight named
+  patterns or their combinations; every combination needs one dominant
+  relationship and an unambiguous scan order.
+- All non-color visual rules in this BODY contract are fixed and non-variable;
+  only color choice may vary, including exact color values. Keep low-to-high
+  importance ordered as pale/dark gray, pale/dark green, then pale/dark orange,
+  with default dark guidance spanning approximately green `#134611` to orange
+  `#C57B57`. Reversing the order or making layout, pattern, hierarchy, scan
+  order, font, size floor, tone, or sole-reference identity variable rejects
+  Gate 1.
+- The size hierarchy is a separate fixed semantic hierarchy, independent of color: low-importance objects and text are smaller, while high-importance objects and text are larger.
+  Object and text size move together in that fixed
+  direction; flattening, reversing, decoupling, or making it variable rejects
+  Gate 1. The Meiryo BODY text floor remains 12 pt at final slide size.
+- BODY must remain one ImageGen-generated raster. Initial construction and repair must not use manually assembled PowerPoint shapes or tables, hand-typed or code-drawn labels, white patches, or overlays; correct defects only by image editing or regeneration.
 - At Phase 1, keep an evidence ledger for every sampled source with publisher,
   formal title, URL, page or section, retrieval date, scope, and limitation; a
   search-result snippet or an unreachable URL is not a usable sample. Organize
@@ -338,6 +364,38 @@ specific rule.
   mutate each critical fact direction, source attribution, branch connection,
   attachment restriction, and raw-derived difference while updating dependent
   hashes, so synchronized tampering is rejected as well as stale hashes.
+- Apply the Phase 2 canonical comparison to every registered customer fact, not
+  only a hand-picked critical subset. For each fact, exact-compare subject,
+  predicate, polarity, value, unit, conditions/qualifiers, the order-independent
+  allowed source-ID set, and exact locators. A correct value attributed to the
+  wrong official source is a rejection. Mutation coverage must include every
+  fact ID across meaning/value, source set, and condition/qualifier classes.
+- A live-form validator may claim full re-extraction only when it defines one
+  canonical projection and proves a bijection between frozen raw elements and
+  derived schema elements. Require unique stable IDs on both sides, consume
+  every raw and schema row exactly once in both directions, and exact-compare
+  all projected attributes, including name, label, type, required, parent,
+  branch keys and choices, min/max, placeholder, default, description, outline,
+  upload restrictions, page, and ordinal. Equal counts do not prove completeness;
+  duplicate-one/drop-another mutations must fail.
+- Make customer requirements, scoring criteria, and application fields a single
+  typed traceability graph. Freeze exact CR, SC, and FM ID sets plus the exact
+  CR-to-SC and SC-to-FM edge sets, with purpose and required proof on every edge.
+  Reject unknown, missing, duplicated, or semantically reassigned edges even when
+  all endpoint IDs exist. Store F/A/H/U as real records, not only class
+  definitions: facts need direct sources, assumptions need an owner and confirm
+  point, hypotheses need KPI/comparison/pass criteria, and unconfirmed items need
+  a question and explicit no-assertion boundary.
+- A cross-phase proposal contract is incomplete until an executable payload
+  fixture proves the contract against real record shapes. Mutation tests must
+  change fact values and source sets, raw and annotated form rows and attributes,
+  graph edges, class records, and transitions themselves; changing only registry
+  declarations or booleans does not close the downstream defect.
+- Keep proposal claim-evidence classes and cross-phase record kinds in separate
+  namespaces. Use `F/E/A/P/V/U` only for the epistemic status of a proposal claim;
+  use explicit record kinds such as `OFFICIAL_FACT`, `PROPOSER_ASSUMPTION`,
+  `PILOT_HYPOTHESIS`, and `UNCONFIRMED` for cross-phase data. Never overload `A`
+  to mean both analysis and assumption, or silently map a hypothesis to evidence.
 - Keep technical maturity and rights provenance as two separate axes in every
   proposal. Record maturity from unstarted/design/prototype/similar-project
   implementation/target-environment validation/operation, and record rights as
@@ -356,12 +414,26 @@ specific rule.
   may be reused only after re-hashing and re-reading them as evidence; do not
   reuse old conclusions, phase decisions, slide bodies, or proposal text
   without regeneration or explicit re-evaluation in the new run.
+- A complete Phase 1 source run must iterate the complete frozen source
+  registry, not only sources reached by citations. After candidate freeze, open
+  and read every registered source, recompute its raw-byte SHA-256 and size,
+  record its media/source type, and run the deterministic type-appropriate
+  extraction or record explicit binary/visual extraction evidence. Emit one
+  per-source read/extraction result. A manifest hash, aggregate source count, or
+  citation traversal cannot prove that an unreferenced registered source was
+  read. Add mutations for an omitted registered source and a falsely claimed
+  read/extraction result.
 - Gate 1 validators must name the candidate Git commit and expected SHA-256
   values, compare scoped worktree artifacts with that candidate separately,
   enforce declared cache-root containment, and reject duplicate source IDs,
   canonical paths, or URLs. Negative tests must cover missing evidence,
   same-size byte modification, candidate drift, path traversal, nonexistent
   meta commits, reverted rules, and a valid later meta descendant.
+- Compare raw binary worktree bytes for every scoped artifact with the exact
+  candidate Git blob, including both byte count and SHA-256, using a path that
+  bypasses Git text and end-of-line filters. A clean Git status is not byte
+  equality. Normalize intended line endings before candidate freeze and reject
+  LF/CRLF or other filter-hidden worktree drift with a dedicated mutation.
 - Treat an HTML citation locator as a structural identity, not as displayed
   heading text. Record the exact decoded text together with the element tag,
   ordered occurrence, raw line or byte range, and deterministic DOM path; the
@@ -404,6 +476,47 @@ specific rule.
   alternatives, owners/actions, data exit, or another stated element remains
   unsupported. Add zero-direct, uncovered-element, and weakened-boundary
   mutations.
+- Atomicity is semantic, not punctuation-based. Manually curate each stable
+  element as a complete, independently evaluable semantic requirement; do not
+  split target lines mechanically by comma, conjunction, slash, or regex. Each
+  element must retain the actor, object, action or prohibition, direction,
+  condition, and lifecycle scope needed for its meaning. Grammatical fragments
+  such as `decision`, `prohibit`, `object`, `repair`, or a dependent prepositional
+  phrase are invalid elements and must not count toward coverage.
+- Do not treat a target or module label as element-level normative evidence.
+  A normative citation may support several atomic elements only when its exact
+  target line explicitly names every supported semantic. Bind every element ID
+  to element-specific semantic fingerprints and fail closed when the cited line
+  omits any fingerprint. In particular, `workflow` alone does not prove an
+  approval or exception path; `adoption` alone does not prove an adoption
+  measure or remediation; `go/no-go` alone does not prove the No-Go action or
+  decision owner; `risk` alone does not prove trigger, prevention, response,
+  and owner; and `agreement` alone does not prove change control, inspection,
+  acceptance, payment, or exit transfer. Keep the exact reusable target lines
+  in the canonical proposal phase-gate card and validate them by target ID.
+- Model every declared bidirectional proposal relation as one canonical typed
+  edge set. This includes form, scoring, requirement, module, evidence, and
+  control relations. Store source type/ID, relation type, target type/ID,
+  provenance, and a short justification once; generate all forward and reverse
+  views from those edges instead of maintaining independent arrays. Reject
+  duplicate edges, unknown endpoints, orphans, and any forward/reverse pair
+  whose exact edge set is not equal. Mutation tests must add, delete, and rewire
+  one side while updating dependent hashes and prove that the mismatch fails.
+  A derived aggregate fact must cite a reproducible derivation locator with the
+  extractor/query version, exact input set or input hash, formula, and output;
+  pointing at one member record does not support an aggregate count.
+- Make unresolved proposal gates structurally stoppable. Every unresolved fact,
+  assumption, eligibility item, score-critical claim, staffing commitment, or
+  submission dependency must have a stable ID, severity, owner, due time,
+  required deliverable, evidence IDs, acceptance criteria, fallback or scope
+  reduction, impacted IDs, and an explicit `stop_if_unresolved` boolean.
+  Mandatory eligibility, submission, privacy, safety, and named-team claims
+  must stop submission when unresolved unless the affected scope is removed in
+  a customer-valid way. A future confirmation, generic TODO, or narrative owner
+  is not a gate. Validate required fields and state transitions, and add missing
+  owner, expired due time, weakened acceptance, false-stop, and silent-removal
+  mutations. Receipts must distinguish valid controls from adversarial
+  mutations and report both counts without calling controls mutations.
 - A frozen proposal standard must be self-identical. Mechanically compare its
   declared version, file name/self-reference, predecessor version/run, required
   meta-card count and IDs, and all manifest/sidecar bindings. Do not create the
@@ -423,6 +536,12 @@ specific rule.
   broad locator reuse, absent evidence phrase, duplicate same-text headings,
   candidate path/SHA/worktree drift, wrapper wrong-candidate input, and a valid
   descendant meta commit that retains all required contracts.
+- Every required mutation above must have a stable runnable case ID in the
+  checked-in suite and exact post-candidate execution evidence. Citation and
+  locator adversaries must mutate the frozen raw source plus all dependent
+  hashes and be rejected by deterministic semantic re-extraction, rather than
+  only by equality with a generated bundle snapshot. Missing or unexecuted
+  required cases reject Gate 1 even when an aggregate mutation count is high.
 - Prove meta lineage with a real or isolated clone of the recorded meta
   repository. Fail closed when it is unavailable. Confirm that the declared
   commit exists and descends from an evidence floor that already contains the
@@ -488,3 +607,22 @@ specific rule.
   `-Push` when intentionally refreshing adopted repositories.
 - Do not store raw transcripts, secrets, customer data, or full local paths in
   `meta` unless they are deliberately sanitized examples.
+## Independent Proposal Oracle
+
+- For customer-system proposal phase gates, a cross-phase oracle must be generated by a separate deterministic builder from the frozen official/raw source set. The builder must not import, read, clone, or structured-clone the candidate fixture or downstream proposal payload at runtime.
+- Pin the oracle bytes, builder bytes, and source raw hashes in the candidate manifest and receipt. Regenerate the oracle at least twice and require byte identity; compare the normalized candidate payload to the independent oracle before any downstream phase.
+- Coordinated mutations that change the fixture and candidate payload together must still be rejected by the pinned oracle SHA and builder output. Treat an oracle derived from the candidate fixture as a Gate 1 rejection even when ordinary validation and mutation counts pass.
+## Customer-Facing Japanese Proposal Language
+
+- Customer-facing proposal slides must use ordinary Japanese business language. Do not leave abbreviations, technical terms, coined expressions, or compressed noun strings unexplained; write the actor, action, timing, and benefit in plain Japanese or show the relationship in a diagram.
+- Keep Title, Key Message, and Body distinct: Title states the question or topic, Key Message answers it, and Body proves or supplements it with relationships, process, comparison, numbers, or roles. Do not repeat the Key Message in a bottom conclusion box; use the Body to show the evidence and flow.
+- For body visuals, prefer readable diagrams over slogan lists. Show who does what, when, what is recorded, and what changes. If a specialized term is necessary, attach a plain-language explanation directly in the same visual.
+- When a proposal uses cloud hosting for this HANAMII work, default to Sakura domestic hosting and describe the data boundary, security review, and fallback in plain Japanese. Do not imply that a cloud choice is approved until the customer security review is complete.
+
+## Customer Proposal Story and Decision Context
+
+- Write for a first-time customer reader who knows only the competition brief, not the proposal-development history. Label the current state, the proposed future work, and the evidence to be verified explicitly; never require the reader to decode private shorthand such as `A/B`, an unexplained acronym, or a coined label.
+- Give every slide a distinct decision job and one non-overlapping question. Proposal overview, future work, feature detail, differentiation, workflow, architecture, verification, cost, organization, and decision must each add new evidence at a deeper level. Reject a deck when several slides restate the same mechanism without advancing one connected story.
+- A cost page must map each amount to concrete work and deliverables. An organization page must name the company and customer roles, state who creates, confirms, decides, and accepts each output, and quantify the customer meeting or work burden. Do not use generic labels such as `proposer` when the company name is known.
+- Keep internal traceability in the working Markdown or evidence ledger. Customer-facing pages must not cite `the problem statement`, `the customer page`, internal source IDs, or production notes as though they were external evidence.
+- When a customer specifies base, main, and accent colors, use only those approved color families for the body unless a separately approved exception is necessary. Verify the dominant/background, main-structure, and accent proportions across the rendered deck, not only in the source theme.
