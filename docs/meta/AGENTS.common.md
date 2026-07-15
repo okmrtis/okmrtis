@@ -226,6 +226,17 @@ specific rule.
   validators, render checks, saved-artifact reads, runtime probes, and negative
   cases. A successful command is evidence only for the behavior it actually
   covers.
+- For exact Codex Desktop app tools, distinguish four facts: installed app
+  capability, the current task's persisted thread-start dynamic-tool snapshot,
+  a bounded recent cohort of non-automation task starts, and any explicit live
+  callable inventory. A resumed turn cannot replace thread-start dynamic tools.
+  If the current task lacks a tool but recent task creation is healthy, classify
+  that task as immutable missing state and use a new or forked task when the
+  exact tool is required. Exclude intentionally minimized automation tasks from
+  the normal provisioning denominator. Treat a missing start followed by later
+  successful same-version starts as transient registration evidence, not global
+  absence. PATH, TOML, SQLite, full-access, approval-policy, Startup, or helper
+  edits cannot inject an app tool into an existing task.
 - Gate 5, stability and reproducibility: reduce avoidable flakiness, refactor
   where it improves correctness or maintainability, verify rerun behavior, and
   record the exact Git state plus authorized external inputs needed to reproduce
