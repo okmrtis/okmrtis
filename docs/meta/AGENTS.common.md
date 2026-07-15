@@ -190,6 +190,12 @@ specific rule.
   connector state, local credentials, existing authorized app sessions, and
   alternate authorized paths before asking the user to intervene. Ask only when
   an interactive user-only step such as consent, 2FA, or a password is required.
+- Access that happens to be available on the local machine is not authorization
+  to inspect or use another person's account, profile, mailbox, files, session,
+  or credentials. Proceed only when the user's current request explicitly
+  authorizes that specific person's account and the specific task. Otherwise
+  leave it untouched, even when no login prompt or technical permission barrier
+  appears.
 - Stop before sending, posting, sharing, inviting, mentioning, notifying, or
   otherwise affecting other people or shared environments. In those cases,
   present the exact proposed action, content, recipients, and likely impact for
@@ -250,6 +256,12 @@ specific rule.
   where it improves correctness or maintainability, verify rerun behavior, and
   record the exact Git state plus authorized external inputs needed to reproduce
   the result.
+- For a defect or user correction, repair the underlying cause rather than only
+  the reported example. Identify the causal invariant, inspect sibling paths
+  that share it, apply the smallest coherent abstraction that fixes those paths,
+  and add regression tests for both the reported case and representative
+  siblings. Do not hard-code the example or widen the change beyond the proven
+  cause.
 - Gate 6, independent evaluation: use at least one proportionate evaluator that
   is independent of the implementation path, such as tests, linters, schema
   validators, CI, browser screenshots, independent commands, subagent review,
@@ -292,6 +304,11 @@ specific rule.
   responses, summaries, reports, and deliverable text unless the user asks for
   another language, the artifact has a required language, or preserving source
   wording is necessary.
+- In Japanese responses and deliverables, do not leave an English term,
+  abbreviation, or unfamiliar loanword unexplained when the meaning is not
+  evident from ordinary Japanese. At first use, add a short plain-Japanese
+  explanation; preserve the original term as a parenthetical label only when it
+  helps later reference or technical accuracy.
 - Human-facing deliverables should present a readable review surface first. Do
   not make raw CSV, JSON, logs, hashes, or full diffs the primary handoff when
   Markdown, HTML, a formatted Excel workbook, or another readable artifact is
@@ -313,6 +330,11 @@ specific rule.
   images, read and apply the `visual-design` topic in `knowledge/cards.jsonl`
   before the first write. Verify the final render with a four-principles pass:
   proximity, alignment, repetition, and contrast.
+- When deriving reusable knowledge from a diagram, screenshot, rendered page,
+  UI, slide, chart, or other visual source, inspect the actual rendered image;
+  do not rely on extracted text alone. Verify spatial relationships, grouping,
+  hierarchy, emphasis, color/legend meaning, and other visual evidence before
+  recording the lesson.
 - Before changing Excel, Word, or PowerPoint artifacts, choose the tool path and
   final verification gate from `okmrtis/meta` topic `office-artifact-workflow`
   in `knowledge/cards.jsonl`; do this before the first write.
@@ -630,6 +652,72 @@ specific rule.
   update before continuing. If the repair needs administrator rights, account
   consent, payment, or another user-only step, record the exact install command
   and follow-up instead of silently dropping the lesson.
+
+## Evidence-Gated Chat Practice Skills
+
+- At the start of every user task, after reading the applicable instruction
+  chain, inspect the available installed and repository-owned skills for a
+  matching trigger. Actively invoke every relevant owned skill without making
+  the user name it: apply a `verified/full` skill within its stated scope, and
+  apply a `provisional/partial` skill only to its explicitly covered steps while
+  honoring all exclusions and uncertainty. Compose multiple skills when their
+  scopes are independent. A skill package that is never selected is not a
+  completed promotion outcome.
+- Treat an expected owned skill that is missing, stale, or not discoverable as
+  a setup defect. When repair is user-local, reversible, and in scope, verify
+  the canonical package, reinstall its hash-checked mirror, and use the
+  repository copy for the current task if the runtime cannot refresh discovery
+  until a later task. Add a project-local dispatch rule for established primary
+  workflows, while keeping the common skill as the reusable source.
+- Keep this active-use promise observable. Reliability health must fail closed
+  when chat-practice evidence is missing or older than its scheduled cadence,
+  when current retained-rollout coverage reports an index, rollout, parse,
+  oversized-record, or incomplete-record gap, when there is no verified
+  full-rescan coverage receipt behind incremental scans, or when an expected
+  skill is not a direct discoverable package under the active Codex skills
+  root. Verify each owned package by a three-way tree hash
+  comparison among the canonical `okmrtis/general` source, the installed-skill
+  registry, and the installed directory; also require the registry source
+  commit to equal the current general commit and reject dirty-source installs.
+  Derive the expected package set and each package's status and evidence
+  metadata from active entries in the General registry; never duplicate a
+  fixed skill-name list in Meta health or runtime configuration.
+  Do not treat a live worker process or an entrypoint string as sufficient
+  health evidence.
+- On every user task, notice reusable procedures and user corrections, but do
+  not treat Codex's own answer, tool success, forward-test success, or user
+  silence as proof that a practice is good. The trusted evidence is: (a) an
+  explicit user correction or rule, or (b) a durable procedure the user invokes
+  repeatedly in distinct tasks after the procedure has become established.
+- Count an established repeated workflow only at the procedure or step level.
+  Do not count retries, rework, or repeated improvement requests as independent
+  successful invocations. Link feedback to the smallest supported target step;
+  a correction in one chat blocks or supersedes that step, not unrelated steps
+  in the same chat.
+- A directly requested, reusable step that has no linked correction may be
+  captured as a partial skill even when another step in the same chat was
+  corrected. Keep such a skill to the narrow contract implied by the user's
+  request, mark the unverified boundary in its instructions, list excluded and
+  unresolved behavior, and define what user evidence would graduate, revise,
+  or retire it. "No correction" means eligible for a bounded partial skill, not
+  approved or successful.
+- Promote a full skill only from explicit user guidance or an established
+  repeated workflow backed by a current durable procedure. Prefer updating an
+  overlapping skill over adding a duplicate. Keep common rules separate from
+  project- or team-specific models, and never generalize a local detail without
+  evidence that it transfers.
+- When a future user correction conflicts with any full or partial skill,
+  immediately stop relying on the implicated instruction, record the
+  superseding evidence at step granularity, and revise, narrow, or retire the
+  skill before reusing it. Reset recurrence evidence for the corrected step;
+  unaffected independent steps may remain.
+- Preserve the correction itself as trusted evidence while blocking the older
+  conflicting procedure. A user correction can therefore update a full skill
+  immediately even though the superseded operational step is no longer valid.
+- Store only sanitized evidence and provenance. Do not commit raw chats,
+  transcripts, email bodies, credentials, customer data, or private local
+  configuration. Validate edited skills structurally and forward-test their
+  decision boundaries without treating those tests as user approval.
 
 ## Cross-Repository Updates
 
