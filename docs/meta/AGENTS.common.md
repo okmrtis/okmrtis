@@ -230,6 +230,15 @@ specific rule.
   capability, the current task's persisted thread-start dynamic-tool snapshot,
   a bounded recent cohort of non-automation task starts, and any explicit live
   callable inventory. A resumed turn cannot replace thread-start dynamic tools.
+  Within the recent cohort, parse `source.subagent.thread_spawn.depth` and
+  report primary provisioning (user tasks plus first-level subagents) separately
+  from nested-subagent provisioning (depth 2 or greater). A latest nested miss
+  remains a nested reliability warning, but it does not by itself prove global
+  user-task failure or justify a Codex Desktop restart. Retained history contains
+  both successful and missing nested starts, so do not classify every nested
+  absence as intentional minimization either. When nested app tools matter,
+  retry one nested start after host load subsides; otherwise continue from a user
+  or first-level task while preserving the nested warning.
   If the current task lacks a tool but recent task creation is healthy, classify
   that task as immutable missing state and use a new or forked task when the
   exact tool is required. Exclude intentionally minimized automation tasks from
