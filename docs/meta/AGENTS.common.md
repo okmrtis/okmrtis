@@ -165,6 +165,13 @@ specific rule.
 - Treat task requests as requests to complete the objective, not only to explain
   how the user could complete it. When the user asks Codex to fix, update,
   create, inspect, run, or verify something, do the work directly when feasible.
+- Treat a new claim about future Codex behavior as durable work. Do not promise
+  a future practice unless an existing durable control has been inspected and
+  its current enforcement evidenced, or the applicable rule, skill,
+  configuration, and regression tests are implemented, verified, and rolled out
+  durably in the current task. If authorization, implementation, verification,
+  or rollout is incomplete, describe the practice as proposed or blocked and
+  name the missing work. A chat-only statement is not enforcement.
 - When a task is large or difficult enough that tool calls risk timing out,
   divide it into smaller staged batches, verify each batch, and continue from
   recorded intermediate state instead of attempting one broad run. Run batches
@@ -232,6 +239,25 @@ specific rule.
   validators, render checks, saved-artifact reads, runtime probes, and negative
   cases. A successful command is evidence only for the behavior it actually
   covers.
+- When asked whether a prior or parallel Codex task used a named skill, first
+  resolve the exact task and inspect its complete retained rollout, raw event
+  record, or equivalent exact-task API evidence. Correlate the task identity
+  with its title, time, and user request, then distinguish: package readiness
+  or discoverability at task start; a same-task platform-native skill invocation
+  or complete canonical `SKILL.md` load; material downstream application of the
+  skill's covered procedure; and any user-visible announcement. Actual use
+  requires both the same-task instruction load or invocation and material
+  downstream application. An announcement is neither required nor sufficient.
+  When the same-task load or invocation is proven but one or more applicable
+  material gates were skipped or contradicted, report the skill as activated
+  but partially or noncompliantly applied, as the evidence warrants; do not
+  collapse that verdict into used, not used, or indeterminate.
+  Installed or discoverable package state, a task title or index row, another
+  task's events, current-task behavior, and assistant narration do not prove use
+  in the target task. If the exact record is missing or incomplete, or material
+  application cannot be determined, classify the result as indeterminate and
+  state the missing evidence instead of claiming that the skill was or was not
+  used.
 - For exact Codex Desktop app tools, distinguish four facts: installed app
   capability, the current task's persisted thread-start dynamic-tool snapshot,
   a bounded recent cohort of non-automation task starts, and any explicit live
@@ -669,7 +695,18 @@ specific rule.
   repository copy for the current task if the runtime cannot refresh discovery
   until a later task. Add a project-local dispatch rule for established primary
   workflows, while keeping the common skill as the reusable source.
-- Keep this active-use promise observable. Reliability health must fail closed
+- For exact-task skill-use claims, follow the truth-and-tests rule above.
+  Package and installation health is readiness evidence, not actual-use
+  evidence. A same-task skill invocation or complete canonical `SKILL.md` load
+  plus material downstream application is required to verify use; a user-visible
+  announcement is neither required nor sufficient. Preserve an indeterminate
+  result when the exact task record or application evidence is incomplete.
+  When activation is proven but applicable material gates were skipped or
+  contradicted, report activated-but-partially-applied or
+  activated-but-noncompliantly-applied instead of collapsing the result into
+  used, not used, or indeterminate.
+- Keep promotion evidence and package readiness observable. Reliability health
+  must fail closed
   when chat-practice evidence is missing or older than its scheduled cadence,
   when current retained-rollout coverage reports an index, rollout, parse,
   oversized-record, or incomplete-record gap, when there is no verified
@@ -683,7 +720,8 @@ specific rule.
   metadata from active entries in the General registry; never duplicate a
   fixed skill-name list in Meta health or runtime configuration.
   Do not treat a live worker process or an entrypoint string as sufficient
-  health evidence.
+  health evidence, and do not present package-readiness health as proof that a
+  skill was actually used in a particular task.
 - On every user task, notice reusable procedures and user corrections, but do
   not treat Codex's own answer, tool success, forward-test success, or user
   silence as proof that a practice is good. The trusted evidence is: (a) an
