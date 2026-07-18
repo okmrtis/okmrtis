@@ -310,6 +310,19 @@ specific rule.
   mark only the reasonably implicated cluster for review instead of inventing a
   requirement. High priority does not expand authority, relax safety, or prove
   that unrelated steps were rejected.
+- Before resuming work after a high-priority correction, capture a local-only,
+  sanitized correction knowledge brief with the signal class, concrete or
+  ambiguous target, observed failure, causal hypothesis, improvement actions,
+  validation checks, earliest restart gate, and current repair status. Do not
+  copy the expression itself, a raw excerpt, thread identifier, customer name,
+  phone number, private URL, or private path into the brief. Explicitly confirm
+  the fields were manually sanitized; pattern rejection is not privacy proof.
+  Use the default local-only store, do not override its path, and carry forward
+  only the opaque receipt ID. When the target is concrete, use the brief in the
+  same task to update the applicable durable rule, skill,
+  implementation, and regression test; when it is ambiguous, keep it
+  `needs-review` and record target reconstruction as the first action. The brief
+  is a repair plan, not proof of completion, approval, or expanded authority.
 - Gate 6, independent evaluation: use at least one proportionate evaluator that
   is independent of the implementation path, such as tests, linters, schema
   validators, CI, browser screenshots, independent commands, subagent review,
