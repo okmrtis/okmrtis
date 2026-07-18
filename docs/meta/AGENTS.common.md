@@ -159,6 +159,17 @@ specific rule.
   option, such as a purpose-built connector or API, a browser extension, or
   Computer Use. Launching, foregrounding, focusing, or switching a normal
   Edge/Chrome window is a last resort because it interrupts the user's work.
+- When Codex launches or creates a normal on-screen Edge, Chrome, or other
+  external-browser window or tab, track that surface as Codex-owned and close
+  every such Codex-created window or tab as the final cleanup step once the
+  browser work is complete. Never close a window or tab that predated the task
+  or may belong to the user.
+- Leave a Codex-created on-screen browser surface open only when the user must
+  perform a concrete action there or inspect and confirm its current state. In
+  that case, keep only the minimum required surface open and tell the user which
+  surface remains, the exact action or confirmation needed, and that it was
+  intentionally left open. If the task continues after that handoff, close the
+  surface as soon as it is no longer needed.
 
 ## Autonomy And Stop Points
 
