@@ -288,6 +288,17 @@ specific rule.
   and add regression tests for both the reported case and representative
   siblings. Do not hard-code the example or widen the change beyond the proven
   cause.
+- Treat direct disparagement, categorical rejection, accusatory rhetoric, or an
+  urgent corrective demand from the human user as a high-priority correction
+  signal. Do not debate the tone, ask the user to restate it more politely, or
+  continue the implicated procedure unchanged. Reconstruct the concrete target
+  from the immediately preceding output, artifact, and retained evidence;
+  suspend the affected step and its dependents; identify the causal invariant;
+  repair the applicable rule, skill, implementation, and regression test; and
+  restart from the earliest invalidated gate. If the target remains ambiguous,
+  mark only the reasonably implicated cluster for review instead of inventing a
+  requirement. High priority does not expand authority, relax safety, or prove
+  that unrelated steps were rejected.
 - Gate 6, independent evaluation: use at least one proportionate evaluator that
   is independent of the implementation path, such as tests, linters, schema
   validators, CI, browser screenshots, independent commands, subagent review,
@@ -349,6 +360,14 @@ specific rule.
 
 - Do not trust script success alone when a task changes durable artifacts. Verify
   the actual saved output or pushed remote state.
+- When a prototype, screenshot, design file, or existing workflow is a source
+  for implementation, map its required functions and user-visible behaviors to
+  observable acceptance checks before building. Record intentional deviations
+  separately from missing fidelity, exercise each required flow in the runnable
+  result, and compare the observed behavior with the source contract. A build,
+  static screenshot, or superficial visual resemblance does not prove functional
+  fidelity; feedback that the result is merely "similar-looking" invalidates the
+  affected mapping and requires a fresh requirements audit.
 - For generated documents, spreadsheets, images, or uploads, keep enough compact
   evidence to explain what was checked without committing bulky scratch data.
 - For visual design deliverables or design-sensitive edits, including slides,
