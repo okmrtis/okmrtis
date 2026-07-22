@@ -16,6 +16,17 @@ specific rule.
   include secrets, unrelated user work, generated scratch, or another unsafe
   change. If Codex leaves a durable commit unpushed, report that as a blocker
   with the exact reason.
+- Treat GitHub for `okmrtis` work as the private synchronization, reflection,
+  history, and recovery plane, not as a user-operated review inbox. Codex owns
+  routine repository inspection, self-review, validation, PR creation or
+  update, verified integration, Issue and ledger reconciliation, and branch or
+  worktree retirement. Do not pause a verified change merely to ask the user to
+  visit GitHub, and do not leave a draft PR or stale branch waiting solely for
+  user review. Ask the user only when authoritative retained evidence cannot
+  resolve material business intent, or when an irreversible external or shared
+  impact remains after trying to make the operation reversible. This ownership
+  does not relax secret handling, changed-head guards, failing-test gates,
+  destructive recovery requirements, or user-only factual decisions.
 - Every repository under `okmrtis` is in scope for GitHub/meta adoption,
   including repositories created in the future. For any new `okmrtis` project,
   adoption is part of project creation, not a later cleanup task. Do not start
