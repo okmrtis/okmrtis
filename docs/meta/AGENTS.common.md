@@ -129,17 +129,21 @@ specific rule.
   workspace before relying on shared behavior.
 - If a project has README/workflow docs saying work is GitHub-managed but lacks
   `AGENTS.md` or `docs/meta/AGENTS.common.md`, treat that as a setup defect:
-  pause normal work, adopt `okmrtis/meta`, run the adoption check, and only then
-  continue.
+  pause only repository mutations whose instruction boundary is missing, adopt
+  `okmrtis/meta`, and run the adoption check before those mutations. Continue
+  unrelated read-only or otherwise in-scope work and record maintenance
+  separately.
 - On this Windows Codex host, recheck current tooling before applying older
   workaround history. GitHub CLI, Python, npm/npx, Git LFS, PowerShell policy,
   and Git long-path behavior were refreshed on 2026-05-20; the current baseline
   lives in `okmrtis/meta` as cards under topic `codex-windows-tooling` in
   `knowledge/cards.jsonl`.
-- Project-local rules win when they are more specific to that repository,
-  especially around real data, workbook edits, deployment, or safety constraints.
-- If shared and local rules conflict, follow the stricter rule and update the
-  relevant documentation when the conflict reveals a reusable lesson.
+- When two applicable rules govern the same action and scope, prefer the more
+  specific project-local rule, especially around real data, workbook edits,
+  deployment, or safety constraints; if specificity is equal, follow the
+  stricter applicable rule. Unrelated generic safety wording must not override
+  explicit user or local scope. Higher-level platform and system policy still
+  applies.
 
 ## Browser And Desktop Interaction
 
@@ -182,6 +186,44 @@ specific rule.
   intentionally left open. If the task continues after that handoff, close the
   surface as soon as it is no longer needed.
 
+## Objective And Scope Control
+
+- Treat the user's objective, 5W1H, explicit exclusions, requested outputs, and
+  objective-level done criteria as the closed task contract. Before every
+  material action, new subtask, subagent, audit, refactor, or test expansion,
+  map it to one requested requirement or done criterion. If it has no direct
+  mapping, do not execute it and do not let it block completion; at most record
+  a sanitized follow-up candidate when that is useful.
+- Safety, privacy, security, reversibility, and reliability rules constrain how
+  authorized in-scope work is performed. They do not independently authorize a
+  security review, hardening project, installer redesign, infrastructure build,
+  broad cleanup, or other new workstream. When a concrete current risk directly
+  blocks an in-scope result, apply the smallest proportionate mitigation and
+  return to the original objective. Higher-level platform and system rules still
+  apply, but must not be misrepresented as user-requested deliverables.
+- Interpret requests to inspect, audit, review, organize, consolidate, simplify,
+  or clean up as work on existing state by default. They do not authorize a new
+  framework, service, automation pipeline, control plane, or replacement system
+  unless the user explicitly requests it or current evidence proves that the
+  requested end state cannot be reached by a smaller change. Report any such
+  necessity as a scope change before implementing it.
+- Constrain every independent evaluator to the same task contract and acceptance
+  criteria. Classify findings as blocking only when they threaten an in-scope
+  requirement, as in-scope improvements when they directly advance one, or as
+  out-of-scope candidates otherwise. Do not recursively implement every review
+  finding, spawn review-of-review chains, or keep broadening tests after the
+  requested outcome has proportionate evidence.
+- Treat "question my instructions" as permission to test means and assumptions
+  against the stated purpose and current evidence. It is not permission to
+  replace the purpose, invent hypothetical threat models, reverse an explicit
+  operating decision, or substitute Codex's preferred project for the user's.
+- An explicit user correction that excludes a topic or says to return to the
+  main task invalidates the affected work immediately. Interrupt related
+  subagents, commands, audits, and test suites; do not finish an already-running
+  excluded suite merely because it started earlier; do not adopt its unmerged
+  changes; and restart from the earliest still-valid objective gate. Preserve
+  unrelated valid work only when it is independently mapped to the task contract.
+
 ## Autonomy And Stop Points
 
 - Treat task requests as requests to complete the objective, not only to explain
@@ -189,11 +231,13 @@ specific rule.
   create, inspect, run, or verify something, do the work directly when feasible.
 - Treat a new claim about future Codex behavior as durable work. Do not promise
   a future practice unless an existing durable control has been inspected and
-  its current enforcement evidenced, or the applicable rule, skill,
-  configuration, and regression tests are implemented, verified, and rolled out
-  durably in the current task. If authorization, implementation, verification,
-  or rollout is incomplete, describe the practice as proposed or blocked and
-  name the missing work. A chat-only statement is not enforcement.
+  its current enforcement evidenced, or the proven causal owner is changed,
+  verified with the smallest regression at that owner boundary, and rolled out
+  durably in the current task. Inspect possible rule, skill, implementation,
+  configuration, and test layers, but modify only proven causal owners; do not
+  manufacture every layer. If rollout is incomplete, describe the practice as
+  proposed or blocked and name the missing work. A chat-only statement is not
+  enforcement.
 - When a task is large or difficult enough that tool calls risk timing out,
   divide it into smaller staged batches, verify each batch, and continue from
   recorded intermediate state instead of attempting one broad run. Run batches
@@ -241,17 +285,19 @@ specific rule.
   is available, across projects, devices, current repositories, and future
   repositories. Scale depth to risk, but classify every gate as `complete`,
   `not applicable` with a reason, or `blocked` with the missing evidence.
-- Gate 1, scope: before acting, report the request interpretation, concrete
-  requirements, material unknowns, constraints, and the objective-level done
-  criteria. Distinguish user facts, authoritative evidence, assumptions,
-  hypotheses, and unresolved claims.
-- Gate 2, plan: select and name an appropriate task standard or structure. Use
-  a recognized delivery method when one fits, such as Agile or waterfall for
-  application delivery, WBS for project decomposition, a logic tree, decision
-  matrix, calculation, test matrix, phase gates, or another explicit model.
-  State the working hypothesis and the evidence that would confirm or reject it.
-  This report is not an approval pause by default; proceed unless a user-only
-  decision, approval-required external impact, or unsafe ambiguity remains.
+- Gate 1, scope: before acting, determine the request interpretation, concrete
+  requirements, constraints, and objective-level done criteria. Record only
+  observed or evidence-backed material unknowns; do not invent uncertainty to
+  populate a template. Distinguish user facts, authoritative evidence,
+  assumptions, hypotheses, and unresolved claims when that distinction affects
+  the result. A simple deterministic task does not need ceremonial fields.
+- Gate 2, plan: use a task standard, structure, or recognized delivery method
+  only when it improves control of the requested work. A simple deterministic
+  task may use a short direct plan and needs no working hypothesis. When genuine
+  uncertainty makes a hypothesis useful, state it together with evidence that
+  would confirm or reject it. Planning is not an approval pause by default;
+  proceed unless a user-only decision, approval-required external impact, or
+  unsafe ambiguity remains.
 - Gate 3, execution: work from authoritative current state, keep changes bounded,
   and update the plan when a contradiction, interesting hypothesis, or reusable
   lesson appears. Do not continue from an assumption after evidence invalidates
@@ -261,45 +307,14 @@ specific rule.
   validators, render checks, saved-artifact reads, runtime probes, and negative
   cases. A successful command is evidence only for the behavior it actually
   covers.
-- When asked whether a prior or parallel Codex task used a named skill, first
-  resolve the exact task and inspect its complete retained rollout, raw event
-  record, or equivalent exact-task API evidence. Correlate the task identity
-  with its title, time, and user request, then distinguish: package readiness
-  or discoverability at task start; a same-task platform-native skill invocation
-  or complete canonical `SKILL.md` load; material downstream application of the
-  skill's covered procedure; and any user-visible announcement. Actual use
-  requires both the same-task instruction load or invocation and material
-  downstream application. An announcement is neither required nor sufficient.
-  When the same-task load or invocation is proven but one or more applicable
-  material gates were skipped or contradicted, report the skill as activated
-  but partially or noncompliantly applied, as the evidence warrants; do not
-  collapse that verdict into used, not used, or indeterminate.
-  Installed or discoverable package state, a task title or index row, another
-  task's events, current-task behavior, and assistant narration do not prove use
-  in the target task. If the exact record is missing or incomplete, or material
-  application cannot be determined, classify the result as indeterminate and
-  state the missing evidence instead of claiming that the skill was or was not
-  used.
-- For exact Codex Desktop app tools, distinguish four facts: installed app
-  capability, the current task's persisted thread-start dynamic-tool snapshot,
-  a bounded recent cohort of non-automation task starts, and any explicit live
-  callable inventory. A resumed turn cannot replace thread-start dynamic tools.
-  Within the recent cohort, parse `source.subagent.thread_spawn.depth` and
-  report primary provisioning (user tasks plus first-level subagents) separately
-  from nested-subagent provisioning (depth 2 or greater). A latest nested miss
-  remains a nested reliability warning, but it does not by itself prove global
-  user-task failure or justify a Codex Desktop restart. Retained history contains
-  both successful and missing nested starts, so do not classify every nested
-  absence as intentional minimization either. When nested app tools matter,
-  retry one nested start after host load subsides; otherwise continue from a user
-  or first-level task while preserving the nested warning.
-  If the current task lacks a tool but recent task creation is healthy, classify
-  that task as immutable missing state and use a new or forked task when the
-  exact tool is required. Exclude intentionally minimized automation tasks from
-  the normal provisioning denominator. Treat a missing start followed by later
-  successful same-version starts as transient registration evidence, not global
-  absence. PATH, TOML, SQLite, full-access, approval-policy, Startup, or helper
-  edits cannot inject an app tool into an existing task.
+- For a prior-task named-skill use claim, load the exact-use-audit mode of the
+  `promote-chat-practices` skill and the evidence-gated promotion card. Package
+  readiness, announcements, and another task are not actual-use evidence.
+- When an exact Codex Desktop app tool is required but missing, load card
+  `codex-workflow/exact-tool-name-discovery`. Keep installed capability,
+  immutable task-start state, primary and nested provisioning, and explicit
+  live inventory distinct; do not let a nested miss or unrelated environment
+  repair block the user objective.
 - Gate 5, stability and reproducibility: reduce avoidable flakiness, refactor
   where it improves correctness or maintainability, verify rerun behavior, and
   record the exact Git state plus authorized external inputs needed to reproduce
@@ -316,11 +331,17 @@ specific rule.
   continue the implicated procedure unchanged. Reconstruct the concrete target
   from the immediately preceding output, artifact, and retained evidence;
   suspend the affected step and its dependents; identify the causal invariant;
-  repair the applicable rule, skill, implementation, and regression test; and
-  restart from the earliest invalidated gate. If the target remains ambiguous,
+  inspect the possible rule, skill, implementation, configuration, and test
+  owners; repair only the proven causal owner or owners; add the smallest
+  regression at that owner boundary; and restart from the earliest invalidated
+  gate. Do not manufacture every layer. If the target remains ambiguous,
   mark only the reasonably implicated cluster for review instead of inventing a
   requirement. High priority does not expand authority, relax safety, or prove
   that unrelated steps were rejected.
+- When the correction explicitly excludes a topic or identifies work as outside
+  the main objective, interrupt the related subagents, processes, audits, and
+  tests before doing further repair work. Do not treat completion of an already
+  scheduled suite as a prerequisite for honoring the correction.
 - Before resuming work after a high-priority correction, capture a local-only,
   sanitized correction knowledge brief with the signal class, concrete or
   ambiguous target, observed failure, causal hypothesis, improvement actions,
@@ -329,37 +350,42 @@ specific rule.
   phone number, private URL, or private path into the brief. Explicitly confirm
   the fields were manually sanitized; pattern rejection is not privacy proof.
   Use the default local-only store, do not override its path, and carry forward
-  only the opaque receipt ID. When the target is concrete, use the brief in the
-  same task to update the applicable durable rule, skill,
-  implementation, and regression test; when it is ambiguous, keep it
-  `needs-review` and record target reconstruction as the first action. The brief
-  is a repair plan, not proof of completion, approval, or expanded authority.
+  only the opaque receipt ID. When the target is concrete, use the brief to
+  inspect possible control layers and change only the proven causal owner or
+  owners with the smallest owner-boundary regression; do not manufacture every
+  layer. When it is ambiguous, keep it `needs-review` and record target
+  reconstruction as the first action. The brief is a repair plan, not proof of
+  completion, approval, expanded authority, or a blocker for unrelated work.
 - Gate 6, independent evaluation: use at least one proportionate evaluator that
   is independent of the implementation path, such as tests, linters, schema
   validators, CI, browser screenshots, independent commands, subagent review,
   or human review after approval. Do not involve other people without approval.
-- Gate 7, monitoring and alignment: define task-relevant regression signals for
-  recurring work, such as pass/fail gates, runtime, coverage, counts, error rate,
-  freshness, drift, hashes, or worker health. Recompare the result with the
-  original objective and identify work that is useful but out of scope.
+- Gate 7, monitoring and alignment: define task-relevant regression signals only
+  for recurring or materially risky work, such as pass/fail gates, runtime,
+  coverage, counts, error rate, freshness, drift, hashes, or worker health.
+  Recompare the result with the original objective. Stop expanding work when the
+  acceptance criteria have proportionate evidence; useful but out-of-scope work
+  is a nonblocking candidate, not a reason to continue.
 - Gate 8, meta-verification and reporting: audit the requirement-to-evidence
   mapping, test coverage of risky paths, evaluator independence, remaining
   uncertainty, and whether another reasonable evaluator would reach the same
   conclusion. Confidence is saturated only when independent evidence agrees,
-  no material requirement or high-risk path lacks evidence, and another check
-  has low expected information gain. Report verifiable outcomes and evidence,
-  not hidden chain-of-thought.
-- User-facing updates and final responses must expose the protocol results:
-  interpretation, requirements, unknowns, hypotheses, plan, execution result,
-  factual checks, tests, stability and reproducibility, refactoring decision,
-  external evaluation, monitoring signals, objective alignment, confidence,
-  and residual uncertainty.
+  no material requirement or high-risk path lacks evidence, and another
+  in-scope check has low expected information gain. Do not seek extra confidence
+  by adding unrelated audits, threat models, or test matrices. Report verifiable
+  outcomes and evidence, not hidden chain-of-thought.
+- User-facing updates and final responses must expose only the protocol results
+  material to the user and task. Do not force not-applicable fields, invented
+  unknowns, or internal process ceremony into a simple result.
 - Keep the local automation that supports this protocol under the component
   ownership defined in `scripts/codex_reliability/manifest.json`. Use
   `scripts/codex_reliability/install-codex-reliability-control-plane.ps1` as the
-  unified install and health-check entrypoint. Do not add another Startup item
-  or scheduler for an existing component without first updating that manifest
-  and proving that the existing owner cannot carry the responsibility.
+  unified installer and component-health entrypoint. This control plane owns
+  installer and component health only; it does not own user-task planning or
+  scope. A health failure blocks only a health claim or an in-scope action that
+  directly depends on that component. Do not add another Startup item or
+  scheduler for an existing component without updating that manifest and
+  proving that the existing owner cannot carry the responsibility.
 - For every task, translate results into the user's decision language before
   presenting technical detail. Start from what the user should worry about,
   decide, change, approve, ignore, or review next. When reporting findings,
@@ -418,301 +444,16 @@ specific rule.
 - Before changing Excel, Word, or PowerPoint artifacts, choose the tool path and
   final verification gate from `okmrtis/meta` topic `office-artifact-workflow`
   in `knowledge/cards.jsonl`; do this before the first write.
-- Before creating any customer-facing system implementation proposal, read and
-  apply all four canonical cards from `knowledge/cards.jsonl`:
+- Before creating or materially revising a customer-facing system
+  implementation proposal, load and apply these four canonical cards from
+  `knowledge/cards.jsonl`:
   `project-delivery-methods/customer-system-proposal-phase-gates`,
   `project-delivery-methods/japanese-system-proposal-standard-structure`,
   `project-delivery-methods/pmo-management-system`, and
-  `visual-design/imagegen-consulting-body-eight-pattern-contract`. Enforce the
-  six independent gates, canonical 25-module decision structure, exact
-  Title/Key Message/Body semantics, eight-form-only ImageGen body contract, and
-  full restart from Phase 1 after any rejection. Do not begin slide production
-  while an upstream gate is unpassed.
-- For the Phase 5 proposal BODY, use the committed asset with stable ID
-  `customer-system-proposal/body-structure-reference/v1` at
-  `assets/customer-system-proposal/body-structure-reference-v1.png` as the sole
-  body-structure reference. Its immutable identity is SHA-256
-  `1214c21578411dfb22885c3e9d1041640a0a78b54797b5761761273aef3122ca`,
-  MIME `image/png`, 4032 x 2283 pixels, 12,958,793 bytes, preserved byte for
-  byte from the user-supplied chat attachment. Additional or alternate
-  body-structure references are a Gate 1 rejection.
-- BODY production must use a Japanese BCG-like customer-proposal tone as a
-  non-proprietary benchmark: claim-led, analytical, flat and precise, minimally
-  ornamental, with rigorous alignment and evidence hierarchy. Do not copy
-  proprietary BCG or other consulting template assets. Use only the eight named
-  patterns or their combinations; every combination needs one dominant
-  relationship and an unambiguous scan order.
-- All non-color visual rules in this BODY contract are fixed and non-variable;
-  only color choice may vary, including exact color values. Keep low-to-high
-  importance ordered as pale/dark gray, pale/dark green, then pale/dark orange,
-  with default dark guidance spanning approximately green `#134611` to orange
-  `#C57B57`. Reversing the order or making layout, pattern, hierarchy, scan
-  order, font, size floor, tone, or sole-reference identity variable rejects
-  Gate 1.
-- The size hierarchy is a separate fixed semantic hierarchy, independent of color: low-importance objects and text are smaller, while high-importance objects and text are larger.
-  Object and text size move together in that fixed
-  direction; flattening, reversing, decoupling, or making it variable rejects
-  Gate 1. The Meiryo BODY text floor remains 12 pt at final slide size.
-- BODY must remain one ImageGen-generated raster. Initial construction and repair must not use manually assembled PowerPoint shapes or tables, hand-typed or code-drawn labels, white patches, or overlays; correct defects only by image editing or regeneration.
-- At Phase 1, keep an evidence ledger for every sampled source with publisher,
-  formal title, URL, page or section, retrieval date, scope, and limitation; a
-  search-result snippet or an unreachable URL is not a usable sample. Organize
-  the resulting standard in three explicit layers: the system-delivery core
-  (purpose through handover and TCO), the public-PoC/procurement overlay
-  (scoring, agreement, reports, rights, payment, publicity, and non-guaranteed
-  continuation), and the domain overlay (law/standards, expert rubric,
-  inclusion/ethics, validity/KPI, and field constraints). A module may be
-  marked not applicable only with a written reason and an alternative control;
-  never silently delete migration, testing/acceptance, training/adoption,
-  go-live/rollback, operations/handover, data exit, or lifecycle cost.
-- Phase 1 sampling must include at least five publicly inspectable Japanese
-  customer-facing system implementation proposal artifacts, or clearly labeled
-  proposal templates that preserve the customer-facing page structure. Do not
-  count RFPs, procurement instructions, evaluation sheets, or generic how-to
-  articles as those five proposal artifacts; use them as separate requirement,
-  evaluation, or delivery-standard evidence. Record whether each artifact is an
-  actual submitted proposal, a disclosed exemplar, or a template, and state the
-  limitation before deriving the standard architecture.
-- Trace every canonical proposal module and every conditional overlay claim
-  back to at least one source ID and an exact page or section; an uncited
-  label or cover module is not an exception. Each citation must carry the
-  smallest supporting locator and a short exact evidence phrase that can be
-  re-extracted from that locator. A source-wide range copied across unrelated
-  claims is not claim-level evidence. Unsupported claims about
-  agreements, reports, acceptance/payment, rights, publicity, continuation,
-  ethics, or domain controls are a Gate 1 rejection even when the overall
-  structure appears reasonable.
-- Preserve each source's exact visible formal title and exact heading byte for
-  byte after ordinary HTML entity decoding, including full-width characters,
-  numbering, and punctuation; keep shortened aliases and contextual project
-  names in separate fields. Re-extract titles, headings, and cited evidence
-  phrases from the frozen raw source during validation rather than only
-  comparing two derived artifacts. Declare one page convention,
-  normally one-based PDF file pages, and use it identically in the human
-  ledger, manifest, module crosswalk, and overlay crosswalk. Reject or narrow a
-  claim when the cited page does not contain it.
-- Proposal Gate 1 negative tests must cover a normalized-but-not-exact formal
-  title, a shortened or renamed heading, a zero-citation canonical module, a
-  broad locator reused across unrelated claims, and an evidence phrase absent
-  from the declared page or section while dependent hashes are updated. A
-  validator that accepts any of these semantic drifts fails closed only in
-  appearance and cannot authorize the next phase.
-- Freeze customer requirement identifiers and meanings when Phase 2 passes.
-  Downstream phases and restarted runs must preserve those identifiers; split a
-  requirement only with child identifiers such as `R06-1`, append newly found
-  requirements at the end, and keep version/change history. Validate the
-  upstream/downstream ID sets mechanically. Reusing an old identifier for a new
-  meaning, silently losing a requirement, or changing its interpretation
-  without a recorded version and impact analysis is a phase-gate rejection.
-- Phase 2 evidence controls must fail closed on meaning, not merely on IDs,
-  hashes, counts, or favorable substrings. Represent every mandatory customer
-  fact with canonical structured semantics and an exact source-ID set; reject
-  negation, reversed rights or payment direction, changed actors, and weakened
-  conditions. Re-extract live forms deterministically from their frozen raw
-  source and compare the entire extracted schema. For conditional fields,
-  verify the exact child, parent, triggering choice/key, required state, and
-  limit. Recompute draft-versus-live differences from the original workbook or
-  form instead of trusting a handwritten difference table. Negative tests must
-  mutate each critical fact direction, source attribution, branch connection,
-  attachment restriction, and raw-derived difference while updating dependent
-  hashes, so synchronized tampering is rejected as well as stale hashes.
-- Apply the Phase 2 canonical comparison to every registered customer fact, not
-  only a hand-picked critical subset. For each fact, exact-compare subject,
-  predicate, polarity, value, unit, conditions/qualifiers, the order-independent
-  allowed source-ID set, and exact locators. A correct value attributed to the
-  wrong official source is a rejection. Mutation coverage must include every
-  fact ID across meaning/value, source set, and condition/qualifier classes.
-- A live-form validator may claim full re-extraction only when it defines one
-  canonical projection and proves a bijection between frozen raw elements and
-  derived schema elements. Require unique stable IDs on both sides, consume
-  every raw and schema row exactly once in both directions, and exact-compare
-  all projected attributes, including name, label, type, required, parent,
-  branch keys and choices, min/max, placeholder, default, description, outline,
-  upload restrictions, page, and ordinal. Equal counts do not prove completeness;
-  duplicate-one/drop-another mutations must fail.
-- Make customer requirements, scoring criteria, and application fields a single
-  typed traceability graph. Freeze exact CR, SC, and FM ID sets plus the exact
-  CR-to-SC and SC-to-FM edge sets, with purpose and required proof on every edge.
-  Reject unknown, missing, duplicated, or semantically reassigned edges even when
-  all endpoint IDs exist. Store F/A/H/U as real records, not only class
-  definitions: facts need direct sources, assumptions need an owner and confirm
-  point, hypotheses need KPI/comparison/pass criteria, and unconfirmed items need
-  a question and explicit no-assertion boundary.
-- A cross-phase proposal contract is incomplete until an executable payload
-  fixture proves the contract against real record shapes. Mutation tests must
-  change fact values and source sets, raw and annotated form rows and attributes,
-  graph edges, class records, and transitions themselves; changing only registry
-  declarations or booleans does not close the downstream defect.
-- Keep proposal claim-evidence classes and cross-phase record kinds in separate
-  namespaces. Use `F/E/A/P/V/U` only for the epistemic status of a proposal claim;
-  use explicit record kinds such as `OFFICIAL_FACT`, `PROPOSER_ASSUMPTION`,
-  `PILOT_HYPOTHESIS`, and `UNCONFIRMED` for cross-phase data. Never overload `A`
-  to mean both analysis and assumption, or silently map a hypothesis to evidence.
-- Keep technical maturity and rights provenance as two separate axes in every
-  proposal. Record maturity from unstarted/design/prototype/similar-project
-  implementation/target-environment validation/operation, and record rights as
-  self-existing, self-current-development, joint result, OSS, third-party
-  license, or future-IP candidate. Do not convert an OSS component's maturity
-  into a claim that the proposal integration is mature, and do not call an
-  unvalidated design proprietary proof.
-- For proposal Gate 1 reproducibility, separate the immutable meta evidence
-  floor from a vendored meta snapshot that may advance. Record both commits and
-  the required proposal-card IDs. Do not bind a validator permanently to exact
-  equality with a floating meta pointer; accept only the same commit or a
-  verified descendant that retains the required contracts, and evaluate the
-  candidate commit separately from later worktree drift. Run the validator
-  under both Windows PowerShell 5.1 and PowerShell 7 with equivalent counts,
-  hashes, ancestry result, and final outcome. Frozen downloaded source bytes
-  may be reused only after re-hashing and re-reading them as evidence; do not
-  reuse old conclusions, phase decisions, slide bodies, or proposal text
-  without regeneration or explicit re-evaluation in the new run.
-- A complete Phase 1 source run must iterate the complete frozen source
-  registry, not only sources reached by citations. After candidate freeze, open
-  and read every registered source, recompute its raw-byte SHA-256 and size,
-  record its media/source type, and run the deterministic type-appropriate
-  extraction or record explicit binary/visual extraction evidence. Emit one
-  per-source read/extraction result. A manifest hash, aggregate source count, or
-  citation traversal cannot prove that an unreferenced registered source was
-  read. Add mutations for an omitted registered source and a falsely claimed
-  read/extraction result.
-- Gate 1 validators must name the candidate Git commit and expected SHA-256
-  values, compare scoped worktree artifacts with that candidate separately,
-  enforce declared cache-root containment, and reject duplicate source IDs,
-  canonical paths, or URLs. Negative tests must cover missing evidence,
-  same-size byte modification, candidate drift, path traversal, nonexistent
-  meta commits, reverted rules, and a valid later meta descendant.
-- Compare raw binary worktree bytes for every scoped artifact with the exact
-  candidate Git blob, including both byte count and SHA-256, using a path that
-  bypasses Git text and end-of-line filters. A clean Git status is not byte
-  equality. Normalize intended line endings before candidate freeze and reject
-  LF/CRLF or other filter-hidden worktree drift with a dedicated mutation.
-- Treat an HTML citation locator as a structural identity, not as displayed
-  heading text. Record the exact decoded text together with the element tag,
-  ordered occurrence, raw line or byte range, and deterministic DOM path; the
-  frozen raw source must resolve that identity to exactly one element. Preserve
-  duplicate-text elements as an ordered collection and reject ambiguity. A
-  text-keyed map, silent overwrite, or last-write-wins parser cannot authorize
-  Gate 1. Negative tests must add a duplicate same-text heading while updating
-  dependent hashes and prove that the citation becomes ambiguous.
-- Bind every Gate 1 decision to an immutable, non-circular candidate receipt.
-  The receipt must name the frozen candidate path, exact candidate byte hash,
-  candidate Git commit, scoped artifact hashes, and applicable meta references;
-  the evaluated candidate must not try to contain its own hash. Validators and
-  dual-host wrappers must receive the candidate path and expected candidate
-  hash or receipt explicitly and must reject a mutable working-manifest
-  substitute, worktree drift, a wrong candidate, or a receipt mismatch. Include
-  positive coverage for an allowed descendant meta commit as well as negative
-  coverage for candidate/worktree drift.
-- Keep repeated proposal-gate runs lightweight and reproducible: cache frozen
-  raw source bytes by content hash, re-hash and re-read them in each restarted
-  run, execute focused mutation tests while iterating, and reserve one complete
-  normal validation pass for the frozen gate candidate. Bound concurrency and
-  avoid agent or browser fan-out when the host application is unstable. This
-  permits transport reuse only; conclusions, gate decisions, proposal text,
-  and slide bodies must still be regenerated or explicitly re-evaluated.
-- Make the five-sample entrance test machine-readable. Each counted artifact
-  must be classified as an actual submitted customer proposal, a disclosed
-  customer-facing exemplar, or a proposal template that preserves the page
-  structure delivered to a customer; attach the exact page or section proving
-  that classification and state its limitation. RFPs, proposal instructions,
-  evaluation sheets, procurement notices, and generic articles may support
-  separate requirement or practice claims but never satisfy the five counted
-  artifacts. Fewer than five eligible artifacts, including zero, is an
-  automatic Gate 1 rejection.
-- Decompose every canonical module and overlay claim into atomic claim elements
-  and validate element-level coverage. Every element must have at least one
-  direct raw-source citation or an explicitly identified normative meta
-  citation. A qualified-partial citation may supplement a claim but cannot be
-  the sole support for an uncovered element. Reject claims whose own
-  `support_boundary` admits that RACI, Go/No-Go, exceptions, adoption checks,
-  alternatives, owners/actions, data exit, or another stated element remains
-  unsupported. Add zero-direct, uncovered-element, and weakened-boundary
-  mutations.
-- Atomicity is semantic, not punctuation-based. Manually curate each stable
-  element as a complete, independently evaluable semantic requirement; do not
-  split target lines mechanically by comma, conjunction, slash, or regex. Each
-  element must retain the actor, object, action or prohibition, direction,
-  condition, and lifecycle scope needed for its meaning. Grammatical fragments
-  such as `decision`, `prohibit`, `object`, `repair`, or a dependent prepositional
-  phrase are invalid elements and must not count toward coverage.
-- Do not treat a target or module label as element-level normative evidence.
-  A normative citation may support several atomic elements only when its exact
-  target line explicitly names every supported semantic. Bind every element ID
-  to element-specific semantic fingerprints and fail closed when the cited line
-  omits any fingerprint. In particular, `workflow` alone does not prove an
-  approval or exception path; `adoption` alone does not prove an adoption
-  measure or remediation; `go/no-go` alone does not prove the No-Go action or
-  decision owner; `risk` alone does not prove trigger, prevention, response,
-  and owner; and `agreement` alone does not prove change control, inspection,
-  acceptance, payment, or exit transfer. Keep the exact reusable target lines
-  in the canonical proposal phase-gate card and validate them by target ID.
-- Model every declared bidirectional proposal relation as one canonical typed
-  edge set. This includes form, scoring, requirement, module, evidence, and
-  control relations. Store source type/ID, relation type, target type/ID,
-  provenance, and a short justification once; generate all forward and reverse
-  views from those edges instead of maintaining independent arrays. Reject
-  duplicate edges, unknown endpoints, orphans, and any forward/reverse pair
-  whose exact edge set is not equal. Mutation tests must add, delete, and rewire
-  one side while updating dependent hashes and prove that the mismatch fails.
-  A derived aggregate fact must cite a reproducible derivation locator with the
-  extractor/query version, exact input set or input hash, formula, and output;
-  pointing at one member record does not support an aggregate count.
-- Make unresolved proposal gates structurally stoppable. Every unresolved fact,
-  assumption, eligibility item, score-critical claim, staffing commitment, or
-  submission dependency must have a stable ID, severity, owner, due time,
-  required deliverable, evidence IDs, acceptance criteria, fallback or scope
-  reduction, impacted IDs, and an explicit `stop_if_unresolved` boolean.
-  Mandatory eligibility, submission, privacy, safety, and named-team claims
-  must stop submission when unresolved unless the affected scope is removed in
-  a customer-valid way. A future confirmation, generic TODO, or narrative owner
-  is not a gate. Validate required fields and state transitions, and add missing
-  owner, expired due time, weakened acceptance, false-stop, and silent-removal
-  mutations. Receipts must distinguish valid controls from adversarial
-  mutations and report both counts without calling controls mutations.
-- A frozen proposal standard must be self-identical. Mechanically compare its
-  declared version, file name/self-reference, predecessor version/run, required
-  meta-card count and IDs, and all manifest/sidecar bindings. Do not create the
-  next standard by blind global string replacement; regenerate its front
-  matter and provenance contract from structured inputs. Any internal version,
-  predecessor, file-name, or card-count contradiction rejects Gate 1.
-- Separate immutable candidate evidence from post-candidate execution evidence
-  without pretending either can contain its own future hash. Commit the full
-  mutation suite and dual-host wrapper before the candidate commit and include
-  them in the candidate receipt scope. After executing them, commit the exact
-  commands, host/runtime identities, exit codes, normalized outputs, case list,
-  counts, control hashes, and final normal-pass result, then bind those results
-  with a second non-circular gate-evidence receipt and commit. The evaluator
-  must verify both receipts. The mutation matrix must cover missing evidence,
-  same-size byte drift, path traversal, nonexistent meta commit, rules/card
-  revert and decoy, exact title/heading drift, zero citation/direct support,
-  broad locator reuse, absent evidence phrase, duplicate same-text headings,
-  candidate path/SHA/worktree drift, wrapper wrong-candidate input, and a valid
-  descendant meta commit that retains all required contracts.
-- Every required mutation above must have a stable runnable case ID in the
-  checked-in suite and exact post-candidate execution evidence. Citation and
-  locator adversaries must mutate the frozen raw source plus all dependent
-  hashes and be rejected by deterministic semantic re-extraction, rather than
-  only by equality with a generated bundle snapshot. Missing or unexecuted
-  required cases reject Gate 1 even when an aggregate mutation count is high.
-- Prove meta lineage with a real or isolated clone of the recorded meta
-  repository. Fail closed when it is unavailable. Confirm that the declared
-  commit exists and descends from an evidence floor that already contains the
-  current reproducibility controls; compare its shared-rules Git blob with the
-  project's vendored blob; and inspect its canonical card bodies for required
-  semantic fingerprints. A 40-character string or ancestry alone is not proof
-  that the vendored rules came from that commit or retained their meaning.
-- Make the Gate 1 ledger and citation crosswalk machine-readable. Validate
-  exact expected ID sets, uniqueness, full source coverage, nonempty exact
-  locations, source-to-manifest membership, and correspondence between every
-  sidecar citation and its human-readable row. Row counts and whole-document
-  string searches are insufficient. Parse canonical meta cards by exact ID and
-  check each card's own body fingerprints so decoy cards cannot mask a revert.
-- Validate candidate and worktree `meta_source.source_repository` and
-  `common_rules_path` against the manifest and actual clone. Normalize
-  equivalent GitHub HTTPS/SSH identities, but require the declared meta commit
-  to be reachable from the authoritative remote ref. Cite explicit user/meta
-  normative controls separately from public source evidence rather than
-  overstating a public source.
+  `visual-design/imagegen-consulting-body-eight-pattern-contract`. The cards,
+  their referenced assets, and project-local rules are the sole detailed
+  proposal contract. Do not load or apply those proposal-only controls to an
+  unrelated task.
 - Local Office automation must avoid interfering with the user's active work
   whenever possible. Do not open files in an existing visible Office session
   unless the target file is already open there and reuse is necessary; create a
@@ -723,93 +464,31 @@ specific rule.
 - When a task starts from a file in Downloads/downloads, copy or stage anything
   needed for the run into a stable work root before relying on it, and record
   the original location only as a temporary handoff source.
-- When a task reveals a missing, stale, or weaker local tool/runtime, prefer a
-  beneficial environment update when it is user-local, reversible, and likely
-  to improve capability, reliability, verification quality, or future
-  reproducibility. Run or rerun the relevant environment checker after the
-  update. If the update is not needed for the active task, finish the task
-  first when that is safer; if the update materially improves the active task,
-  update before continuing. If the repair needs administrator rights, account
-  consent, payment, or another user-only step, record the exact install command
-  and follow-up instead of silently dropping the lesson.
+- Update a local tool or runtime only when an in-scope action demonstrably
+  depends on that update. Use the smallest user-local, reversible repair and
+  rerun only the relevant check. Otherwise finish the objective and record the
+  update as an optional nonblocking follow-up. Environment maintenance never
+  blocks unrelated work.
 
 ## Evidence-Gated Chat Practice Skills
 
-- At the start of every user task, after reading the applicable instruction
-  chain, inspect the available installed and repository-owned skills for a
-  matching trigger. Actively invoke every relevant owned skill without making
-  the user name it: apply a `verified/full` skill within its stated scope, and
-  apply a `provisional/partial` skill only to its explicitly covered steps while
-  honoring all exclusions and uncertainty. Compose multiple skills when their
-  scopes are independent. A skill package that is never selected is not a
-  completed promotion outcome.
-- Treat an expected owned skill that is missing, stale, or not discoverable as
-  a setup defect. When repair is user-local, reversible, and in scope, verify
-  the canonical package, reinstall its hash-checked mirror, and use the
-  repository copy for the current task if the runtime cannot refresh discovery
-  until a later task. Add a project-local dispatch rule for established primary
-  workflows, while keeping the common skill as the reusable source.
-- For exact-task skill-use claims, follow the truth-and-tests rule above.
-  Package and installation health is readiness evidence, not actual-use
-  evidence. A same-task skill invocation or complete canonical `SKILL.md` load
-  plus material downstream application is required to verify use; a user-visible
-  announcement is neither required nor sufficient. Preserve an indeterminate
-  result when the exact task record or application evidence is incomplete.
-  When activation is proven but applicable material gates were skipped or
-  contradicted, report activated-but-partially-applied or
-  activated-but-noncompliantly-applied instead of collapsing the result into
-  used, not used, or indeterminate.
-- Keep promotion evidence and package readiness observable. Reliability health
-  must fail closed
-  when chat-practice evidence is missing or older than its scheduled cadence,
-  when current retained-rollout coverage reports an index, rollout, parse,
-  oversized-record, or incomplete-record gap, when there is no verified
-  full-rescan coverage receipt behind incremental scans, or when an expected
-  skill is not a direct discoverable package under the active Codex skills
-  root. Verify each owned package by a three-way tree hash
-  comparison among the canonical `okmrtis/general` source, the installed-skill
-  registry, and the installed directory; also require the registry source
-  commit to equal the current general commit and reject dirty-source installs.
-  Derive the expected package set and each package's status and evidence
-  metadata from active entries in the General registry; never duplicate a
-  fixed skill-name list in Meta health or runtime configuration.
-  Do not treat a live worker process or an entrypoint string as sufficient
-  health evidence, and do not present package-readiness health as proof that a
-  skill was actually used in a particular task.
-- On every user task, notice reusable procedures and user corrections, but do
-  not treat Codex's own answer, tool success, forward-test success, or user
-  silence as proof that a practice is good. The trusted evidence is: (a) an
-  explicit user correction or rule, or (b) a durable procedure the user invokes
-  repeatedly in distinct tasks after the procedure has become established.
-- Count an established repeated workflow only at the procedure or step level.
-  Do not count retries, rework, or repeated improvement requests as independent
-  successful invocations. Link feedback to the smallest supported target step;
-  a correction in one chat blocks or supersedes that step, not unrelated steps
-  in the same chat.
-- A directly requested, reusable step that has no linked correction may be
-  captured as a partial skill even when another step in the same chat was
-  corrected. Keep such a skill to the narrow contract implied by the user's
-  request, mark the unverified boundary in its instructions, list excluded and
-  unresolved behavior, and define what user evidence would graduate, revise,
-  or retire it. "No correction" means eligible for a bounded partial skill, not
-  approved or successful.
-- Promote a full skill only from explicit user guidance or an established
-  repeated workflow backed by a current durable procedure. Prefer updating an
-  overlapping skill over adding a duplicate. Keep common rules separate from
-  project- or team-specific models, and never generalize a local detail without
-  evidence that it transfers.
-- When a future user correction conflicts with any full or partial skill,
-  immediately stop relying on the implicated instruction, record the
-  superseding evidence at step granularity, and revise, narrow, or retire the
-  skill before reusing it. Reset recurrence evidence for the corrected step;
-  unaffected independent steps may remain.
-- Preserve the correction itself as trusted evidence while blocking the older
-  conflicting procedure. A user correction can therefore update a full skill
-  immediately even though the superseded operational step is no longer valid.
-- Store only sanitized evidence and provenance. Do not commit raw chats,
-  transcripts, email bodies, credentials, customer data, or private local
-  configuration. Validate edited skills structurally and forward-test their
-  decision boundaries without treating those tests as user approval.
+- At task start, select only skills whose trigger and covered procedure map to
+  the closed task contract. A verified skill applies only within its scope; a
+  provisional skill applies only to its covered steps and exclusions. A missing
+  or stale skill is repaired only when the active task demonstrably depends on
+  it; package maintenance never becomes an unrelated workstream.
+- For an active correction, an exact prior-task use audit, daily practice
+  convergence, or skill maintenance, load the matching mode of
+  `promote-chat-practices` and card
+  `codex-knowledge-management/evidence-gated-skill-promotion`. Use exactly one
+  mode unless the user explicitly requests more than one. Promotion and package
+  health findings block only promotion, reuse, or a directly dependent action;
+  they never block an unrelated user task or authorize environment or security
+  work.
+- Only explicit user evidence or independently verified repeated use can promote
+  a reusable practice. Codex output, tool success, tests, and user silence are
+  not approval. Store only sanitized provenance and prefer revising an
+  overlapping skill over creating a duplicate.
 
 ## Cross-Repository Updates
 
@@ -849,22 +528,3 @@ specific rule.
   `-Push` when intentionally refreshing adopted repositories.
 - Do not store raw transcripts, secrets, customer data, or full local paths in
   `meta` unless they are deliberately sanitized examples.
-## Independent Proposal Oracle
-
-- For customer-system proposal phase gates, a cross-phase oracle must be generated by a separate deterministic builder from the frozen official/raw source set. The builder must not import, read, clone, or structured-clone the candidate fixture or downstream proposal payload at runtime.
-- Pin the oracle bytes, builder bytes, and source raw hashes in the candidate manifest and receipt. Regenerate the oracle at least twice and require byte identity; compare the normalized candidate payload to the independent oracle before any downstream phase.
-- Coordinated mutations that change the fixture and candidate payload together must still be rejected by the pinned oracle SHA and builder output. Treat an oracle derived from the candidate fixture as a Gate 1 rejection even when ordinary validation and mutation counts pass.
-## Customer-Facing Japanese Proposal Language
-
-- Customer-facing proposal slides must use ordinary Japanese business language. Do not leave abbreviations, technical terms, coined expressions, or compressed noun strings unexplained; write the actor, action, timing, and benefit in plain Japanese or show the relationship in a diagram.
-- Keep Title, Key Message, and Body distinct: Title states the question or topic, Key Message answers it, and Body proves or supplements it with relationships, process, comparison, numbers, or roles. Do not repeat the Key Message in a bottom conclusion box; use the Body to show the evidence and flow.
-- For body visuals, prefer readable diagrams over slogan lists. Show who does what, when, what is recorded, and what changes. If a specialized term is necessary, attach a plain-language explanation directly in the same visual.
-- When a proposal uses cloud hosting for this HANAMII work, default to Sakura domestic hosting and describe the data boundary, security review, and fallback in plain Japanese. Do not imply that a cloud choice is approved until the customer security review is complete.
-
-## Customer Proposal Story and Decision Context
-
-- Write for a first-time customer reader who knows only the competition brief, not the proposal-development history. Label the current state, the proposed future work, and the evidence to be verified explicitly; never require the reader to decode private shorthand such as `A/B`, an unexplained acronym, or a coined label.
-- Give every slide a distinct decision job and one non-overlapping question. Proposal overview, future work, feature detail, differentiation, workflow, architecture, verification, cost, organization, and decision must each add new evidence at a deeper level. Reject a deck when several slides restate the same mechanism without advancing one connected story.
-- A cost page must map each amount to concrete work and deliverables. An organization page must name the company and customer roles, state who creates, confirms, decides, and accepts each output, and quantify the customer meeting or work burden. Do not use generic labels such as `proposer` when the company name is known.
-- Keep internal traceability in the working Markdown or evidence ledger. Customer-facing pages must not cite `the problem statement`, `the customer page`, internal source IDs, or production notes as though they were external evidence.
-- When a customer specifies base, main, and accent colors, use only those approved color families for the body unless a separately approved exception is necessary. Verify the dominant/background, main-structure, and accent proportions across the rendered deck, not only in the source theme.
