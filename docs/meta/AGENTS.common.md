@@ -478,3 +478,19 @@ specific rule.
   `-Push` when intentionally refreshing adopted repositories.
 - Do not store raw transcripts, secrets, customer data, or full local paths in
   `meta` unless they are deliberately sanitized examples.
+
+## Non-Loss Consolidation
+
+- When organizing, integrating, simplifying, or retiring material, map every
+  independently identified source intent and requirement to its retained target
+  or an explicit unresolved state. A summary or passing aggregate test is not a
+  substitute for that mapping.
+- Apply this separately to QA: preserve each acceptance criterion, risky path,
+  expected result, and required evidence.
+- Apply it separately to reusable knowledge: preserve purpose, applicability,
+  procedure, expected output, exclusions, evidence, and unknowns. Do not retire
+  a source while any field is unmapped or unresolved.
+- Apply it separately to automation: preserve purpose, trigger, cadence, inputs,
+  outputs, failure behavior, permissions, non-interference, lifecycle, and
+  implementation owner. Do not retire or reassign an automation until every
+  field has a verified target.
