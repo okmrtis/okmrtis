@@ -45,76 +45,26 @@ specific rule.
 - Prefer small focused commits named by the durable behavior or rule being added.
 - Before declaring GitHub management done, check the current branch, remote,
   worktree status, and whether durable files are still untracked.
-- Treat non-main branch creation as a tracked decision, not disposable scratch.
-  Immediately after creating a branch and after material head changes, record
-  its repository, branch, full head/base object IDs, and current Codex task ID
-  in the local branch-integration provenance ledger with the installed
-  `record_branch_provenance.ps1`. Store pointers only: never copy raw chat text,
-  hidden reasoning, credentials, or private exports into the ledger or GitHub.
-  A hexadecimal string is not provenance proof: the recorder must resolve the
-  supplied head and base as readable commit objects in the named worktree,
-  require the head to equal the current local branch ref, and append nothing
-  when object or ref validation fails.
-  Before declaring repository or GitHub management done, check branch hygiene
-  for the active repository or `okmrtis` scope when available, such as with
-  `<meta-clone>\scripts\check_branch_hygiene.ps1`. Resolve or explicitly
-  report remote branches without open PRs, branches already contained in the
-  default branch, local branches without upstreams, and local branches ahead of
-  upstream. Do not delete, force-push, or otherwise retire branches until the
-  target branch, ownership, review path, and rollback posture are explicit.
-- Use the installed `okmrtis` branch-integration controller as the deterministic
-  cross-repo safety layer when it is available. It must identify repositories by
-  GitHub `owner/name`, not by whichever duplicate local clone happens to be
-  found. It may open or update PRs, merge with expected-head guards, and retire
-  contained refs after cooldown. It must still fail closed for conflicts,
-  draft or do-not-merge signals, changed heads, failed or pending checks,
-  requested changes, sensitive or high-risk paths, oversized diffs, uncertain
-  API state, and untested code. A ready PR intentionally handed to that lane
-  must include `<!-- okmrtis-branch-integration:v1 -->`; absence routes it to
-  semantic convergence instead of implying deterministic merge consent. Never
-  force-update branch content. A contained ref may be deleted only with an
-  expected-head lease and a recovery SHA recorded first.
-- A deterministic `waiting`, `review_needed`, or `error` result is not a terminal
-  hold. The scheduled Codex semantic branch-convergence automation must consume
-  every such result and every local or remote non-default branch. Only an active
-  task, changed head, cooldown/post-mutation interval, or named external retry
-  may be monitored, and every monitoring item needs an exact recheck time.
-- Before deterministic create/update/merge/delete, run an audit and correlate the
-  exact head with its provenance and current Codex task. Grant a short-lived
-  exact-head `clear` preflight only when the owning task is inactive or complete
-  and no matching worktree contains uncommitted or unpushed intent. Record an
-  `active_task` lease otherwise. Missing, expired, active, or wrong-head
-  preflight must prevent mutation and produce bounded monitoring.
-- For semantic convergence, inspect evidence in this order: matching Codex task
-  history; GitHub Issue/PR timeline, reviews, and checks; commit, diff, reflog,
-  worktree, and timestamp chronology relative to current `main`; current rules
-  and regression tests; then prior integration/recovery records. Correlate at
-  least two independent identifiers before assigning task ownership. Store only
-  task IDs, hashes, and privacy-safe summaries, never raw chat transcripts,
-  hidden reasoning, credentials, or full machine paths.
-- Semantic convergence must preserve the newest verified repository invariants
-  and integrate the unique intent of older work. Do not blindly merge an obsolete
-  implementation merely to remove a branch. Port still-useful behavior and tests
-  onto current `main`, resolve conflicts by the reconstructed intent and timeline,
-  add or repair tests, rerun risk-matched checks, and keep iterating until the
-  result is verified. A failing change is work to repair or safely supersede, not
-  permission to merge a regression and not a reason to abandon the branch.
-- An actively changing branch is owned work, not an abandoned hold. Continue or
-  message its owning Codex task with an explicit completion instruction; if the
-  task becomes idle or loses ownership, take over in an isolated worktree. The
-  only terminal outcomes are `merged_semantically`,
-  `semantic_noop_obsolete_retired`, or
-  `declared_long_lived_with_authoritative_evidence`. A long-lived declaration
-  must cite the current default-head authority and expire for revalidation.
-  Any unresolved external dependency remains an active retry item with a next
-  action and owning task, and must be revisited automatically rather than parked.
-- Branch automation complements task completion. At the end of branch-based work,
-  commit and push durable work, converge it into `main`, close or merge its PR,
-  and retire the ref after recording recovery evidence. Keep
-  `delete_branch_on_merge` enabled where GitHub supports it. A ready PR handed to
-  the deterministic controller may retain the exact body marker
-  `<!-- okmrtis-branch-integration:v1 -->`, but absence of that marker routes the
-  work to semantic convergence instead of becoming a permanent hold.
+- Treat every non-main branch as an owned, temporary path toward the repository's
+  intended result. Reconstruct its purpose from the matching Codex task, Issue or
+  pull request, commits, diff, reflog, worktree, and current project rules. Build
+  an explicit mapping from every unique still-valid requirement to the current
+  default branch, the proposed integration, or evidence that it is already
+  represented; do not merge obsolete implementation merely to remove a branch.
+- Codex owns branch completion within the authorized repository scope: preserve
+  newer verified invariants, port all unique valid intent onto current `main`,
+  self-review the resulting diff, run risk-matched tests, create or update the
+  pull request, merge the verified head, and retire the integrated branch. Record
+  the exact recovery SHA before deleting a ref, use expected-head protection, and
+  never force-push or rewrite shared history.
+- Do not mutate, merge, normalize, or delete a branch or worktree while its task is
+  active, its head or ownership is unknown, or it contains dirty, untracked, or
+  unpushed work whose intent is not proven elsewhere. Continue the owning task or
+  schedule a concrete recheck; do not create permanent exceptions or abandoned
+  holds. Keep ownership until every branch's unique valid intent is represented
+  on the default branch or the branch is proven duplicate or obsolete. A
+  controller, marker, lease, or other optional helper may supply evidence but is
+  never required to establish the user's purpose or complete the work.
 
 ## Local Project Rules
 
