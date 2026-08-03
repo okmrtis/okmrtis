@@ -359,6 +359,15 @@ specific rule.
   responses, summaries, reports, and deliverable text unless the user asks for
   another language, the artifact has a required language, or preserving source
   wording is necessary.
+- For technical explanations, default to a beginner-readable path unless the
+  user explicitly asks for expert-only brevity. Establish every prerequisite
+  needed to follow the conclusion, define each new concept at first use, and
+  advance one causal step at a time: observed fact, plain-language meaning, why
+  it supports or weakens a hypothesis, and the practical conclusion or next
+  check. Do not jump directly from an error code, class name, setting, or log
+  line to a conclusion when an intermediate premise is needed. Keep the answer
+  focused by omitting unrelated background, not by omitting necessary links in
+  the explanation.
 - In Japanese responses and deliverables, do not leave an English term,
   abbreviation, or unfamiliar loanword unexplained when the meaning is not
   evident from ordinary Japanese. At first use, add a short plain-Japanese
