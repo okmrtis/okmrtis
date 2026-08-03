@@ -442,11 +442,26 @@ specific rule.
 - When a task starts from a file in Downloads/downloads, copy or stage anything
   needed for the run into a stable work root before relying on it, and record
   the original location only as a temporary handoff source.
-- Update a local tool or runtime only when an in-scope action demonstrably
-  depends on that update. Use the smallest user-local, reversible repair and
-  rerun only the relevant check. Otherwise finish the objective and record the
-  update as an optional nonblocking follow-up. Environment maintenance never
-  blocks unrelated work.
+- When an in-scope action or a proportionate verification required to complete
+  it depends on a missing or incompatible tool, runtime, SDK, compiler, or
+  package, treat that environment preparation as part of completing the task.
+  Recheck actual availability, derive the required version and architecture
+  from authoritative project evidence, then install, configure, or update the
+  smallest compatible user-local and reversible option. Rerun the blocked
+  action and its relevant verification. Do not stop at "not installed," omit
+  the verification, or shift routine setup to the user when Codex can safely
+  complete it.
+- Prefer an existing bundled, portable, project-local, or user-scope path
+  before a system-wide change; use an authoritative distribution source,
+  preserve working versions and a rollback path, and record the installed
+  version and source when reproducibility matters. Do not install an arbitrary
+  latest version or replace unrelated global defaults. Exhaust safe
+  alternatives before stopping, and ask only for the exact user-only step when
+  license acceptance, interactive authentication or 2FA, payment,
+  administrator elevation, or meaningful irreversible, system-wide, or shared
+  impact remains. If no compatible installation is possible, report the
+  tested options and exact blocker. Environment preparation must not block
+  unrelated work.
 
 ## Evidence-Gated Chat Practice Skills
 
