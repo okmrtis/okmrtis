@@ -136,6 +136,41 @@ specific rule.
   intentionally left open. If the task continues after that handoff, close the
   surface as soon as it is no longer needed.
 
+## Windows Unattended Automation
+
+- Every unattended Windows automation that Codex creates or changes must run
+  without showing a top-level window, creating a visible console at any point,
+  taking foreground focus, or interrupting keyboard input. This is an invariant
+  for the whole parent, child, retry, repair, updater, notification, and fallback
+  process tree; an application-specific exception never permits PowerShell,
+  Command Prompt, a console host, or another helper window to flash on screen.
+- Launch each console executable through a GUI-subsystem wrapper or with
+  `UseShellExecute=false`, `CreateNoWindow=true`, and a `Hidden` process window
+  style. PowerShell children should also receive `-NoLogo -NoProfile
+  -NonInteractive -WindowStyle Hidden`, but those arguments alone are not proof
+  of background execution. A Task Scheduler `Hidden` setting, minimized window,
+  shortcut window style, or `Start-Process -WindowStyle Hidden` alone is also
+  insufficient.
+- Inspect every registered and dynamically spawned execution path, including
+  Startup shortcuts, scheduled-task actions, Codex notify hooks, self-update and
+  recovery paths, alternate runtimes, and descendants such as Python, Git,
+  `cmd.exe`, and `conhost.exe`. Do not leave a direct unattended
+  `powershell.exe`, `pwsh.exe`, or `cmd.exe` entrypoint when a no-console owner
+  can be used.
+- A background application restart may run unattended only under a narrow,
+  explicit standing authorization that records the named automation,
+  application, purpose, recovery bound, and non-interference guarantees. It must
+  remain minimized or windowless and must not take focus or synthesize user
+  input. Foregrounding, focusing, mouse or keyboard control, or any broader
+  interruption still requires explicit confirmation for that specific run.
+- Before enabling a new or repaired unattended path, perform static readback of
+  its registered owner and descendants, then observe at least one real or
+  faithful trigger with window-show and foreground-event monitoring. Verify
+  exit-code propagation as well as the absence of visible windows. If a current
+  owner is confirmed to flash or steal focus, disable or replace that exact
+  owner until the no-window path is verified; do not stop unrelated user
+  processes or applications.
+
 ## Objective And Scope Control
 
 - Treat the user's objective, 5W1H, explicit exclusions, requested outputs, and
