@@ -136,39 +136,53 @@ specific rule.
   intentionally left open. If the task continues after that handoff, close the
   surface as soon as it is no longer needed.
 
-## Windows Unattended Automation
+## Windows Background Process Non-Interference
 
-- Every unattended Windows automation that Codex creates or changes must run
+- Every non-user-facing Windows process that Codex starts or changes must run
   without showing a top-level window, creating a visible console at any point,
-  taking foreground focus, or interrupting keyboard input. This is an invariant
-  for the whole parent, child, retry, repair, updater, notification, and fallback
-  process tree; an application-specific exception never permits PowerShell,
-  Command Prompt, a console host, or another helper window to flash on screen.
-- Launch each console executable through a GUI-subsystem wrapper or with
+  taking foreground focus, or interrupting keyboard input. This applies both to
+  unattended automation and to commands run during an interactive Codex task,
+  including tests, validators, builds, linters, formatters, parsers, renderers,
+  package tools, Git hooks, setup or teardown helpers, probes, retries, and
+  fallbacks. The invariant covers the whole parent and descendant process tree;
+  an application-specific exception never permits PowerShell, Command Prompt, a
+  console host, or another helper window to flash on screen.
+- When a Codex shell tool already provides a PowerShell host, invoke a `.ps1`
+  script in that host with the call operator (`&`) instead of starting a nested
+  `powershell.exe` or `pwsh.exe` merely to run the script or its tests. Do not
+  wrap a command in `cmd.exe /c` merely for convenience. If a fresh process,
+  different PowerShell version, STA apartment, isolation boundary, or execution-
+  policy override is genuinely required, launch it through a GUI-subsystem
+  wrapper or `System.Diagnostics.ProcessStartInfo` with
   `UseShellExecute=false`, `CreateNoWindow=true`, and a `Hidden` process window
-  style. PowerShell children should also receive `-NoLogo -NoProfile
-  -NonInteractive -WindowStyle Hidden`, but those arguments alone are not proof
-  of background execution. A Task Scheduler `Hidden` setting, minimized window,
-  shortcut window style, or `Start-Process -WindowStyle Hidden` alone is also
-  insufficient.
+  style. Redirect and concurrently drain standard output and error, apply a
+  bounded wait when appropriate, and propagate the real exit code.
+- PowerShell children should also receive `-NoLogo -NoProfile -NonInteractive
+  -WindowStyle Hidden` as defense in depth, but those arguments alone are not
+  proof of background execution. Directly placing `powershell.exe -File`,
+  `pwsh.exe -File`, or `cmd.exe /c` inside a shell-tool command is prohibited
+  unless that launch is itself owned by a verified no-console process API. A
+  Task Scheduler `Hidden` setting, minimized window, shortcut window style, or
+  `Start-Process -WindowStyle Hidden` alone is also insufficient.
 - Inspect every registered and dynamically spawned execution path, including
-  Startup shortcuts, scheduled-task actions, Codex notify hooks, self-update and
-  recovery paths, alternate runtimes, and descendants such as Python, Git,
-  `cmd.exe`, and `conhost.exe`. Do not leave a direct unattended
-  `powershell.exe`, `pwsh.exe`, or `cmd.exe` entrypoint when a no-console owner
-  can be used.
+  task-local test helpers, Startup shortcuts, scheduled-task actions, Codex
+  notify hooks, self-update and recovery paths, alternate runtimes, and
+  descendants such as Python, Git, package managers, `cmd.exe`, and
+  `conhost.exe`. Do not leave a direct background `powershell.exe`, `pwsh.exe`,
+  or `cmd.exe` entrypoint when the current host or a no-console owner can be used.
 - A background application restart may run unattended only under a narrow,
   explicit standing authorization that records the named automation,
   application, purpose, recovery bound, and non-interference guarantees. It must
   remain minimized or windowless and must not take focus or synthesize user
   input. Foregrounding, focusing, mouse or keyboard control, or any broader
   interruption still requires explicit confirmation for that specific run.
-- Before enabling a new or repaired unattended path, perform static readback of
-  its registered owner and descendants, then observe at least one real or
-  faithful trigger with window-show and foreground-event monitoring. Verify
+- Before enabling a new or repaired unattended path, shared launcher, or test
+  harness, perform static readback of its owner and descendants, then observe at
+  least one real or faithful trigger with window-show and foreground-event
+  monitoring. Verify output capture, timeout behavior when applicable, and
   exit-code propagation as well as the absence of visible windows. If a current
-  owner is confirmed to flash or steal focus, disable or replace that exact
-  owner until the no-window path is verified; do not stop unrelated user
+  path is confirmed to flash or steal focus, stop using or replace that exact
+  path until the no-window route is verified; do not stop unrelated user
   processes or applications.
 
 ## Objective And Scope Control
