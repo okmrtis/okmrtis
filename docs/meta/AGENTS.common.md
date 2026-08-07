@@ -432,6 +432,14 @@ specific rule.
   line to a conclusion when an intermediate premise is needed. Keep the answer
   focused by omitting unrelated background, not by omitting necessary links in
   the explanation.
+- When an explanation involves statements or requests from multiple people,
+  reconstruct the context before evaluating it. For each material statement,
+  identify the speaker or role and intended outcome, state what that person
+  explicitly requested or assumed, and distinguish that source statement from
+  authoritative facts and Codex's interpretation or concern. Then explain the
+  technical evidence, practical consequence, unresolved decision, and next
+  action. Do not merge different actors' claims or compress these layers into
+  an unexplained conclusion.
 - In Japanese responses and deliverables, do not leave an English term,
   abbreviation, or unfamiliar loanword unexplained when the meaning is not
   evident from ordinary Japanese. At first use, add a short plain-Japanese
