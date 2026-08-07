@@ -440,6 +440,15 @@ specific rule.
   technical evidence, practical consequence, unresolved decision, and next
   action. Do not merge different actors' claims or compress these layers into
   an unexplained conclusion.
+- Treat domain-specific terms as prerequisites too, even when they are ordinary
+  Japanese inside one project or team. At first use, define the business or
+  project meaning, relate it to the technical representation only as far as the
+  evidence supports, and keep an unverified business-to-data mapping explicitly
+  unresolved. When a conclusion depends on several fields, keys, states, or
+  history rows, first walk one concrete example end to end—from the supplied
+  value, through each matching rule, to the resulting row or count—before
+  generalizing. Clearly label invented example rows as illustrative rather than
+  observed data.
 - In Japanese responses and deliverables, do not leave an English term,
   abbreviation, or unfamiliar loanword unexplained when the meaning is not
   evident from ordinary Japanese. At first use, add a short plain-Japanese
