@@ -390,8 +390,11 @@ specific rule.
   Codex's native retries and contains no last assistant output. It does not own
   user-task planning or scope. The recovery path must baseline without
   historical backfill on first install or policy upgrade, exclude subagents,
-  automations, heartbeat, unrelated errors, completed, aborted, expired, or
-  superseded turns, re-read state before resuming, bound network retry chains
+  automation-source turns, unknown or malformed heartbeat turns, unrelated
+  errors, completed, aborted, expired, or superseded turns, and admit a same-task
+  heartbeat only when one exact safe automation id matches a current ACTIVE
+  heartbeat definition whose target is that exact top-level task. Re-read both
+  rollout state and that definition before resuming, bound network retry chains
   across replacement turn IDs with shared backoff without charging successful
   independent network recoveries against the restart fan-out cap, expose the
   attempt count, next retry, and attempt-limit count in health status, use the
