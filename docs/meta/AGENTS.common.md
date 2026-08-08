@@ -383,23 +383,32 @@ specific rule.
   installer and component health and may perform only the manifest-declared,
   bounded continuation of a top-level user turn whose immutable first
   `session_meta` has exact `originator=Codex Desktop`, `thread_source=user`, and
-  no parent, after either (a) evidence that it was running before the prior Codex
-  Desktop generation ended or (b) a newly observed platform `task_complete`
+  no parent, after one of (a) evidence that it was running before the prior Codex
+  Desktop generation ended, (b) a newly observed platform `task_complete`
   error tied to a current-generation turn or retained previous-generation active
   evidence that strictly identifies a terminal network transport failure after
-  Codex's native retries and contains no last assistant output. It does not own
-  user-task planning or scope. The recovery path must baseline without
+  Codex's native retries and contains no last assistant output, or (c) a newly
+  observed platform `task_complete` whose exact `codex_error_info` is
+  `usage_limit_exceeded`, contains no last assistant output, and belongs to one
+  exact currently ACTIVE same-task heartbeat definition. Condition (c) never
+  applies to an ordinary user turn. It does not own user-task planning or scope.
+  The recovery path must baseline without
   historical backfill on first install or policy upgrade, exclude subagents,
   automation-source turns, unknown or malformed heartbeat turns, unrelated
   errors, completed, aborted, expired, or superseded turns, and admit a same-task
   heartbeat only when one exact safe automation id matches a current ACTIVE
   heartbeat definition whose target is that exact top-level task. Re-read both
-  rollout state and that definition before resuming, bound network retry chains
-  across replacement turn IDs with shared backoff without charging successful
-  independent network recoveries against the restart fan-out cap, expose the
-  attempt count, next retry, and attempt-limit count in health status, use the
-  supported noninteractive Codex session-resume command, and never mutate Codex task
-  SQLite or TOML directly. Since Codex exposes no atomic external claim lock,
+  rollout state and that definition before resuming. Bound network retry chains
+  across replacement turn IDs with shared backoff. Bound each heartbeat-credit
+  retry chain across replacement turn IDs and Desktop generations with persisted
+  exponential backoff; a newer scheduled or manual turn supersedes the stale
+  chain, and one independent terminal recovery must not reset another chain's
+  failures or consume the restart fan-out cap. Persist only sanitized identifiers
+  and health metadata; never persist transcript, heartbeat or recovery-prompt
+  text, or raw error text. Expose separate network and heartbeat-credit attempt
+  counts, next retries, pending counts, and attempt-limit counts in health status,
+  use the supported noninteractive Codex session-resume command, and never mutate
+  Codex task SQLite or TOML directly. Since Codex exposes no atomic external claim lock,
   retain the final state/process rechecks but document the narrow residual race
   with a user-initiated resume instead of claiming absolute duplicate exclusion.
   A health failure blocks only
