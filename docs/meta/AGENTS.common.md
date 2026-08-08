@@ -449,6 +449,15 @@ specific rule.
   value, through each matching rule, to the resulting row or count—before
   generalizing. Clearly label invented example rows as illustrative rather than
   observed data.
+- When handing a multi-step operating procedure to a beginner, lead with the
+  single next action. For each step, state the actor and purpose, prerequisites,
+  exact screen, file, command, or full selection to use, whether it can mutate
+  state, the expected result or check, and the stop condition. Keep the detailed
+  user explanation separate from a concise message intended for another
+  reviewer; a brevity constraint for one audience must not remove context needed
+  by the operator. Distinguish observed facts, interpretation, unresolved
+  choices, and next actions, and do not continue a mutating sequence after an
+  unexpected result until the earliest invalidated read-only gate is rechecked.
 - In Japanese responses and deliverables, do not leave an English term,
   abbreviation, or unfamiliar loanword unexplained when the meaning is not
   evident from ordinary Japanese. At first use, add a short plain-Japanese
