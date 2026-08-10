@@ -4,35 +4,61 @@ Codex must read these shared rules before working in any adopted `okmrtis`
 project. They apply unless a project-local `AGENTS.md` adds a stricter or more
 specific rule.
 
+## Proportional Personal And AI Workflow
+
+- The default operating context is one human owner working with Codex and other
+  AI agents in private repositories. Optimize for a short, recoverable path to a
+  verified result; do not copy team-development ceremony into ordinary personal
+  work.
+- For a small or medium change on a clean, synchronized default branch, Codex
+  may work directly on that branch: edit, run risk-matched checks, and make one
+  focused commit or fast-forward push when the current authorization and remote
+  state allow it. A GitHub Issue, feature branch, pull request, task-ledger row,
+  independent reviewer, formal test plan, or written gate report is not required
+  merely because the change is durable or AI-authored.
+- Escalate the affected change, not necessarily the whole repository, when one
+  or more of these conditions materially applies: another person is
+  collaborating or must review; overlapping agents or tasks may write the same
+  area; branch protection or CI requires a review branch; the diff is large,
+  generated, difficult to inspect, or hard to roll back; intent is uncertain;
+  or the change affects deployment, customers, shared data, authentication,
+  billing, security, privacy, destructive migration, or another high-impact
+  boundary. Then use the useful controls among an Issue, branch, pull request,
+  stronger tests, independent review, rollback evidence, and staged rollout.
+- A project such as LifeCollector may move to the stricter path when its actual
+  collaboration, deployment, data, or change risk grows. Do not impose that
+  future state on its present personal prototype work, and do not let the
+  lightweight default prevent later adoption of team controls.
+- AI volume increases the need for bounded diffs, saved-state readback, focused
+  commits, and tests of user-visible behavior. It does not by itself require an
+  Issue, branch, pull request, duplicated ledger, or enterprise process.
+
 ## Git And Reproducibility
 
-- Durable work should end as committed and pushed repository state, not as
-  chat-only guidance.
-- For `okmrtis` repositories, a user request that creates or updates durable
-  repository state normally authorizes Codex to commit and push the verified
-  result to the repository's ordinary remote branch. Do not stop at a local
-  commit unless the user explicitly asks for local-only work, the push is
-  blocked by authentication or branch divergence, or the candidate push would
-  include secrets, unrelated user work, generated scratch, or another unsafe
-  change. If Codex leaves a durable commit unpushed, report that as a blocker
-  with the exact reason.
-- Treat GitHub for `okmrtis` work as the private synchronization, reflection,
-  history, and recovery plane, not as a user-operated review inbox. Codex owns
-  routine repository inspection, self-review, validation, PR creation or
-  update, verified integration, Issue and ledger reconciliation, and branch or
-  worktree retirement. Do not pause a verified change merely to ask the user to
-  visit GitHub, and do not leave a draft PR or stale branch waiting solely for
-  user review. Ask the user only when authoritative retained evidence cannot
-  resolve material business intent, or when an irreversible external or shared
-  impact remains after trying to make the operation reversible. This ownership
-  does not relax secret handling, changed-head guards, failing-test gates,
-  destructive recovery requirements, or user-only factual decisions.
-- Every repository under `okmrtis` is in scope for GitHub/meta adoption,
-  including repositories created in the future. For any new `okmrtis` project,
-  adoption is part of project creation, not a later cleanup task. Do not start
-  normal project work until the project has a Git repository, root `AGENTS.md`,
-  `docs/meta/AGENTS.common.md`, `docs/meta/meta_source.json`, and the
-  meta-adoption check passes.
+- Durable work should end in the smallest durable form appropriate to the
+  project, not as chat-only guidance. For a local-only project, a verified local
+  commit may be complete; creating a remote is a separate product and recovery
+  decision, not a hidden prerequisite.
+- When an ordinary remote is already configured and the current request and
+  applicable integration rules authorize repository writes, complete the
+  verified result through the normal fast-forward push path. Otherwise leave a
+  bounded, clearly reported local diff or commit. Do not call an unpushed local
+  prototype a failure merely because it has no remote, and do not create a
+  remote, publish, or change visibility without explicit authorization.
+- Treat GitHub for `okmrtis` work as the private synchronization, history, and
+  recovery plane, not as a user-operated review inbox. In the normal solo path,
+  Codex owns sync, diff review, validation, focused commit, and ordinary
+  fast-forward push without manufacturing an Issue, branch, pull request, or
+  duplicate ledger. When escalation conditions make those controls useful,
+  Codex also owns their routine completion and does not leave them waiting
+  solely for the user's GitHub review. Ask only when retained evidence cannot
+  resolve material intent or a meaningful irreversible or shared impact
+  remains.
+- Apply meta adoption to persistent repositories where shared behavior and
+  cross-device recovery are useful. A disposable test, sandbox, one-off
+  experiment, or early local prototype may remain unadopted until the user or
+  the work makes it durable. Missing or older vendored rules do not block safe
+  work when the current local `okmrtis/meta` source has already been read.
 - A project should be reproducible from Git plus documented authorized external
   inputs. If an input or generated output is not committed, record enough
   manifest information to obtain it, rerun the procedure, and verify the result.
@@ -45,18 +71,19 @@ specific rule.
 - Prefer small focused commits named by the durable behavior or rule being added.
 - Before declaring GitHub management done, check the current branch, remote,
   worktree status, and whether durable files are still untracked.
-- Treat every non-main branch as an owned, temporary path toward the repository's
-  intended result. Reconstruct its purpose from the matching Codex task, Issue or
-  pull request, commits, diff, reflog, worktree, and current project rules. Build
-  an explicit mapping from every unique still-valid requirement to the current
-  default branch, the proposed integration, or evidence that it is already
-  represented; do not merge obsolete implementation merely to remove a branch.
-- Codex owns branch completion within the authorized repository scope: preserve
-  newer verified invariants, port all unique valid intent onto current `main`,
-  self-review the resulting diff, run risk-matched tests, create or update the
-  pull request, merge the verified head, and retire the integrated branch. Record
-  the exact recovery SHA before deleting a ref, use expected-head protection, and
-  never force-push or rewrite shared history.
+- Do not create a feature branch only because a change is called substantial or
+  non-trivial. Create one when an escalation condition applies or isolation is
+  otherwise useful. If a non-main branch already exists, treat it as a path to a
+  result rather than permanent storage: reconstruct its purpose from the
+  available task, commit, diff, reflog, worktree, Issue, or pull-request evidence
+  in proportion to ambiguity and risk.
+- Codex owns completion of an in-scope branch: preserve unique valid intent,
+  review and test the result, integrate it through the repository's appropriate
+  direct or pull-request path, and retire it when recovery is adequate. Exact
+  expected-head and recovery-SHA controls are mandatory for destructive,
+  ambiguous, shared, or conflict-prone retirement; they are optional ceremony
+  for an ordinary clean personal branch whose commits are already reachable.
+  Never force-push or rewrite shared history without explicit authorization.
 - Do not mutate, merge, normalize, or delete a branch or worktree while its task is
   active, its head or ownership is unknown, or it contains dirty, untracked, or
   unpushed work whose intent is not proven elsewhere. Continue the owning task or
@@ -74,15 +101,15 @@ specific rule.
   Codex chat that involves `okmrtis` work. On each shared device, a local
   `okmrtis/meta` clone and workspace-level `AGENTS.md` entrypoint should be
   bootstrapped with `scripts/bootstrap_codex_meta_environment.ps1` before
-  substantive work. If a chat starts outside a bootstrapped workspace or cannot
-  read meta, restore the bootstrap or move the work under a bootstrapped
-  workspace before relying on shared behavior.
-- If a project has README/workflow docs saying work is GitHub-managed but lacks
-  `AGENTS.md` or `docs/meta/AGENTS.common.md`, treat that as a setup defect:
-  pause only repository mutations whose instruction boundary is missing, adopt
-  `okmrtis/meta`, and run the adoption check before those mutations. Continue
-  unrelated read-only or otherwise in-scope work and record maintenance
-  separately.
+  substantive work. Prefer the current local meta source when it is available;
+  a repository's vendored `docs/meta/AGENTS.common.md` is a portable fallback,
+  not a freshness gate that must be rewritten before every task.
+- If a persistent project says it is GitHub-managed but lacks a root
+  `AGENTS.md` or a usable shared-rule source, add the smallest adoption files at
+  a practical setup boundary. Do not interrupt a safe in-scope edit merely to
+  initialize GitHub, refresh an older but compatible snapshot, or adopt a
+  disposable prototype. Record deferred adoption only when the project is
+  expected to remain durable.
 - On this Windows Codex host, recheck current tooling before applying older
   workaround history. GitHub CLI, Python, npm/npx, Git LFS, PowerShell policy,
   and Git long-path behavior were refreshed on 2026-05-20; the current baseline
@@ -278,12 +305,20 @@ specific rule.
   releases, deployment promotions, or pushes containing unclear/unrelated
   changes still require the relevant explicit approval or rollback path.
 
-## Execution Reliability Protocol
+## Execution Reliability, Scaled To Risk
 
-- Apply the following eight gates to every user Codex task where `okmrtis/meta`
-  is available, across projects, devices, current repositories, and future
-  repositories. Scale depth to risk, but classify every gate as `complete`,
-  `not applicable` with a reason, or `blocked` with the missing evidence.
+- Every task needs the same small core: understand the requested outcome, read
+  the relevant current state, keep changes bounded, verify what materially
+  changed, and report the result and remaining uncertainty honestly.
+- For a lightweight personal change, that core may be a direct edit plus one
+  proportionate saved-state or runtime check. Do not require a formal plan,
+  hypothesis, eight-gate status table, independent evaluator, monitoring plan,
+  Issue, branch, pull request, or extra artifact when it would not change the
+  decision or catch a plausible failure.
+- Use the eight gates below as a checklist for protected, shared, ambiguous,
+  long-running, or high-impact work. Classify gates explicitly only when the
+  classification helps control or hand off the task; otherwise apply the
+  relevant substance without user-visible ceremony.
 - Gate 1, scope: before acting, determine the request interpretation, concrete
   requirements, constraints, and objective-level done criteria. Record only
   observed or evidence-backed material unknowns; do not invent uncertainty to
@@ -355,76 +390,49 @@ specific rule.
   layer. When it is ambiguous, keep it `needs-review` and record target
   reconstruction as the first action. The brief is a repair plan, not proof of
   completion, approval, expanded authority, or a blocker for unrelated work.
-- Gate 6, independent evaluation: use at least one proportionate evaluator that
-  is independent of the implementation path, such as tests, linters, schema
-  validators, CI, browser screenshots, independent commands, subagent review,
-  or human review after approval. Do not involve other people without approval.
+- Gate 6, independent evaluation: for protected, shared, or materially risky
+  work, use at least one proportionate evaluator that is independent of the
+  implementation path, such as tests, linters, schema validators, CI, browser
+  screenshots, independent commands, subagent review, or human review after
+  approval. For lightweight work, direct readback of the changed result is
+  enough unless a plausible failure needs a second path. Do not involve other
+  people without approval.
 - Gate 7, monitoring and alignment: define task-relevant regression signals only
   for recurring or materially risky work, such as pass/fail gates, runtime,
   coverage, counts, error rate, freshness, drift, hashes, or worker health.
   Recompare the result with the original objective. Stop expanding work when the
   acceptance criteria have proportionate evidence; useful but out-of-scope work
   is a nonblocking candidate, not a reason to continue.
-- Gate 8, meta-verification and reporting: audit the requirement-to-evidence
-  mapping, test coverage of risky paths, evaluator independence, remaining
-  uncertainty, and whether another reasonable evaluator would reach the same
-  conclusion. Confidence is saturated only when independent evidence agrees,
-  no material requirement or high-risk path lacks evidence, and another
-  in-scope check has low expected information gain. Do not seek extra confidence
-  by adding unrelated audits, threat models, or test matrices. Report verifiable
-  outcomes and evidence, not hidden chain-of-thought.
+- Gate 8, meta-verification and reporting: for work that used the protected
+  path, audit the requirement-to-evidence mapping, risky-path coverage,
+  evaluator independence, remaining uncertainty, and whether another
+  reasonable evaluator would reach the same conclusion. For lightweight work,
+  reread the requested outcome and the saved result. Do not seek extra
+  confidence by adding unrelated audits, threat models, or test matrices.
+  Stop when another in-scope check has low expected information gain.
+  Report verifiable outcomes and evidence, not hidden chain-of-thought.
 - User-facing updates and final responses must expose only the protocol results
   material to the user and task. Do not force not-applicable fields, invented
   unknowns, or internal process ceremony into a simple result.
-- Keep the local automation that supports this protocol under the component
-  ownership defined in `scripts/codex_reliability/manifest.json`. Use
-  `scripts/codex_reliability/install-codex-reliability-control-plane.ps1` as the
-  unified installer and component-health entrypoint. This control plane owns
-  installer and component health and may perform only the manifest-declared,
-  bounded continuation of a top-level user turn whose immutable first
-  `session_meta` has exact `originator=Codex Desktop`, `thread_source=user`, and
-  no parent, after one of (a) evidence that it was running before the prior Codex
-  Desktop generation ended, (b) a newly observed platform `task_complete`
-  error tied to a current-generation turn or retained previous-generation active
-  evidence that strictly identifies a terminal network transport failure after
-  Codex's native retries and contains no last assistant output, or (c) a newly
-  observed platform `task_complete` whose exact `codex_error_info` is
-  `usage_limit_exceeded`, contains no last assistant output, and belongs to one
-  exact currently ACTIVE same-task heartbeat definition. Condition (c) never
-  applies to an ordinary user turn. It does not own user-task planning or scope.
-  The recovery path must baseline without
-  historical backfill on first install or policy upgrade, exclude subagents,
-  automation-source turns, unknown or malformed heartbeat turns, unrelated
-  errors, completed, aborted, expired, or superseded turns, and admit a same-task
-  heartbeat only when one exact safe automation id matches a current ACTIVE
-  heartbeat definition whose target is that exact top-level task. Re-read both
-  rollout state and that definition before resuming. Bound network retry chains
-  across replacement turn IDs with shared backoff. Bound each heartbeat-credit
-  retry chain across replacement turn IDs and Desktop generations with persisted
-  exponential backoff; a newer scheduled or manual turn supersedes the stale
-  chain, and one independent terminal recovery must not reset another chain's
-  failures or consume the restart fan-out cap. Persist only sanitized identifiers
-  and health metadata; never persist transcript, heartbeat or recovery-prompt
-  text, or raw error text. Expose separate network and heartbeat-credit attempt
-  counts, next retries, pending counts, and attempt-limit counts in health status,
-  use the supported noninteractive Codex session-resume command, and never mutate
-  Codex task SQLite or TOML directly. Since Codex exposes no atomic external claim lock,
-  retain the final state/process rechecks but document the narrow residual race
-  with a user-initiated resume instead of claiming absolute duplicate exclusion.
-  A health failure blocks only
-  a health claim or an in-scope action that directly depends on that component.
-  Do not add another Startup item or scheduler for an existing component
-  without updating that manifest and proving that the existing owner cannot
-  carry the responsibility.
+- Keep local reliability automation under the component ownership and exact
+  behavioral contracts in `scripts/codex_reliability/manifest.json`; do not copy
+  component-specific retry, timing, or state-machine detail into this common
+  rule file. Use the unified installer and health entrypoint named there. A
+  component may act only within its manifest-declared authority, must preserve
+  privacy and user-work non-interference, and must never expand or block an
+  unrelated user task. Do not add a second Startup or scheduled owner for an
+  existing component without evidence that the current owner cannot carry the
+  responsibility.
 - For every task, translate results into the user's decision language before
   presenting technical detail. Start from what the user should worry about,
   decide, change, approve, ignore, or review next. When reporting findings,
   separate real concerns from review candidates and non-concerns, and attach
   impact, affected scope, and recommended action instead of leaving the user to
   infer meaning from raw diffs, sheet names, warnings, logs, or counts.
-- Treat completion as unproven until requirement-by-requirement evidence shows
-  the requested end state is satisfied. If evidence is weak, indirect, missing,
-  or contradicted, continue working or state the remaining gap.
+- Treat completion as unproven until evidence proportionate to the material
+  requested outcomes shows the end state is satisfied. If evidence is weak,
+  indirect, missing, or contradicted, continue working or state the remaining
+  gap.
 
 ## User-Facing Output
 
@@ -432,6 +440,23 @@ specific rule.
   responses, summaries, reports, and deliverable text unless the user asks for
   another language, the artifact has a required language, or preserving source
   wording is necessary.
+- Before presenting a proposed design, implementation, workflow, or structure,
+  first state the concrete human use scenario in plain language whenever it is
+  material to understanding why the request exists: who is trying to do what,
+  in what situation, and why. Then state the outcome to achieve and the
+  requirements that are genuinely fixed. Distinguish those requirements from
+  implementation ideas. When the user has not fixed the means, label each
+  proposed method as an example and explicitly allow any equivalent alternative
+  that satisfies the outcome and constraints. Do not let a detailed example read
+  as though it were the requirement itself. For specifications and external
+  requests, use this order: relevant human use scenario, desired outcome, fixed
+  constraints with their reasons, freedom of means, then examples or references.
+- For an initial request to an external recipient in Japanese, use respectful,
+  consultative phrasing. Briefly explain the background and hoped-for outcome,
+  ask whether consultation or support is possible, and present fixed constraints
+  as courteous requests with their reasons rather than as a terse list of
+  imperatives or prohibitions. Keep direct prohibitive language only where
+  safety, law, or another non-negotiable boundary requires it.
 - For technical explanations, default to a beginner-readable path unless the
   user explicitly asks for expert-only brevity. Establish every prerequisite
   needed to follow the conclusion, define each new concept at first use, and
@@ -557,9 +582,9 @@ specific rule.
   provisional skill applies only to its covered steps and exclusions. A missing
   or stale skill is repaired only when the active task demonstrably depends on
   it; package maintenance never becomes an unrelated workstream.
-- For an active correction, an exact prior-task use audit, daily practice
-  convergence, or skill maintenance, load the matching mode of
-  `promote-chat-practices` and card
+- For an explicit request to make a correction durable, a high-priority
+  correction, an exact prior-task use audit, daily practice convergence, or
+  skill maintenance, load the matching mode of `promote-chat-practices` and card
   `codex-knowledge-management/evidence-gated-skill-promotion`. Use exactly one
   mode unless the user explicitly requests more than one. Promotion and package
   health findings block only promotion, reuse, or a directly dependent action;
@@ -586,8 +611,10 @@ specific rule.
   by topic, section, summary, body, and signals. Apply only cards that fit the
   current project.
 - When adding shared knowledge, make the scope, source date, and future action
-  explicit. Use GitHub Issues for open tasks and backlogs, not as the primary
-  store for stable lessons.
+  explicit. Use a GitHub Issue only when work needs to survive the current task,
+  coordinate separate actors or dependencies, or remain as a meaningful
+  backlog/recovery item; do not create one for every durable edit. Issues are
+  never the primary store for stable lessons.
 - Whenever Codex writes a new durable knowledge record or materially updates an
   existing one in any `okmrtis` repository, add machine-readable environment
   provenance in the record's native metadata. Record the writing environment
@@ -600,12 +627,16 @@ specific rule.
   Never fabricate an original environment during backfill, and do not apply a
   dependent or partially dependent lesson to another environment without a
   current compatibility check.
-- When changing common behavior, update `okmrtis/meta` first, then refresh every
-  current `okmrtis` repository's vendored `docs/meta/AGENTS.common.md` snapshot.
-  Future repositories under `okmrtis` must receive the same snapshot during
-  creation. Use `scripts/sync_all_okmrtis_meta_adoption.ps1 -CheckOnly` to
-  audit current GitHub repositories, then rerun it with `-Apply`, `-Commit`, or
-  `-Push` when intentionally refreshing adopted repositories.
+- Keep this common rule file limited to stable cross-project behavior. Put
+  domain guidance in knowledge cards, specialized procedures in skills, and
+  component implementation contracts in their owning manifests or tests so one
+  narrow improvement does not rewrite every repository snapshot.
+- When common behavior changes, update `okmrtis/meta` first. Refresh the active
+  repository when the new rule materially applies or when maintaining its
+  portable fallback; use owner-wide check/apply only for an intentional
+  compatibility-breaking rollout or an explicit all-repository request. An
+  older compatible snapshot is not a reason to create repetitive commits in
+  dormant, test, sandbox, or early prototype repositories.
 - Do not store raw transcripts, secrets, customer data, or full local paths in
   `meta` unless they are deliberately sanitized examples.
 
