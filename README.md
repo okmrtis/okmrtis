@@ -1,41 +1,55 @@
 <div align="center">
-  <img src="./assets/neumorphic-profile.svg" alt="okmrtis - consulting workflow automation, AI agent collaboration, and externalized thinking with GitHub" width="100%" />
+  <img src="./assets/neumorphic-profile.svg" alt="okmrtis - reliable human-AI work systems, automation, learning, and applied experiments" width="100%" />
 </div>
 
 <br />
 
 <p align="center">
-  <a href="#focus"><kbd>Focus</kbd></a>
-  <a href="#operating-style"><kbd>Operating style</kbd></a>
-  <a href="#current-direction"><kbd>Current direction</kbd></a>
-  <a href="https://github.com/okmrtis?tab=repositories"><kbd>Repositories</kbd></a>
+  <a href="#now-august-2026"><kbd>Now</kbd></a>
+  <a href="#how-i-work"><kbd>How I work</kbd></a>
+  <a href="#working-stack"><kbd>Working stack</kbd></a>
+  <a href="#why-github"><kbd>Why GitHub</kbd></a>
 </p>
 
-## Soft Systems Workbench
+## Reliable Human-AI Work Systems
 
-I build quiet operating systems for consulting work: small automations, clear repositories, and AI-agent workflows that turn loose context into checkable, recoverable progress.
+I design practical systems for people and AI agents to work together across real desktop tools, repositories, and long-running projects. The goal is continuity: work that can be checked, recovered, handed off, and resumed.
+
+日常業務・学習・試作を、AIと人が検証しながら継続できる仕組みに整えています。
 
 <div align="center">
-  <img src="./assets/workbench-system.svg" alt="A soft workflow map connecting consulting work, AI agents, and GitHub-based externalized thinking" width="100%" />
+  <img src="./assets/workbench-system.svg" alt="A workflow connecting practical work, AI agents, and GitHub-backed context" width="100%" />
 </div>
 
-## Focus
+## Now: August 2026
 
-| Practice | What I am shaping |
+Recent work is converging around four connected themes.
+
+| Theme | Current direction |
 | --- | --- |
-| Consulting workflow automation | Translating recurring desk work into logged, rerunnable flows |
-| Human-agent collaboration | Designing prompts, handoffs, reviews, and recovery paths that keep humans in control |
-| Durable working memory | Moving decisions, tasks, notes, and runbooks into versioned, reviewable repositories |
-| Verification and continuity | Making outputs easy to reopen, compare, trace, and safely continue |
+| Agent operations | Building bounded workflows that can pause, recover, and leave verifiable state behind |
+| Context infrastructure | Keeping decisions, rules, reusable skills, and handoffs versioned across repositories and devices |
+| Learning systems | Creating adaptive study loops that record answers, identify gaps, and resume from saved progress |
+| Applied prototyping | Moving AI-related ideas from problem framing into requirements, external conversations, and test plans |
 
-## Operating Style
+The larger shift is from isolated automations to a connected personal AI operating model: explicit scope, durable context, quiet execution, and evidence-backed completion.
 
-- Evidence before confidence: useful work should leave something inspectable behind.
-- Local-first when it matters: workflows should stay understandable on the machine where real work happens.
-- Repo-centered by default: decisions and procedures belong somewhere durable, not only in chat.
-- Boundary-aware: public examples stay generalized, private context stays private, and automation scopes stay explicit.
-- Agent-aware: tasks are written so a human and an AI agent can both pick up the thread without guessing.
+## How I Work
 
-## Current Direction
+- Evidence before confidence: a result should leave something inspectable behind.
+- Human-owned intent: the person sets purpose and boundaries; the agent carries routine execution through to a verified result.
+- Minimal ceremony, strong recovery: use the smallest process that still preserves state, rollback, and continuity.
+- Quiet automation: background work should avoid interrupting the person using the machine.
+- Public-safe by default: private operational context stays private; public material remains generalized and useful.
 
-I am exploring how consultants can combine everyday automation, AI agents, and GitHub as practical cognitive infrastructure: a working surface where context, decisions, checks, and next actions become searchable, reusable, and easier to improve over time.
+## Working Stack
+
+`PowerShell` · `Python` · `GitHub Actions` · `Microsoft 365` · `browser automation` · `AI agents`
+
+I use these as parts of one workflow rather than as isolated tools: automate the repeatable parts, keep decisions close to the work, and verify the saved or external state that actually matters.
+
+## Why GitHub
+
+Most of my working repositories are private because they contain operational context. GitHub is the synchronization, history, and recovery plane for that work: decisions, runbooks, tests, and reusable agent context live close to the projects instead of disappearing into chat history.
+
+This profile is the public layer: a compact view of the systems and questions I am working on, without exposing private project details.
