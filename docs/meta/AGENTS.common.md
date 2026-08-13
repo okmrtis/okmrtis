@@ -1,8 +1,8 @@
 # Shared Codex Rules
 
-Codex must read these shared rules before working in any adopted `okmrtis`
-project. They apply unless a project-local `AGENTS.md` adds a stricter or more
-specific rule.
+Codex must read these shared rules before working on any task governed by this
+shared Codex setup, including work outside an `okmrtis` repository. They apply
+unless a project-local `AGENTS.md` adds a stricter or more specific rule.
 
 ## Proportional Personal And AI Workflow
 
@@ -93,32 +93,57 @@ specific rule.
   controller, marker, lease, or other optional helper may supply evidence but is
   never required to establish the user's purpose or complete the work.
 
+## Shared Instruction Resolution
+
+- For every task governed by this shared Codex setup, including chat-only,
+  read-only, non-repository, non-`okmrtis`, unadopted, disposable, and
+  persistent-project work, resolve the active
+  instruction set before the first material action or answer and again whenever
+  the task scope materially changes. Read the current meta root `AGENTS.md` and
+  `shared/AGENTS.common.md`; inspect available local or project `AGENTS.md`,
+  README, and workflow instructions needed to identify the task contract; read
+  `knowledge/topics.json`; then select and read the complete current records for
+  only the applicable cards in `knowledge/cards.jsonl`. Inspect the available
+  installed and repository-owned skills and read every matching `SKILL.md` in
+  full before applying its procedure. Use the task contract, local rules, topic
+  metadata, card signals, and explicit card or skill references to decide what
+  applies; do not load unrelated cards or skills merely because they exist.
+- Once per uninterrupted task and meta source head, refresh the local
+  `okmrtis/meta` remote references when network access is available and compare
+  the checked-out source with the canonical remote default branch. Safely
+  fast-forward a clean supported checkout when possible. If the source is dirty,
+  divergent, offline, or cannot be refreshed, inspect the relevant difference
+  or report the exact freshness gap; do not silently claim that it is current.
+  Reuse that comparison for the same uninterrupted task instead of fetching once
+  per card, skill, repository, or substep.
+- Treat source freshness, instruction discovery, complete instruction loading,
+  and downstream application as separate gates. A successful fetch, equal Git
+  commit, matching portable snapshot, topic-map hit, or installed/discoverable
+  skill proves only that source or readiness fact. None proves that an applicable
+  rule, card, or skill was selected, read in full, or followed. Before claiming
+  compliance, verify each materially governing instruction at the action or
+  output boundary. If freshness or a required instruction cannot be established,
+  name the exact gap and do not claim compliance.
+
 ## Local Project Rules
 
 - Read this shared file, then the project-local `AGENTS.md`, README, and
   workflow docs before changing files.
 - Treat `okmrtis/meta` as the normative source for Codex behavior in every
   Codex chat that involves `okmrtis` work. On each shared device, a local
-  `okmrtis/meta` clone and workspace-level `AGENTS.md` entrypoint should be
-  bootstrapped with `scripts/bootstrap_codex_meta_environment.ps1` before
-  substantive work. Prefer the current local meta source when it is available;
+  `okmrtis/meta` clone, Codex-home global `AGENTS.md`, and secondary workspace
+  entrypoint should be bootstrapped with
+  `scripts/bootstrap_codex_meta_environment.ps1` before work. Prefer the current
+  local meta source when it is available;
   a repository's vendored `docs/meta/AGENTS.common.md` is a portable fallback,
   not a freshness gate that must be rewritten before every task.
-- At the start of substantive work in an adopted persistent project, refresh
-  the local `okmrtis/meta` remote references when network access is available
-  and compare the checked-out source with the canonical remote default branch.
-  Before writing project files, inspect newer changes both to
-  `shared/AGENTS.common.md` and to the knowledge topics or cards that the active
-  project or task requires; decide explicitly which changes materially apply
-  and load those current instructions. Safely fast-forward a clean source
-  checkout when possible. If the source is dirty, divergent, or cannot be
-  refreshed, do not silently claim freshness: inspect the relevant diff or
-  report the exact gap and continue only with instructions whose applicability
-  is supported by the available source. Compare the active project's portable
-  snapshot with the committed shared-rule content, and refresh that snapshot
-  when a newly read rule materially applies or the snapshot is no longer
-  content-compatible; relevant card changes are applied from the live meta
-  source, while unrelated meta commits remain a no-op.
+- For an adopted persistent project, compare its portable snapshot with the
+  committed shared-rule content after the all-task instruction-resolution gate
+  above. Refresh that snapshot when a newly read common rule materially applies
+  or the snapshot is no longer content-compatible. Relevant card and skill
+  changes apply from their live current sources and do not by themselves require
+  a project snapshot commit or an owner-wide repository rollout; unrelated meta
+  commits remain a no-op.
 - If a persistent project says it is GitHub-managed but lacks a root
   `AGENTS.md` or a usable shared-rule source, add the smallest adoption files at
   a practical setup boundary. Do not interrupt a safe in-scope edit merely to
