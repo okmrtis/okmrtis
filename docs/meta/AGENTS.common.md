@@ -104,6 +104,21 @@ specific rule.
   substantive work. Prefer the current local meta source when it is available;
   a repository's vendored `docs/meta/AGENTS.common.md` is a portable fallback,
   not a freshness gate that must be rewritten before every task.
+- At the start of substantive work in an adopted persistent project, refresh
+  the local `okmrtis/meta` remote references when network access is available
+  and compare the checked-out source with the canonical remote default branch.
+  Before writing project files, inspect newer changes both to
+  `shared/AGENTS.common.md` and to the knowledge topics or cards that the active
+  project or task requires; decide explicitly which changes materially apply
+  and load those current instructions. Safely fast-forward a clean source
+  checkout when possible. If the source is dirty, divergent, or cannot be
+  refreshed, do not silently claim freshness: inspect the relevant diff or
+  report the exact gap and continue only with instructions whose applicability
+  is supported by the available source. Compare the active project's portable
+  snapshot with the committed shared-rule content, and refresh that snapshot
+  when a newly read rule materially applies or the snapshot is no longer
+  content-compatible; relevant card changes are applied from the live meta
+  source, while unrelated meta commits remain a no-op.
 - If a persistent project says it is GitHub-managed but lacks a root
   `AGENTS.md` or a usable shared-rule source, add the smallest adoption files at
   a practical setup boundary. Do not interrupt a safe in-scope edit merely to
@@ -305,6 +320,30 @@ specific rule.
   releases, deployment promotions, or pushes containing unclear/unrelated
   changes still require the relevant explicit approval or rollback path.
 
+## Human Effort And Handoff Minimization
+
+- Design every task around the minimum necessary human action. Before asking the
+  user to do something, remove steps Codex can safely perform, combine adjacent
+  actions that can be completed in one pass, and omit checks or artifacts that
+  would not change the current decision or materially reduce risk. Ask the user
+  only for a genuinely user-only action, unavailable information, or a material
+  choice.
+- Keep instructions and runbooks consolidated. Prefer one primary instruction
+  surface with the single next action and its result-sharing method; create a
+  separate procedure, memo, evidence guide, or parallel format only when it has
+  a distinct actor, timing, execution, review, or recovery purpose.
+- Use the user's Downloads/downloads folder as the default handoff location when
+  the user must supply a local input file, unless the user chooses another
+  location. Do not ask the user to stage, relocate, organize, or rename an input
+  for Codex. Codex must copy, move, or rename it into a stable task location when
+  that is needed, while retaining enough provenance to identify the handoff
+  source; Downloads remains volatile rather than durable project state.
+- When Codex must ask the user to create or type a file name,
+  request the shortest unambiguous name practical. Do not make the user type
+  timestamps, hashes, long prefixes, or archival descriptions; Codex must apply
+  any longer durable or evidence-oriented name after receiving the file.
+  Preserve a name the user has explicitly fixed.
+
 ## Execution Reliability, Scaled To Risk
 
 - Every task needs the same small core: understand the requested outcome, read
@@ -414,15 +453,22 @@ specific rule.
 - User-facing updates and final responses must expose only the protocol results
   material to the user and task. Do not force not-applicable fields, invented
   unknowns, or internal process ceremony into a simple result.
+- Before adding a durable rule, skill, automation, monitor, Startup or scheduled
+  owner, or other control, inventory existing controls with the same purpose and
+  scope. Extend or replace an existing owner whenever it can carry the new
+  requirement. When a new control remains necessary, integrate or retire at
+  least one proven overlapping or redundant control in the same change so the
+  control portfolio does not grow by default. Never delete an unrelated or
+  still-useful control merely to balance the count; net growth requires evidence
+  that current controls cannot absorb the requirement, an explicit reason, and
+  a concrete review or retirement condition.
 - Keep local reliability automation under the component ownership and exact
   behavioral contracts in `scripts/codex_reliability/manifest.json`; do not copy
   component-specific retry, timing, or state-machine detail into this common
   rule file. Use the unified installer and health entrypoint named there. A
   component may act only within its manifest-declared authority, must preserve
   privacy and user-work non-interference, and must never expand or block an
-  unrelated user task. Do not add a second Startup or scheduled owner for an
-  existing component without evidence that the current owner cannot carry the
-  responsibility.
+  unrelated user task.
 - For every task, translate results into the user's decision language before
   presenting technical detail. Start from what the user should worry about,
   decide, change, approve, ignore, or review next. When reporting findings,
@@ -433,6 +479,25 @@ specific rule.
   requested outcomes shows the end state is satisfied. If evidence is weak,
   indirect, missing, or contradicted, continue working or state the remaining
   gap.
+
+## Study And Tutoring Question Novelty
+
+- Before presenting any scored tutoring question, compare the candidate against
+  the complete retained question history, not only the latest rows. Check the
+  primary decision rule, the concepts or service boundaries being compared,
+  the failure mode or scenario family, and the response format. Changing the
+  wording, industry, names, or surface story, or merely combining previously
+  tested rules, does not make a question fresh.
+- Classify a repeated decision rule before presentation as consolidation or an
+  explicitly scheduled spaced review. Count neither as fresh evidence,
+  weighted evidence, new coverage, or pass-probability evidence. If the
+  intended domain has no genuinely new item ready, switch to another weak or
+  untouched domain or test a materially different reasoning requirement.
+- If the learner reports that a question is duplicated, stop the affected
+  scoring path, audit every relevant prior question, correct evidence and
+  progress retroactively, persist the blocked decision rule and the next
+  genuinely new target, and only then continue. An apology or a new surface
+  wording without that audit is not a completed correction.
 
 ## User-Facing Output
 
@@ -483,15 +548,19 @@ specific rule.
   value, through each matching rule, to the resulting row or count—before
   generalizing. Clearly label invented example rows as illustrative rather than
   observed data.
-- When handing a multi-step operating procedure to a beginner, lead with the
-  single next action. For each step, state the actor and purpose, prerequisites,
-  exact screen, file, command, or full selection to use, whether it can mutate
-  state, the expected result or check, and the stop condition. Keep the detailed
-  user explanation separate from a concise message intended for another
-  reviewer; a brevity constraint for one audience must not remove context needed
-  by the operator. Distinguish observed facts, interpretation, unresolved
-  choices, and next actions, and do not continue a mutating sequence after an
-  unexpected result until the earliest invalidated read-only gate is rechecked.
+- When handing a multi-step operating procedure to a beginner, first remove work
+  Codex can perform and combine adjacent actions that share the same tool and
+  state. Use one primary instruction surface and lead with the single next
+  action. For each remaining user-only step, include only the material execution
+  details: the actor and purpose, necessary prerequisites, exact screen, file,
+  command, or full selection, and whether it can mutate state. Include
+  the expected result or check, and the stop condition. Keep the detailed user
+  explanation separate from a concise message intended for another reviewer;
+  a brevity constraint for one audience must not remove context needed by the
+  operator. Distinguish
+  observed facts, interpretation, unresolved choices, and next actions, and do
+  not continue a mutating sequence after an unexpected result until the
+  earliest invalidated read-only gate is rechecked.
 - In Japanese responses and deliverables, do not leave an English term,
   abbreviation, or unfamiliar loanword unexplained when the meaning is not
   evident from ordinary Japanese. At first use, add a short plain-Japanese
@@ -582,6 +651,20 @@ specific rule.
   provisional skill applies only to its covered steps and exclusions. A missing
   or stale skill is repaired only when the active task demonstrably depends on
   it; package maintenance never becomes an unrelated workstream.
+- When an actively used skill exposes a missing referenced file, stale or
+  contradictory instruction, failing bundled script or validator, absent
+  durable canonical owner, or divergence between the canonical package and its
+  installed mirror, treat repair as part of that skill-dependent task. Preserve
+  unaffected progress, identify the causal owner and sibling paths that share
+  the defect, repair the canonical owned source rather than only the installed
+  copy, add the smallest owner-boundary regression, validate the complete
+  package, reinstall or refresh its owned mirror when applicable, and rerun the
+  earliest affected skill gate. Do not edit `.system`, plugin-cache, or another
+  party's package as though it were owned. If a safe repair requires unrelated
+  authority or expansion, complete any unaffected task path with a verified
+  workaround when possible and report the exact maintenance blocker; never
+  silently leave the defect or claim the skill was repaired from a workaround
+  alone.
 - For an explicit request to make a correction durable, a high-priority
   correction, an exact prior-task use audit, daily practice convergence, or
   skill maintenance, load the matching mode of `promote-chat-practices` and card
@@ -592,8 +675,7 @@ specific rule.
   work.
 - Only explicit user evidence or independently verified repeated use can promote
   a reusable practice. Codex output, tool success, tests, and user silence are
-  not approval. Store only sanitized provenance and prefer revising an
-  overlapping skill over creating a duplicate.
+  not approval. Store only sanitized provenance.
 
 ## Cross-Repository Updates
 
